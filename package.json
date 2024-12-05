@@ -1,0 +1,29 @@
+{
+  "name": "project_abgabe.2",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "set PORT=4000 && node server.js",
+    "build": "next build",
+    "start": "set PORT=4000 && next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@emotion/cache": "11.13.5",
+    "@emotion/react": "11.13.5",
+    "@emotion/server": "11.11.0",
+    "@emotion/styled": "11.13.5",
+    "@mui/material": "6.1.9",
+    "next": "15.0.3",
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "eslint": "^8",
+    "eslint-config-next": "15.0.3",
+    "typescript": "^5"
+  }
+}
