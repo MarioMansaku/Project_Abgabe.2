@@ -1,4 +1,4 @@
-import SearchButton from "../components/read-request.js";
+import SearchButton from "../components/searchButton.js";
 
 export default function Home() {
   return (
