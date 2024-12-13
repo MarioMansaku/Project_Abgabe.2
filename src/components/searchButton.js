@@ -1,7 +1,7 @@
 "use client"
 
 import React, {useState} from "react";
-import { getBuch } from '../api/readService.js';
+import { getBuch } from '../api/read-buch.service.ts';
 import log from '../utils/logger.js';
 
 export function SearchButton() {
