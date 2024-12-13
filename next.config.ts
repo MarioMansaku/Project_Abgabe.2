@@ -6,8 +6,8 @@ const nextConfig: NextConfig = {
 };
 
 const httpsOptions = {
-  key: fs.readFileSync('./key.pem'),
-  cert: fs.readFileSync('./certificate.crt'),
+  key: fs.readFileSync('./src/config/tls/key.pem'),
+  cert: fs.readFileSync('./src/config/tls/certificate.crt'),
 };
 
 export default nextConfig;

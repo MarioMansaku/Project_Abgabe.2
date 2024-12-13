@@ -9,8 +9,8 @@ const handle = app.getRequestHandler();
 
 
 const httpsOptions = {
-  key: fs.readFileSync('./key.pem'),
-  cert: fs.readFileSync('./certificate.crt'),
+  key: fs.readFileSync('./src/config/tls/key.pem'),
+  cert: fs.readFileSync('./src/config/tls/certificate.crt'),
 };
 
 const port = process.env.PORT || 3001;
