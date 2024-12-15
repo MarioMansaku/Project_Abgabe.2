@@ -1,4 +1,3 @@
-import SearchButton from "../components/searchButton.js";
 import InfoIcon from "@mui/icons-material/Info";
 import {
   AppBar,
@@ -11,16 +10,6 @@ import {
   Typography,
 } from "@mui/material";
 import React from "react";
-
-export default function Home() {
-  return (
-    <main style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
-    <h1>Testing</h1>
-    <SearchButton />
-    <ExamplesLanding />
-  </main>
-  );
-}
 
 export const ExamplesLanding = () => {
   return (

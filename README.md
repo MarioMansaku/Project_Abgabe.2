@@ -6,6 +6,7 @@ npm run dev # Server hochfahren
 # Dependencies
 npm install loglevel # LogLevels für die Protokollierung installieren -> src/utils/logger.js 
 npm install axios # Axios bietet eine sauberere und prägnantere API für HTTP-Anfragen im Vergleich zur Fetch-API.
+npm i material-ui --force # Installation von "@mui/icons-material für page.tsx
 
 # GitHub 
 
