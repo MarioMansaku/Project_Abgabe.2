@@ -11,25 +11,26 @@ import {
   Typography,
 } from "@mui/material";
 import React from "react";
+//import { Gallery } from "./screens/gallery/indexGallery.js"
 
 export default function Home() {
   return (
     <main style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
+    <Frontpage />
     <h1>Testing</h1>
     <SearchButton />
-    <ExamplesLanding />
   </main>
   );
 }
 
-export const ExamplesLanding = () => {
+export const Frontpage = () => {
   return (
     <Box
       sx={{
         height: "1080px",
         overflow: "hidden",
         border: 1,
-        borderColor: "black",
+        borderColor: "white",
       }}
     >
       <AppBar
@@ -74,7 +75,7 @@ export const ExamplesLanding = () => {
           SWE
         </Typography>
         <Box sx={{ display: "flex", gap: 2 }}>
-          <Button variant="contained" color="inherit">
+          <Button variant="contained" color="secondary">
             Add
           </Button>
           <Button variant="contained" color="primary">
@@ -100,14 +101,14 @@ export const ExamplesLanding = () => {
         sx={{
           width: "930px",
           padding: 4,
-          backgroundColor: "rgba(0, 0, 0, 0.2)",
+          backgroundColor: "rgba(86, 84, 84, 0.2)",
         }}
       >
         <Box sx={{ marginBottom: 2 }}>
-          <Typography variant="h3" color="textPrimary">
+          <Typography variant="h3" color="white">
             Heading
           </Typography>
-          <Typography variant="subtitle1" color="textSecondary">
+          <Typography variant="subtitle1" color="white">
             Subheading
           </Typography>
         </Box>
@@ -115,10 +116,10 @@ export const ExamplesLanding = () => {
           <Box sx={{ display: "flex", gap: 2 }}>
             <InfoIcon fontSize="large" />
             <Box>
-              <Typography variant="h4" color="textPrimary">
+              <Typography variant="h4" color="white">
                 Title
               </Typography>
-              <Typography variant="body1" color="textSecondary">
+              <Typography variant="body1" color="white">
                 Body text for whatever you’d like to say. Add main takeaway
                 points, quotes, anecdotes, or even a very very short story.
               </Typography>
@@ -131,14 +132,14 @@ export const ExamplesLanding = () => {
         sx={{
           width: "930px",
           padding: 4,
-          backgroundColor: "rgba(0, 0, 0, 0.2)",
+          backgroundColor: "rgba(188, 32, 32, 0.2)",
         }}
       >
         <Box sx={{ marginBottom: 2 }}>
-          <Typography variant="h3" color="textPrimary">
+          <Typography variant="h3" color="white">
             Heading
           </Typography>
-          <Typography variant="subtitle1" color="textSecondary">
+          <Typography variant="subtitle1" color="white">
             Subheading
           </Typography>
         </Box>
@@ -146,10 +147,10 @@ export const ExamplesLanding = () => {
           <Box sx={{ display: "flex", gap: 2 }}>
             <InfoIcon fontSize="large" />
             <Box>
-              <Typography variant="h4" color="textPrimary">
+              <Typography variant="h4" color="white">
                 Title
               </Typography>
-              <Typography variant="body1" color="textSecondary">
+              <Typography variant="body1" color="white">
                 Body text for whatever you’d like to say. Add main takeaway
                 points, quotes, anecdotes, or even a very very short story.
               </Typography>
