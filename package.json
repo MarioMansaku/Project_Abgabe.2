@@ -14,12 +14,11 @@
     "@emotion/server": "11.11.0",
     "@emotion/styled": "11.13.5",
     "@mui/icons-material": "5.16.7",
-    "@mui/material": "6.1.9",
+    "@mui/material": "6.1.10",
     "axios": "1.7.9",
     "class-transformer": "0.5.1",
     "class-validator": "0.14.1",
     "loglevel": "1.9.2",
-    "material-ui": "0.20.0",
     "next": "15.0.3",
     "react": "18.3.1",
     "react-dom": "18.3.1"
