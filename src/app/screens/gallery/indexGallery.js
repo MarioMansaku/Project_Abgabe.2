@@ -1,1 +1,1 @@
-export { Gallery } from "./pageGallery.tsx";
+export { Gallery } from "./pageGallery";
