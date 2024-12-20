@@ -1,5 +1,5 @@
 import Header from "@mui/icons-material/Star";
-import { Box, Button, Container, TextField, Typography } from "@mui/material";
+import { AppBar, Box, Button, Container, TextField, Toolbar, Typography } from "@mui/material";
 import React from "react";
 
 export const Login = () => {
@@ -13,6 +13,21 @@ export const Login = () => {
         position: "relative",
       }}
     >
+      <AppBar
+                position="static"
+                color="default"
+                sx={{ borderBottom: 1, borderColor: "divider" }}
+              >
+                <Toolbar>
+                  <img
+                    alt="Block"
+                    src="https://c.animaapp.com/CBoGUkLi/img/block.svg"
+                    style={{ marginTop: "-7.75px", marginBottom: "-7.75px" }}
+                  />
+                  <Box sx={{ flexGrow: 1 }} />
+                </Toolbar>
+              </AppBar>
+
       <Box
         sx={{
           width: "513px",
