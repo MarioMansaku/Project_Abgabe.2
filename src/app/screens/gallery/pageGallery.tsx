@@ -1,4 +1,4 @@
-import { Box, Button, Container, Grid, Typography } from "@mui/material";
+import { AppBar, Box, Button, Container, Grid, Toolbar, Typography } from "@mui/material";
 import React from "react";
 
 export const Gallery = () => {
@@ -12,55 +12,27 @@ export const Gallery = () => {
         border: "1px solid black",
       }}
     >
-      <Box
-        component="header"
-        sx={{
-          display: "flex",
-          flexWrap: "wrap",
-          height: "87px",
-          alignItems: "center",
-          gap: 2,
-          p: 2,
-          width: "100%",
-          backgroundColor: "background.default",
-          borderBottom: "1px solid",
-          borderColor: "border.default",
-        }}
-      >
-        <Box
-          sx={{ display: "flex", width: "178px", alignItems: "center", gap: 1 }}
+      <AppBar
+          position="static"
+          color="default"
+          sx={{ borderBottom: 1, borderColor: "divider" }}
         >
-          <Button
-            variant="contained"
-            sx={{
-              flex: 1,
-              backgroundColor: "background.neutralTertiary",
-              borderRadius: 1,
-              border: "1px solid",
-              borderColor: "border.neutralSecondary",
-            }}
-          >
-            <Typography variant="body1" color="text.primary">
+          <Toolbar>
+            <img
+              alt="Block"
+              src="https://c.animaapp.com/CBoGUkLi/img/block.svg"
+              style={{ marginTop: "-7.75px", marginBottom: "-7.75px" }}
+            />
+            <Box sx={{ flexGrow: 1 }} />
+            <Button variant="contained" color="inherit" sx={{ marginRight: 2 }}>
               Sign in
-            </Typography>
-          </Button>
-          <Button
-            variant="contained"
-            sx={{
-              flex: 1,
-              backgroundColor: "background.brandDefault",
-              borderRadius: 1,
-              border: "1px solid",
-              borderColor: "border.brandDefault",
-            }}
-          >
-            <Typography variant="body1" color="text.brandOnBrand">
+            </Button>
+            <Button variant="contained" color="primary">
               Register
-            </Typography>
-          </Button>
-        </Box>
-      </Box>
-
+            </Button>
+          </Toolbar>
+        </AppBar>
+        
       <Box
         sx={{
           display: "flex",
