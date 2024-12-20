@@ -1,4 +1,3 @@
-import Header from "@mui/icons-material/Star";
 import { AppBar, Box, Button, Container, TextField, Toolbar, Typography } from "@mui/material";
 import React from "react";
 
@@ -7,7 +6,6 @@ export const Login = () => {
     <Container
       maxWidth={false}
       sx={{
-        width: "1920px",
         height: "1080px",
         backgroundColor: "white",
         position: "relative",
@@ -33,9 +31,9 @@ export const Login = () => {
           width: "513px",
           height: "686px",
           backgroundColor: "#838392",
-          position: "absolute",
-          top: "197px",
-          left: "703px",
+          position: "relative",
+          top: "20%",
+          left: "40%",
           padding: "20px",
           borderRadius: "8px",
         }}
@@ -110,16 +108,6 @@ export const Login = () => {
           Register
         </Button>
       </Box>
-
-      <Header
-        sx={{
-          position: "absolute",
-          width: "1920px",
-          height: "87px",
-          top: 0,
-          left: 0,
-        }}
-      />
     </Container>
   );
 };

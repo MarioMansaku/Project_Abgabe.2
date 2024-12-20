@@ -6,6 +6,7 @@ export const Gallery = () => {
     <Box
       sx={{
         display: "flex",
+        overflow: "hidden",
         flexDirection: "column",
         height: "4300px",
         backgroundColor: "background.default",
