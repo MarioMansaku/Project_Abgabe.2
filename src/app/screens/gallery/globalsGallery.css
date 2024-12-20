@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Inter:var(--title-hero-font-weight),var(--single-line-body-base-font-weight)");
+@import url("https://fonts.googleapis.com/css?family=Inter:var(--body-base-font-weight),var(--single-line-body-base-font-weight),var(--title-hero-font-weight),var(--heading-font-weight),var(--subheading-font-weight)");
 @import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
       * {
         -webkit-font-smoothing: antialiased;
