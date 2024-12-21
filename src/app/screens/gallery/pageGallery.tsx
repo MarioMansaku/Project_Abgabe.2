@@ -8,7 +8,7 @@ export const Gallery = () => {
         display: "flex",
         overflow: "hidden",
         flexDirection: "column",
-        height: "4300px",
+        height: "relative",
         backgroundColor: "background.default",
         border: "1px solid black",
       }}

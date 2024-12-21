@@ -33,7 +33,7 @@ export const Login = () => {
           backgroundColor: "#838392",
           position: "relative",
           top: "20%",
-          left: "40%",
+          left: "32%",
           padding: "20px",
           borderRadius: "8px",
         }}
