@@ -58,7 +58,7 @@ export const Login = () => {
           <TextField
             fullWidth
             variant="outlined"
-            defaultValue="Value"
+            defaultValue=""
             sx={{
               backgroundColor: "white",
               borderRadius: "8px",
@@ -73,7 +73,7 @@ export const Login = () => {
           <TextField
             fullWidth
             variant="outlined"
-            defaultValue="Value"
+            defaultValue=""
             sx={{
               backgroundColor: "white",
               borderRadius: "8px",
@@ -87,6 +87,7 @@ export const Login = () => {
           sx={{
             backgroundColor: "#e3e3e3",
             color: "#1e1e1e",
+            marginTop: "50px",
             marginBottom: "20px",
             borderRadius: "8px",
             border: "1px solid #767676",

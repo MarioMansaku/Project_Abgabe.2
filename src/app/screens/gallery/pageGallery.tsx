@@ -60,7 +60,7 @@ export const Gallery = () => {
         {[
           {
             title: "Titel (Alpha)",
-            image: "https://c.animaapp.com/dwkKemiH/img/image.svg",
+            image: "https://media.istockphoto.com/id/937170838/de/vektor/fernsehen-test-muster-aus-streifen.jpg?s=612x612&w=0&k=20&c=7UB3mSLlGW73opaNA05lUyOs_I-h4q-MbZoSycFG-9k=",
           },
           {
             title: "Titel (Beta)",
