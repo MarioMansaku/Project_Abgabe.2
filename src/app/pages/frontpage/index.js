@@ -1,0 +1,1 @@
+export { Frontpage } from "./page";

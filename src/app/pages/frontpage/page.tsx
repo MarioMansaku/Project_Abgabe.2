@@ -149,4 +149,5 @@ export const Frontpage = () => {
       </Box>
     );
   };
-  
+
+export default Frontpage;

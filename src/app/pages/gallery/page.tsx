@@ -122,3 +122,5 @@ export const Gallery = () => {
     </Box>
   );
 };
+
+export default Gallery;
