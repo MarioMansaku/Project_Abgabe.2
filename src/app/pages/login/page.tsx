@@ -1,7 +1,16 @@
+'use client';
 import { AppBar, Box, Button, Container, TextField, Toolbar, Typography } from "@mui/material";
 import React from "react";
+import { useRouter } from "next/navigation";
 
 export const Login = () => {
+  const router = useRouter(); // Initialisiere den Router
+    
+      // Funktion zum Navigieren zur Frontpage-Seite
+      const navigateToFrontpage = () => {
+        router.push('/pages/frontpage'); // Navigiere zur Frontpage-Seite
+      };
+
   return (
     <Container
       maxWidth={false}
@@ -21,6 +30,7 @@ export const Login = () => {
                     alt="Block"
                     src="https://c.animaapp.com/CBoGUkLi/img/block.svg"
                     style={{ marginTop: "-7.75px", marginBottom: "-7.75px" }}
+                    onClick={navigateToFrontpage}
                   />
                   <Box sx={{ flexGrow: 1 }} />
                 </Toolbar>

@@ -11,6 +11,11 @@ export const Gallery = () => {
       router.push('/pages/login'); // Navigiere zur Login-Seite
     }; 
 
+    // Funktion zum Navigieren zur Frontpage-Seite
+    const navigateToFrontpage = () => {
+      router.push('/pages/frontpage'); // Navigiere zur Frontpage-Seite
+    }; 
+
   return (
     <Box
       sx={{
@@ -32,6 +37,7 @@ export const Gallery = () => {
               alt="Block"
               src="https://c.animaapp.com/CBoGUkLi/img/block.svg"
               style={{ marginTop: "-7.75px", marginBottom: "-7.75px" }}
+              onClick={navigateToFrontpage}
             />
             <Box sx={{ flexGrow: 1 }} />
             <Button variant="contained" color="inherit" sx={{ marginRight: 2 }} onClick={navigateToLogin}>
