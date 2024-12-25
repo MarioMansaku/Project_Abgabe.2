@@ -24,7 +24,6 @@ export const Gallery = () => {
         flexDirection: "column",
         height: "relative",
         backgroundColor: "background.default",
-        border: "1px solid black",
       }}
     >
       <AppBar

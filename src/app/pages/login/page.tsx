@@ -40,7 +40,7 @@ export const Login = () => {
         sx={{
           width: "513px",
           height: "686px",
-          backgroundColor: "#838392",
+          backgroundColor: "#e1ccff",
           position: "relative",
           top: "20%",
           left: "32%",

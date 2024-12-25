@@ -31,8 +31,6 @@ export const Frontpage = () => {
         sx={{
           height: "1080px",
           overflow: "hidden",
-          border: 1,
-          borderColor: "white",
         }}
       >
         <AppBar
