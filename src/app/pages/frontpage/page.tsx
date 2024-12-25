@@ -21,6 +21,11 @@ export const Frontpage = () => {
     router.push('/pages/login'); // Navigiere zur Login-Seite
   };  
 
+  // Funktion zum Navigieren zur Gallery-Seite
+  const navigateToGallery = () => {
+    router.push('/pages/gallery'); // Navigiere zur Gallery-Seite
+  }; 
+
   return (
       <Box
         sx={{
@@ -45,8 +50,8 @@ export const Frontpage = () => {
             <Button variant="contained" color="inherit" sx={{ marginRight: 2 }} onClick={navigateToLogin}>
               Sign in
             </Button>
-            <Button variant="contained" color="primary">
-              Register
+            <Button variant="contained" color="primary" onClick={navigateToGallery}>
+              Gallery
             </Button>
           </Toolbar>
         </AppBar>

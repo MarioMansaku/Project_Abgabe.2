@@ -1,7 +1,16 @@
+'use client';
 import { AppBar, Box, Button, Container, Grid, Toolbar, Typography } from "@mui/material";
 import React from "react";
+import { useRouter } from "next/navigation";
 
 export const Gallery = () => {
+  const router = useRouter(); // Initialisiere den Router
+  
+    // Funktion zum Navigieren zur Login-Seite
+    const navigateToLogin = () => {
+      router.push('/pages/login'); // Navigiere zur Login-Seite
+    }; 
+
   return (
     <Box
       sx={{
@@ -25,7 +34,7 @@ export const Gallery = () => {
               style={{ marginTop: "-7.75px", marginBottom: "-7.75px" }}
             />
             <Box sx={{ flexGrow: 1 }} />
-            <Button variant="contained" color="inherit" sx={{ marginRight: 2 }}>
+            <Button variant="contained" color="inherit" sx={{ marginRight: 2 }} onClick={navigateToLogin}>
               Sign in
             </Button>
             <Button variant="contained" color="primary">
