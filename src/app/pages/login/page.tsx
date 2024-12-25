@@ -8,7 +8,7 @@ export const Login = () => {
     
       // Funktion zum Navigieren zur Frontpage-Seite
       const navigateToFrontpage = () => {
-        router.push('/pages/frontpage'); // Navigiere zur Frontpage-Seite
+        router.push('/'); // Navigiere zur Frontpage-Seite
       };
 
   return (
