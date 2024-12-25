@@ -1,3 +1,4 @@
+'use client';
 import InfoIcon from "@mui/icons-material/Info";
 import {
   AppBar,
@@ -10,9 +11,17 @@ import {
   Typography,
 } from "@mui/material";
 import React from "react";
+import { useRouter } from "next/navigation";
 
 export const Frontpage = () => {
-    return (
+  const router = useRouter(); // Initialisiere den Router
+
+  // Funktion zum Navigieren zur Login-Seite
+  const navigateToLogin = () => {
+    router.push('/pages/login'); // Navigiere zur Login-Seite
+  };  
+
+  return (
       <Box
         sx={{
           height: "1080px",
@@ -33,7 +42,7 @@ export const Frontpage = () => {
               style={{ marginTop: "-7.75px", marginBottom: "-7.75px" }}
             />
             <Box sx={{ flexGrow: 1 }} />
-            <Button variant="contained" color="inherit" sx={{ marginRight: 2 }}>
+            <Button variant="contained" color="inherit" sx={{ marginRight: 2 }} onClick={navigateToLogin}>
               Sign in
             </Button>
             <Button variant="contained" color="primary">
