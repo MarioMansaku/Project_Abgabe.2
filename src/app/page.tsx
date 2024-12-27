@@ -23,6 +23,7 @@ import SearchButton from "../components/searchButton.js";
 export default function Home() {
   return (
     <main style={{ padding: '1px', fontFamily: 'Arial, sans-serif' }}>
+    <main style={{ padding: '1px', fontFamily: 'Arial, sans-serif' }}>
     <Frontpage />
     <h1>Testing</h1>
     <SearchButton />
