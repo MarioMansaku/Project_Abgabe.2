@@ -1,26 +1,49 @@
-import Header from "@mui/icons-material/Star";
-import { Box, Button, Container, TextField, Typography } from "@mui/material";
+'use client';
+import { AppBar, Box, Button, Container, TextField, Toolbar, Typography } from "@mui/material";
 import React from "react";
+import { useRouter } from "next/navigation";
 
 export const Login = () => {
+  const router = useRouter(); // Initialisiere den Router
+    
+      // Funktion zum Navigieren zur Frontpage-Seite
+      const navigateToFrontpage = () => {
+        router.push('/'); // Navigiere zur Frontpage-Seite
+      };
+
   return (
     <Container
       maxWidth={false}
       sx={{
-        width: "1920px",
         height: "1080px",
         backgroundColor: "white",
         position: "relative",
       }}
     >
+      <AppBar
+                position="static"
+                color="default"
+                sx={{ borderBottom: 1, borderColor: "divider" }}
+              >
+                <Toolbar>
+                  <img
+                    alt="Block"
+                    src="https://c.animaapp.com/CBoGUkLi/img/block.svg"
+                    style={{ marginTop: "-7.75px", marginBottom: "-7.75px" }}
+                    onClick={navigateToFrontpage}
+                  />
+                  <Box sx={{ flexGrow: 1 }} />
+                </Toolbar>
+              </AppBar>
+
       <Box
         sx={{
           width: "513px",
           height: "686px",
-          backgroundColor: "#838392",
-          position: "absolute",
-          top: "197px",
-          left: "703px",
+          backgroundColor: "#e1ccff",
+          position: "relative",
+          top: "20%",
+          left: "32%",
           padding: "20px",
           borderRadius: "8px",
         }}
@@ -45,7 +68,7 @@ export const Login = () => {
           <TextField
             fullWidth
             variant="outlined"
-            defaultValue="Value"
+            defaultValue=""
             sx={{
               backgroundColor: "white",
               borderRadius: "8px",
@@ -60,7 +83,7 @@ export const Login = () => {
           <TextField
             fullWidth
             variant="outlined"
-            defaultValue="Value"
+            defaultValue=""
             sx={{
               backgroundColor: "white",
               borderRadius: "8px",
@@ -74,6 +97,7 @@ export const Login = () => {
           sx={{
             backgroundColor: "#e3e3e3",
             color: "#1e1e1e",
+            marginTop: "50px",
             marginBottom: "20px",
             borderRadius: "8px",
             border: "1px solid #767676",
@@ -95,16 +119,8 @@ export const Login = () => {
           Register
         </Button>
       </Box>
-
-      <Header
-        sx={{
-          position: "absolute",
-          width: "1920px",
-          height: "87px",
-          top: 0,
-          left: 0,
-        }}
-      />
     </Container>
   );
 };
+
+export default Login;

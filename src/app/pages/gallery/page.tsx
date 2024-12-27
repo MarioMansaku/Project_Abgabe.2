@@ -1,66 +1,53 @@
-import { Box, Button, Container, Grid, Typography } from "@mui/material";
+'use client';
+import { AppBar, Box, Button, Container, Grid, Toolbar, Typography } from "@mui/material";
 import React from "react";
+import { useRouter } from "next/navigation";
 
 export const Gallery = () => {
+  const router = useRouter(); // Initialisiere den Router
+  
+    // Funktion zum Navigieren zur Login-Seite
+    const navigateToLogin = () => {
+      router.push('/pages/login'); // Navigiere zur Login-Seite
+    }; 
+
+    // Funktion zum Navigieren zur Frontpage-Seite
+    const navigateToFrontpage = () => {
+      router.push('/'); // Navigiere zur Frontpage-Seite
+    }; 
+
   return (
     <Box
       sx={{
         display: "flex",
+        overflow: "hidden",
         flexDirection: "column",
-        height: "4300px",
+        height: "relative",
         backgroundColor: "background.default",
-        border: "1px solid black",
       }}
     >
-      <Box
-        component="header"
-        sx={{
-          display: "flex",
-          flexWrap: "wrap",
-          height: "87px",
-          alignItems: "center",
-          gap: 2,
-          p: 2,
-          width: "100%",
-          backgroundColor: "background.default",
-          borderBottom: "1px solid",
-          borderColor: "border.default",
-        }}
-      >
-        <Box
-          sx={{ display: "flex", width: "178px", alignItems: "center", gap: 1 }}
+      <AppBar
+          position="static"
+          color="default"
+          sx={{ borderBottom: 1, borderColor: "divider" }}
         >
-          <Button
-            variant="contained"
-            sx={{
-              flex: 1,
-              backgroundColor: "background.neutralTertiary",
-              borderRadius: 1,
-              border: "1px solid",
-              borderColor: "border.neutralSecondary",
-            }}
-          >
-            <Typography variant="body1" color="text.primary">
+          <Toolbar>
+            <img
+              alt="Block"
+              src="https://c.animaapp.com/CBoGUkLi/img/block.svg"
+              style={{ marginTop: "-7.75px", marginBottom: "-7.75px" }}
+              onClick={navigateToFrontpage}
+            />
+            <Box sx={{ flexGrow: 1 }} />
+            <Button variant="contained" color="inherit" sx={{ marginRight: 2 }} onClick={navigateToLogin}>
               Sign in
-            </Typography>
-          </Button>
-          <Button
-            variant="contained"
-            sx={{
-              flex: 1,
-              backgroundColor: "background.brandDefault",
-              borderRadius: 1,
-              border: "1px solid",
-              borderColor: "border.brandDefault",
-            }}
-          >
-            <Typography variant="body1" color="text.brandOnBrand">
+            </Button>
+            <Button variant="contained" color="primary">
               Register
-            </Typography>
-          </Button>
-        </Box>
-      </Box>
-
+            </Button>
+          </Toolbar>
+        </AppBar>
+        
       <Box
         sx={{
           display: "flex",
@@ -87,7 +74,7 @@ export const Gallery = () => {
         {[
           {
             title: "Titel (Alpha)",
-            image: "https://c.animaapp.com/dwkKemiH/img/image.svg",
+            image: "https://media.istockphoto.com/id/937170838/de/vektor/fernsehen-test-muster-aus-streifen.jpg?s=612x612&w=0&k=20&c=7UB3mSLlGW73opaNA05lUyOs_I-h4q-MbZoSycFG-9k=",
           },
           {
             title: "Titel (Beta)",
@@ -149,3 +136,5 @@ export const Gallery = () => {
     </Box>
   );
 };
+
+export default Gallery;
