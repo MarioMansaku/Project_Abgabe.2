@@ -1,6 +1,6 @@
 import React from "react";
 import { Frontpage } from "./pages/frontpage/index.js"
-import SearchButton from "../components/searchButton.js";
+import SearchButton from "../components/searchButton";
 import AddButton from "../components/addButton";
 
 export default function Home() {
