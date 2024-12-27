@@ -20,12 +20,12 @@ git push -u origin main # Alle Änderungen ins Haupt-Repository pushen
 
 Use the provided OpenAPI documentation from {{Host}}:Port/swagger-json (e.g. https://localhost:3000/swagger-json):
 ```bash
-  npm install @openapitools/openapi-generator-cli -g
+  npm install -g openapi-typescript
 ```
 This is managed via package.json dependencies. 
 To generate the code for client, dtos etc. Following command may be required.
 To further ease integration the OpenAPI documentation is included in this project, but can otherwise be directly loaded from the API via: {{ }}
 
 ```bash
-openapi-generator-cli generate -i C:\Users\{{UserName}}\{Path-To-Your-Project}}\src\resources\openapi\swagger.json -g typescript-fetch -o C:\Users\{{UserName}}\{Path-To-Your-Project}}\src\resources\openapi\generated
+openapi-typescript C:\Users\...\...\...\openapi\swagger.json --output src/api.ts
 ```
