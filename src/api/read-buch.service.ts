@@ -11,7 +11,7 @@ export const getBuch = async (criteria: string) => {
             },
         });
 
-        return res.data; // Axios automatically parses JSON response
+        return res.data; 
     } catch (error: any) {
         if (axios.isAxiosError(error)) {
             const message = error.response?.status === 404

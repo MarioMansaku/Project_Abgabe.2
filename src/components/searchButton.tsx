@@ -17,7 +17,7 @@ export function SearchButton() {
             const query = `${criteria}=${encodeURIComponent(value)}`;
             const data = await getBuch(query); 
             setResponse(data);
-        } catch (err) {
+        } catch (err: any) {
             setError(err.message);
         } finally {
           setLoading(false);

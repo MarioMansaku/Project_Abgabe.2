@@ -1,4 +1,5 @@
-import SearchButton from "../components/searchButton.js";
+import SearchButton from "../components/searchButton";
+import AddButton from "../components/addButton";
 import InfoIcon from "@mui/icons-material/Info";
 import {
   AppBar,
@@ -19,6 +20,7 @@ export default function Home() {
     <Frontpage />
     <h1>Testing</h1>
     <SearchButton />
+    <AddButton />
   </main>
   );
 }

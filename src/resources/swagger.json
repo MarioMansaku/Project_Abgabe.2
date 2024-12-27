@@ -1,0 +1,922 @@
+{
+    "openapi": "3.0.0",
+    "paths": {
+      "/health/liveness": {
+        "get": {
+          "operationId": "HealthController_live",
+          "summary": "Liveness überprüfen",
+          "parameters": [],
+          "responses": {
+            "200": {
+              "description": "The Health Check is successful",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string",
+                        "example": "ok"
+                      },
+                      "info": {
+                        "type": "object",
+                        "example": {
+                          "database": {
+                            "status": "up"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "object",
+                          "required": [
+                            "status"
+                          ],
+                          "properties": {
+                            "status": {
+                              "type": "string"
+                            }
+                          },
+                          "additionalProperties": true
+                        },
+                        "nullable": true
+                      },
+                      "error": {
+                        "type": "object",
+                        "example": {
+  
+                        },
+                        "additionalProperties": {
+                          "type": "object",
+                          "required": [
+                            "status"
+                          ],
+                          "properties": {
+                            "status": {
+                              "type": "string"
+                            }
+                          },
+                          "additionalProperties": true
+                        },
+                        "nullable": true
+                      },
+                      "details": {
+                        "type": "object",
+                        "example": {
+                          "database": {
+                            "status": "up"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "object",
+                          "required": [
+                            "status"
+                          ],
+                          "properties": {
+                            "status": {
+                              "type": "string"
+                            }
+                          },
+                          "additionalProperties": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "503": {
+              "description": "The Health Check is not successful",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string",
+                        "example": "error"
+                      },
+                      "info": {
+                        "type": "object",
+                        "example": {
+                          "database": {
+                            "status": "up"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "object",
+                          "required": [
+                            "status"
+                          ],
+                          "properties": {
+                            "status": {
+                              "type": "string"
+                            }
+                          },
+                          "additionalProperties": true
+                        },
+                        "nullable": true
+                      },
+                      "error": {
+                        "type": "object",
+                        "example": {
+                          "redis": {
+                            "status": "down",
+                            "message": "Could not connect"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "object",
+                          "required": [
+                            "status"
+                          ],
+                          "properties": {
+                            "status": {
+                              "type": "string"
+                            }
+                          },
+                          "additionalProperties": true
+                        },
+                        "nullable": true
+                      },
+                      "details": {
+                        "type": "object",
+                        "example": {
+                          "database": {
+                            "status": "up"
+                          },
+                          "redis": {
+                            "status": "down",
+                            "message": "Could not connect"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "object",
+                          "required": [
+                            "status"
+                          ],
+                          "properties": {
+                            "status": {
+                              "type": "string"
+                            }
+                          },
+                          "additionalProperties": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "tags": [
+            "Health"
+          ]
+        }
+      },
+      "/health/readiness": {
+        "get": {
+          "operationId": "HealthController_ready",
+          "summary": "Readiness überprüfen",
+          "parameters": [],
+          "responses": {
+            "200": {
+              "description": "The Health Check is successful",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string",
+                        "example": "ok"
+                      },
+                      "info": {
+                        "type": "object",
+                        "example": {
+                          "database": {
+                            "status": "up"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "object",
+                          "required": [
+                            "status"
+                          ],
+                          "properties": {
+                            "status": {
+                              "type": "string"
+                            }
+                          },
+                          "additionalProperties": true
+                        },
+                        "nullable": true
+                      },
+                      "error": {
+                        "type": "object",
+                        "example": {
+  
+                        },
+                        "additionalProperties": {
+                          "type": "object",
+                          "required": [
+                            "status"
+                          ],
+                          "properties": {
+                            "status": {
+                              "type": "string"
+                            }
+                          },
+                          "additionalProperties": true
+                        },
+                        "nullable": true
+                      },
+                      "details": {
+                        "type": "object",
+                        "example": {
+                          "database": {
+                            "status": "up"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "object",
+                          "required": [
+                            "status"
+                          ],
+                          "properties": {
+                            "status": {
+                              "type": "string"
+                            }
+                          },
+                          "additionalProperties": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "503": {
+              "description": "The Health Check is not successful",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string",
+                        "example": "error"
+                      },
+                      "info": {
+                        "type": "object",
+                        "example": {
+                          "database": {
+                            "status": "up"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "object",
+                          "required": [
+                            "status"
+                          ],
+                          "properties": {
+                            "status": {
+                              "type": "string"
+                            }
+                          },
+                          "additionalProperties": true
+                        },
+                        "nullable": true
+                      },
+                      "error": {
+                        "type": "object",
+                        "example": {
+                          "redis": {
+                            "status": "down",
+                            "message": "Could not connect"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "object",
+                          "required": [
+                            "status"
+                          ],
+                          "properties": {
+                            "status": {
+                              "type": "string"
+                            }
+                          },
+                          "additionalProperties": true
+                        },
+                        "nullable": true
+                      },
+                      "details": {
+                        "type": "object",
+                        "example": {
+                          "database": {
+                            "status": "up"
+                          },
+                          "redis": {
+                            "status": "down",
+                            "message": "Could not connect"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "object",
+                          "required": [
+                            "status"
+                          ],
+                          "properties": {
+                            "status": {
+                              "type": "string"
+                            }
+                          },
+                          "additionalProperties": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "tags": [
+            "Health"
+          ]
+        }
+      },
+      "/metrics": {
+        "get": {
+          "operationId": "PrometheusController_metrics",
+          "parameters": [],
+          "responses": {
+            "200": {
+              "description": ""
+            }
+          }
+        }
+      },
+      "/rest/{id}": {
+        "get": {
+          "operationId": "BuchGetController_getById",
+          "summary": "Suche mit der Buch-ID",
+          "parameters": [
+            {
+              "name": "id",
+              "required": true,
+              "in": "path",
+              "description": "Z.B. 1",
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "If-None-Match",
+              "in": "header",
+              "description": "Header für bedingte GET-Requests, z.B. \"0\"",
+              "required": false,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Das Buch wurde gefunden"
+            },
+            "304": {
+              "description": "Das Buch wurde bereits heruntergeladen"
+            },
+            "404": {
+              "description": "Kein Buch zur ID gefunden"
+            }
+          },
+          "tags": [
+            "Buch REST-API"
+          ]
+        },
+        "put": {
+          "operationId": "BuchWriteController_put",
+          "summary": "Ein vorhandenes Buch aktualisieren",
+          "tags": [
+            "Buch REST-API"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "required": true,
+              "in": "path",
+              "schema": {
+                "type": "number"
+              }
+            },
+            {
+              "name": "If-Match",
+              "in": "header",
+              "description": "Header für optimistische Synchronisation",
+              "required": false,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BuchDtoOhneRef"
+                }
+              }
+            }
+          },
+          "responses": {
+            "204": {
+              "description": "Erfolgreich aktualisiert"
+            },
+            "400": {
+              "description": "Fehlerhafte Buchdaten"
+            },
+            "403": {
+              "description": "Kein Token mit ausreichender Berechtigung vorhanden"
+            },
+            "412": {
+              "description": "Falsche Version im Header \"If-Match\""
+            },
+            "428": {
+              "description": "Header \"If-Match\" fehlt"
+            }
+          },
+          "security": [
+            {
+              "bearer": []
+            }
+          ]
+        },
+        "delete": {
+          "operationId": "BuchWriteController_delete",
+          "summary": "Buch mit der ID löschen",
+          "parameters": [
+            {
+              "name": "id",
+              "required": true,
+              "in": "path",
+              "schema": {
+                "type": "number"
+              }
+            }
+          ],
+          "responses": {
+            "204": {
+              "description": "Das Buch wurde gelöscht oder war nicht vorhanden"
+            },
+            "403": {
+              "description": "Kein Token mit ausreichender Berechtigung vorhanden"
+            }
+          },
+          "tags": [
+            "Buch REST-API"
+          ],
+          "security": [
+            {
+              "bearer": []
+            }
+          ]
+        }
+      },
+      "/rest": {
+        "get": {
+          "operationId": "BuchGetController_get",
+          "summary": "Suche mit Suchkriterien",
+          "parameters": [
+            {
+              "name": "isbn",
+              "required": false,
+              "in": "query",
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "rating",
+              "required": false,
+              "in": "query",
+              "schema": {
+                "type": "number"
+              }
+            },
+            {
+              "name": "art",
+              "required": false,
+              "in": "query",
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "preis",
+              "required": false,
+              "in": "query",
+              "schema": {
+                "type": "number"
+              }
+            },
+            {
+              "name": "rabatt",
+              "required": false,
+              "in": "query",
+              "schema": {
+                "type": "number"
+              }
+            },
+            {
+              "name": "lieferbar",
+              "required": false,
+              "in": "query",
+              "schema": {
+                "type": "boolean"
+              }
+            },
+            {
+              "name": "datum",
+              "required": false,
+              "in": "query",
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "homepage",
+              "required": false,
+              "in": "query",
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "javascript",
+              "required": false,
+              "in": "query",
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "typescript",
+              "required": false,
+              "in": "query",
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "titel",
+              "required": false,
+              "in": "query",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Eine evtl. leere Liste mit Büchern"
+            }
+          },
+          "tags": [
+            "Buch REST-API"
+          ]
+        },
+        "post": {
+          "operationId": "BuchWriteController_post",
+          "summary": "Ein neues Buch anlegen",
+          "parameters": [],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BuchDTO"
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Erfolgreich neu angelegt"
+            },
+            "400": {
+              "description": "Fehlerhafte Buchdaten"
+            },
+            "403": {
+              "description": "Kein Token mit ausreichender Berechtigung vorhanden"
+            }
+          },
+          "tags": [
+            "Buch REST-API"
+          ],
+          "security": [
+            {
+              "bearer": []
+            }
+          ]
+        }
+      },
+      "/auth/token": {
+        "post": {
+          "operationId": "TokenController_token",
+          "summary": "Access Token zu Benutzername und Passwort",
+          "parameters": [],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/x-www-form-urlencoded": {
+                "schema": {
+                  "$ref": "#/components/schemas/TokenData"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TokenData"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Erfolgreich eingeloggt."
+            },
+            "401": {
+              "description": "Benutzername oder Passwort sind falsch."
+            }
+          },
+          "tags": [
+            "Authentifizierung und Autorisierung"
+          ]
+        }
+      },
+      "/auth/refresh": {
+        "post": {
+          "operationId": "TokenController_refresh",
+          "summary": "Refresh für vorhandenen Token",
+          "parameters": [],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/x-www-form-urlencoded": {
+                "schema": {
+                  "$ref": "#/components/schemas/Refresh"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Refresh"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Erfolgreich aktualisiert."
+            },
+            "401": {
+              "description": "Ungültiger Token."
+            }
+          },
+          "tags": [
+            "Authentifizierung und Autorisierung"
+          ]
+        }
+      },
+      "/dev/db_populate": {
+        "post": {
+          "operationId": "DevController_dbPopulate",
+          "summary": "DB neu laden",
+          "parameters": [],
+          "responses": {
+            "200": {
+              "description": "Die DB wurde neu geladen"
+            },
+            "403": {
+              "description": "Kein Token mit ausreichender Berechtigung vorhanden"
+            }
+          },
+          "tags": [
+            "Dev"
+          ],
+          "security": [
+            {
+              "bearer": []
+            }
+          ]
+        }
+      }
+    },
+    "info": {
+      "title": "Buch",
+      "description": "Beispiel für Software Engineering",
+      "version": "2024.10.1",
+      "contact": {
+  
+      }
+    },
+    "tags": [],
+    "servers": [],
+    "components": {
+      "securitySchemes": {
+        "bearer": {
+          "scheme": "bearer",
+          "bearerFormat": "JWT",
+          "type": "http"
+        }
+      },
+      "schemas": {
+        "TitelDTO": {
+          "type": "object",
+          "properties": {
+            "titel": {
+              "type": "string",
+              "example": "Der Titel"
+            },
+            "untertitel": {
+              "type": "string",
+              "example": "Der Untertitel"
+            }
+          },
+          "required": [
+            "titel",
+            "untertitel"
+          ]
+        },
+        "AbbildungDTO": {
+          "type": "object",
+          "properties": {
+            "beschriftung": {
+              "type": "string",
+              "example": "Die Beschriftung"
+            },
+            "contentType": {
+              "type": "string",
+              "example": "image/png"
+            }
+          },
+          "required": [
+            "beschriftung",
+            "contentType"
+          ]
+        },
+        "BuchDTO": {
+          "type": "object",
+          "properties": {
+            "isbn": {
+              "type": "string",
+              "example": "978-0-007-00644-1"
+            },
+            "rating": {
+              "type": "number",
+              "example": 5
+            },
+            "art": {
+              "type": "string",
+              "example": "EPUB"
+            },
+            "preis": {
+              "type": "number",
+              "example": 1
+            },
+            "rabatt": {
+              "type": "number",
+              "example": 0.1
+            },
+            "lieferbar": {
+              "type": "boolean",
+              "example": true
+            },
+            "datum": {
+              "type": "object",
+              "example": "2021-01-31"
+            },
+            "homepage": {
+              "type": "string",
+              "example": "https://test.de/"
+            },
+            "schlagwoerter": {
+              "type": "object",
+              "example": [
+                "JAVASCRIPT",
+                "TYPESCRIPT",
+                "JAVA",
+                "PYTHON"
+              ]
+            },
+            "titel": {
+              "$ref": "#/components/schemas/TitelDTO"
+            },
+            "abbildungen": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/AbbildungDTO"
+              }
+            }
+          },
+          "required": [
+            "isbn",
+            "rating",
+            "art",
+            "preis",
+            "rabatt",
+            "lieferbar",
+            "datum",
+            "homepage",
+            "schlagwoerter",
+            "titel",
+            "abbildungen"
+          ]
+        },
+        "BuchDtoOhneRef": {
+          "type": "object",
+          "properties": {
+            "isbn": {
+              "type": "string",
+              "example": "978-0-007-00644-1"
+            },
+            "rating": {
+              "type": "number",
+              "example": 5
+            },
+            "art": {
+              "type": "string",
+              "example": "EPUB"
+            },
+            "preis": {
+              "type": "number",
+              "example": 1
+            },
+            "rabatt": {
+              "type": "number",
+              "example": 0.1
+            },
+            "lieferbar": {
+              "type": "boolean",
+              "example": true
+            },
+            "datum": {
+              "type": "object",
+              "example": "2021-01-31"
+            },
+            "homepage": {
+              "type": "string",
+              "example": "https://test.de/"
+            },
+            "schlagwoerter": {
+              "type": "object",
+              "example": [
+                "JAVASCRIPT",
+                "TYPESCRIPT",
+                "JAVA",
+                "PYTHON"
+              ]
+            }
+          },
+          "required": [
+            "isbn",
+            "rating",
+            "art",
+            "preis",
+            "rabatt",
+            "lieferbar",
+            "datum",
+            "homepage",
+            "schlagwoerter"
+          ]
+        },
+        "TokenData": {
+          "type": "object",
+          "properties": {
+            "username": {
+              "type": "string",
+              "example": "admin"
+            },
+            "password": {
+              "type": "string",
+              "example": "p"
+            }
+          },
+          "required": [
+            "username",
+            "password"
+          ]
+        },
+        "Refresh": {
+          "type": "object",
+          "properties": {
+            "refresh_token": {
+              "type": "string",
+              "example": "alg.payload.signature"
+            }
+          },
+          "required": [
+            "refresh_token"
+          ]
+        }
+      }
+    }
+  }

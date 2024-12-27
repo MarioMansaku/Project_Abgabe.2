@@ -1,14 +1,34 @@
-import log from '../utils/logger.js'
-import axios from 'axios'
-import { BuchDto } from '@/models/buchDto.js';
-import { validateInput } from '@/utils/validateInput.js';
+import log from '../utils/logger.js';
+import axios, { AxiosResponse } from 'axios';
+import { operations } from './api.js'
+
+type PostPayload = operations["BuchWriteController_post"]["requestBody"]["content"]["application/json"];
+type PostResponse = operations["BuchWriteController_post"]["responses"]["201"]["content"];
+// type PutPayload = operations["BuchWriteController_put"]["requestBody"]["content"]["application/json"];
+// type PutResponse = operations["BuchWriteController_put"]["responses"]["204"]["content"];
+
 
 const BASE_URL = 'https://localhost:3000/rest';
 
-export class BuchWriteService {
-    /**
-    * Neues Buch anlegen.
-    * @param bookData The raw book data from the frontend.
-    * @param token The authorization token.
-    */
+export class WriteServiceBuch {
+    async postBuch(buch: PostPayload): Promise<PostResponse | void> {
+        try {
+            const response: AxiosResponse<PostResponse> = await axios.post(BASE_URL, buch, {
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+
+            if(response.status === 201) {
+                log.debug("Book good");
+                return response.data;
+            }
+
+        } catch (error: any) {
+            log.debug("Book bad")
+            throw error;
+        }
+    };
 }
+
+
