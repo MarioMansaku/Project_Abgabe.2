@@ -25,6 +25,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "server.js", "src/utils/logger.js", "src/components/searchButton.tsx", "src/components/addButton.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "server.js", "src/utils/logger.js", "src/app/pages/components/searchButton/searchButton.tsx", "src/app/pages/components/addButton/page.tsx"],
   "exclude": ["node_modules"]
 }

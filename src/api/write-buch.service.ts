@@ -1,6 +1,6 @@
-import log from '../utils/logger.js';
+import log from '../utils/logger';
 import axios, { AxiosResponse } from 'axios';
-import { operations } from './api.js'
+import { operations } from './api'
 
 type PostPayload = operations["BuchWriteController_post"]["requestBody"]["content"]["application/json"];
 type PostResponse = operations["BuchWriteController_post"]["responses"]["201"]["content"];

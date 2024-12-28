@@ -1,7 +1,6 @@
 import React from "react";
 import { Frontpage } from "./pages/frontpage/index.js"
-import SearchButton from "../components/searchButton.js";
-import AddButton from "../components/addButton";
+import SearchButton from "../components/searchButton.tsx";
 
 export default function Home() {
   return (
@@ -9,7 +8,6 @@ export default function Home() {
     <Frontpage />
     <h1>Testing</h1>
     <SearchButton />
-    <AddButton />
   </main>
   );
 }

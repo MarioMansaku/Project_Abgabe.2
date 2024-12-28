@@ -26,6 +26,10 @@ export const Frontpage = () => {
     router.push('/pages/gallery'); // Navigiere zur Gallery-Seite
   }; 
 
+  const navigateToAdd = () => {
+    router.push('/pages/components/addButton'); // Navigiere zur Gallery-Seite
+  }; 
+
   return (
       <Box
         sx={{
@@ -75,7 +79,7 @@ export const Frontpage = () => {
             SWE
           </Typography>
           <Box sx={{ display: "flex", gap: 2 }}>
-            <Button variant="contained" color="secondary">
+            <Button variant="contained" color="secondary" onClick={navigateToAdd}>
               Add
             </Button>
             <Button variant="contained" color="primary">

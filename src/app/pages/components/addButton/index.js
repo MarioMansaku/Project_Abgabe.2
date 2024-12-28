@@ -1,0 +1,1 @@
+export { AdminAddBook } from "./page"

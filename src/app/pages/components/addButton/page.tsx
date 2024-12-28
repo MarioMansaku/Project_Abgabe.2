@@ -1,12 +1,12 @@
 "use client"
 
 import React, { useState } from "react";
-import { WriteServiceBuch } from '../api/write-buch.service.ts';
-import { operations } from '../api/api.ts';
+import { WriteServiceBuch } from '../../../../api/write-buch.service.ts';
+import { operations } from '../../../../api/api.ts';
 
 type PostPayload = operations["BuchWriteController_post"]["requestBody"]["content"]["application/json"];
 
-export default function AdminAddBook() {
+export function AdminAddBook() {
     const writeService = new WriteServiceBuch();
     const [bookData, setBookData] = useState<Partial<Record<keyof PostPayload, any>>>({});
     const [status, setStatus] = useState<string>("");
@@ -76,3 +76,5 @@ export default function AdminAddBook() {
         </div>
     );
 }
+
+export default AdminAddBook;
