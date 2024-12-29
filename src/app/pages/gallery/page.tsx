@@ -81,27 +81,27 @@ export const Gallery = () => {
         {[
           {
             title: "Titel (Alpha)",
-            image: "https://media.istockphoto.com/id/937170838/de/vektor/fernsehen-test-muster-aus-streifen.jpg?s=612x612&w=0&k=20&c=7UB3mSLlGW73opaNA05lUyOs_I-h4q-MbZoSycFG-9k=",
+            image: "https://i.ibb.co/VHr3s01/Alpha.png",
           },
           {
             title: "Titel (Beta)",
-            image: "https://c.animaapp.com/dwkKemiH/img/image-1.svg",
+            image: "https://i.ibb.co/y67qW95/Beta.png",
           },
           {
             title: "Titel (Gamma)",
-            image: "https://c.animaapp.com/dwkKemiH/img/image-2.svg",
+            image: "https://i.ibb.co/9pz0HCb/Gamma.png", 
           },
           {
             title: "Titel (Delta)",
-            image: "https://c.animaapp.com/dwkKemiH/img/image-3.svg",
+            image: "https://i.ibb.co/hmynPQz/Delta.png",
           },
           {
             title: "Titel (Epsilon)",
-            image: "https://c.animaapp.com/dwkKemiH/img/image-4.svg",
+            image: "https://i.ibb.co/xMDBC09/Epsilon.png",
           },
           {
             title: "Titel (Phi)",
-            image: "https://c.animaapp.com/dwkKemiH/img/image-5.svg",
+            image: "https://i.ibb.co/W0hVrvf/Phi.png",
           },
         ].map((item, index) => (
           <Grid
@@ -114,7 +114,7 @@ export const Gallery = () => {
               <Box
                 sx={{
                   width: "100%",
-                  height: "350px",
+                  height: "850px",
                   backgroundImage: `url(${item.image})`,
                   backgroundSize: "cover",
                   backgroundPosition: "center",

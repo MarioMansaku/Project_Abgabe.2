@@ -18,7 +18,7 @@ export const Carousel = () => {
       <Slider {...settings}>
         <div>
           <h3>Alpha</h3>
-          <img src="https://via.placeholder.com/800x400?text=Slide+1" alt="Slide 1" style={{ width: '100%' }} />
+          <img src="@/resources/bookCovers/Alpha.png" alt="Slide 1" style={{ width: '100%' }} />
         </div>
         <div>
           <h3>Beta</h3>
