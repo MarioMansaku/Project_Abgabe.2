@@ -2,6 +2,7 @@
 import { AppBar, Box, Button, Container, Grid, Toolbar, Typography } from "@mui/material";
 import React from "react";
 import { useRouter } from "next/navigation";
+import SearchButton from "@/components/searchButton";
 
 export const Gallery = () => {
   const router = useRouter(); // Initialisiere den Router
@@ -14,6 +15,10 @@ export const Gallery = () => {
     // Funktion zum Navigieren zur Frontpage-Seite
     const navigateToFrontpage = () => {
       router.push('/'); // Navigiere zur Frontpage-Seite
+    }; 
+
+    const navigateToAdd = () => {
+      router.push('/pages/components/addButton'); // Navigiere zur Gallery-Seite
     }; 
 
   return (
@@ -42,12 +47,9 @@ export const Gallery = () => {
             <Button variant="contained" color="inherit" sx={{ marginRight: 2 }} onClick={navigateToLogin}>
               Sign in
             </Button>
-            <Button variant="contained" color="primary">
-              Register
-            </Button>
           </Toolbar>
         </AppBar>
-        
+
       <Box
         sx={{
           display: "flex",
@@ -68,7 +70,12 @@ export const Gallery = () => {
         <Typography variant="h1" color="#151547" sx={{ textAlign: "center" }}>
           Gallery
         </Typography>
+        <Button variant="contained" color="secondary" onClick={navigateToAdd}>
+          Add
+        </Button>
       </Box>
+
+      <SearchButton />
 
       <Container sx={{ opacity: 0.8 }}>
         {[

@@ -3,6 +3,8 @@
 import React, { useState } from "react";
 import { WriteServiceBuch } from '../../../../api/write-buch.service.ts';
 import { operations } from '../../../../api/api.ts';
+import { useRouter } from "next/navigation";
+import { Button } from "@mui/material";
 
 type PostPayload = operations["BuchWriteController_post"]["requestBody"]["content"]["application/json"];
 
@@ -40,6 +42,13 @@ export function AdminAddBook() {
         "titel",
     ];
 
+    const router = useRouter(); // Initialisiere den Router
+        
+        // Funktion zum Navigieren zur Gallery-Seite
+        const navigateToGallery = () => {
+            router.push('/pages/gallery'); // Navigiere zur Gallery-Seite
+        };
+
     return (
         <div>
             <h2>Admin Input Table</h2>
@@ -69,9 +78,12 @@ export function AdminAddBook() {
                 </tbody>
             </table>
 
-            <button style={{ marginTop: "20px" }} onClick={handleSubmit}>
+            <Button variant="contained" style={{ marginTop: 20, marginRight: 20 }} onClick={handleSubmit}>
                 Submit
-            </button>
+            </Button>
+            <Button variant="contained" color="secondary" style={{ marginTop: 20, marginRight: 20 }} onClick={navigateToGallery}>
+                Gallery
+            </Button>
             <p>{status}</p>
         </div>
     );

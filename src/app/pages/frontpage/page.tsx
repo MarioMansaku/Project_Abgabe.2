@@ -52,9 +52,6 @@ export const Frontpage = () => {
             <Button variant="contained" color="inherit" sx={{ marginRight: 2 }} onClick={navigateToLogin}>
               Sign in
             </Button>
-            <Button variant="contained" color="primary" onClick={navigateToGallery}>
-              Gallery
-            </Button>
           </Toolbar>
         </AppBar>
   
@@ -82,8 +79,8 @@ export const Frontpage = () => {
             <Button variant="contained" color="secondary" onClick={navigateToAdd}>
               Add
             </Button>
-            <Button variant="contained" color="primary">
-              Button
+            <Button variant="contained" color="primary" onClick={navigateToGallery}>
+              Gallery
             </Button>
           </Box>
         </Box>
