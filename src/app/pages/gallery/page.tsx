@@ -77,7 +77,7 @@ export const Gallery = () => {
 
       <SearchButton />
 
-      <Container sx={{ opacity: 0.8 }}>
+      <Container >
         {[
           {
             title: "Titel (Alpha)",
