@@ -98,17 +98,7 @@ export const Frontpage = () => {
             />
           </Grid>
         </Grid>
-  
-        <Container
-          sx={{
-            width: "930px",
-            padding: 4,
-            backgroundColor: "rgba(151, 151, 151, 0.2)",
-          }}
-        >
-          <Carousel />
-        </Container>
-
+        <Carousel />
       </Box>
     );
   };

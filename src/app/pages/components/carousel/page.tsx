@@ -9,8 +9,12 @@ export const Carousel = () => {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 2500,
+    cssEase: "linear",
+    pauseOnHover: true
   };
   
   return (
@@ -18,27 +22,27 @@ export const Carousel = () => {
       <Slider {...settings}>
         <div>
           <h3>Alpha</h3>
-          <img src="@/resources/bookCovers/Alpha.png" alt="Slide 1" style={{ width: '100%' }} />
+          <img src="https://i.ibb.co/VHr3s01/Alpha.png" alt="Slide 1" style={{ width: '100%' }} />
         </div>
         <div>
           <h3>Beta</h3>
-          <img src="https://via.placeholder.com/800x400?text=Slide+1" alt="Slide 2" style={{ width: '100%' }} />
+          <img src="https://i.ibb.co/y67qW95/Beta.png" alt="Slide 2" style={{ width: '100%' }} />
         </div>
         <div>
           <h3>Gamma</h3>
-          <img src="https://via.placeholder.com/800x400?text=Slide+1" alt="Slide 3" style={{ width: '100%' }} />
+          <img src="https://i.ibb.co/9pz0HCb/Gamma.png" alt="Slide 3" style={{ width: '100%' }} />
         </div>
         <div>
           <h3>Delta</h3>
-          <img src="https://via.placeholder.com/800x400?text=Slide+1" alt="Slide 4" style={{ width: '100%' }} />
+          <img src="https://i.ibb.co/hmynPQz/Delta.png" alt="Slide 4" style={{ width: '100%' }} />
         </div>
         <div>
           <h3>Epsilon</h3>
-          <img src="https://via.placeholder.com/800x400?text=Slide+1" alt="Slide 5" style={{ width: '100%' }} />
+          <img src="https://i.ibb.co/xMDBC09/Epsilon.png" alt="Slide 5" style={{ width: '100%' }} />
         </div>
         <div>
           <h3>Phi</h3>
-          <img src="https://via.placeholder.com/800x400?text=Slide+1" alt="Slide 6" style={{ width: '100%' }} />
+          <img src="https://i.ibb.co/W0hVrvf/Phi.png" alt="Slide 6" style={{ width: '100%' }} />
         </div>
       </Slider>
     </div>
