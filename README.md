@@ -7,6 +7,8 @@ npm run dev # Server hochfahren
 npm install loglevel # LogLevels für die Protokollierung installieren -> src/utils/logger.js 
 npm install axios # Axios bietet eine sauberere und prägnantere API für HTTP-Anfragen im Vergleich zur Fetch-API.
 npm install @mui/material # Installation von "@mui/icons-material für page.tsx
+npm install react-slick --legacy-peer-deps #Installation von react slick für das Karussell
+npm install slick-carousel --legacy-peer-deps #Installation der Karussell-Komponenten
 
 # GitHub 
 
