@@ -1,5 +1,5 @@
 'use client';
-import InfoIcon from "@mui/icons-material/Info";
+
 import {
   AppBar,
   Box,
@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 import React from "react";
 import { useRouter } from "next/navigation";
+import { Carousel } from "../components/carousel";
 
 export const Frontpage = () => {
   const router = useRouter(); // Initialisiere den Router
@@ -102,63 +103,12 @@ export const Frontpage = () => {
           sx={{
             width: "930px",
             padding: 4,
-            backgroundColor: "rgba(86, 84, 84, 0.2)",
+            backgroundColor: "rgba(151, 151, 151, 0.2)",
           }}
         >
-          <Box sx={{ marginBottom: 2 }}>
-            <Typography variant="h3" color="white">
-              Heading
-            </Typography>
-            <Typography variant="subtitle1" color="white">
-              Subheading
-            </Typography>
-          </Box>
-          <Box sx={{ display: "flex", gap: 4 }}>
-            <Box sx={{ display: "flex", gap: 2 }}>
-              <InfoIcon fontSize="large" />
-              <Box>
-                <Typography variant="h4" color="white">
-                  Title
-                </Typography>
-                <Typography variant="body1" color="white">
-                  Body text for whatever you’d like to say. Add main takeaway
-                  points, quotes, anecdotes, or even a very very short story.
-                </Typography>
-              </Box>
-            </Box>
-          </Box>
+          <Carousel />
         </Container>
-  
-        <Container
-          sx={{
-            width: "930px",
-            padding: 4,
-            backgroundColor: "rgba(188, 32, 32, 0.2)",
-          }}
-        >
-          <Box sx={{ marginBottom: 2 }}>
-            <Typography variant="h3" color="white">
-              Heading
-            </Typography>
-            <Typography variant="subtitle1" color="white">
-              Subheading
-            </Typography>
-          </Box>
-          <Box sx={{ display: "flex", gap: 4 }}>
-            <Box sx={{ display: "flex", gap: 2 }}>
-              <InfoIcon fontSize="large" />
-              <Box>
-                <Typography variant="h4" color="white">
-                  Title
-                </Typography>
-                <Typography variant="body1" color="white">
-                  Body text for whatever you’d like to say. Add main takeaway
-                  points, quotes, anecdotes, or even a very very short story.
-                </Typography>
-              </Box>
-            </Box>
-          </Box>
-        </Container>
+
       </Box>
     );
   };
