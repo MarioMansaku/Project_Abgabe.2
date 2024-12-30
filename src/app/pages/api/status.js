@@ -5,8 +5,8 @@ const SECRET_KEY = process.env.JWT_SECRET_KEY; // store this in an environment v
 
 // Sample hardcoded users (you should query from a real database in production)
 const users = [
-  { id: 1, username: 'test', password: 'test' }, // hashed password: 'password123'
-  { id: 2, username: 'admin', password: 'p' }, // hashed password: 'password456'
+  { id: 1, username: 'user1', password: '$2a$10$5O8uqU0oNSL6FHZhr3l.BO..LgfhzJw9P4GbZXwLj1dOa3VRmjRjW' }, // hashed password: 'password123'
+  { id: 2, username: 'user2', password: '$2a$10$XzXx7g2V.xPZG3kWn6z1WONOdFqP7pOmcSCbKK5BOdl7eT.m8RQ2O' }, // hashed password: 'password456'
 ];
 
 const status = async (req, res) => {
