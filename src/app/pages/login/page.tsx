@@ -15,7 +15,8 @@ export const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-
+  
+  // Funktion zum Abfragen der Login-Daten
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
