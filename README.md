@@ -9,6 +9,7 @@ npm install axios # Axios bietet eine sauberere und prägnantere API für HTTP-A
 npm install @mui/material # Installation von "@mui/icons-material für page.tsx
 npm install react-slick --legacy-peer-deps #Installation von react slick für das Karussell
 npm install slick-carousel --legacy-peer-deps #Installation der Karussell-Komponenten
+npm install next-auth jwt-simple bcryptjs --legacy-peer-deps #Installation der fürs Login notwenigen Packete
 
 # GitHub 
 
