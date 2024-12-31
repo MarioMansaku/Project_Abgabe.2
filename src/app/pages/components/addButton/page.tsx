@@ -14,16 +14,23 @@ export function AdminAddBook() {
     const [status, setStatus] = useState<string>("");
     const [isAdmin, setIsAdmin] = useState<boolean>(false); // State für Admin-Status
     const [accessDenied, setAccessDenied] = useState<boolean>(false); // State für Zugriff verweigert
+    const [notLoggedIn, setNotLoggedIn] = useState<boolean>(false); // State für nicht eingeloggt
     const [redirecting, setRedirecting] = useState<boolean>(false); // State für Weiterleitung
 
     const router = useRouter(); // Initialisiere den Router
 
-    // Überprüfen, ob der Benutzer als 'admin' eingeloggt ist
+    // Überprüfen, ob der Benutzer eingeloggt ist und Admin ist
     useEffect(() => {
         const token = localStorage.getItem('authToken');
         if (!token) {
-            // Wenn kein Token vorhanden ist, zur Login-Seite weiterleiten
-            router.push('/pages/login');
+            // Wenn kein Token vorhanden ist, Zugang verweigern und weiterleiten
+            setNotLoggedIn(true);
+            setAccessDenied(true);
+
+            // Verzögerung vor der Weiterleitung zur Login-Seite
+            setTimeout(() => {
+                router.push('/pages/login'); // Weiterleitung zur Login-Seite
+            }, 3000); // 3000ms (3 Sekunden) Verzögerung
         } else {
             // Token dekodieren, um den Benutzernamen zu überprüfen
             const decoded = JSON.parse(atob(token.split('.')[1]));
@@ -75,20 +82,31 @@ export function AdminAddBook() {
         router.push('/pages/gallery'); // Navigiere zur Gallery-Seite
     };
 
-    // Wenn der Benutzer nicht admin ist, eine Meldung anzeigen
+    // Wenn der Benutzer nicht eingeloggt ist oder nicht admin ist, eine Meldung anzeigen
     if (accessDenied) {
         return (
             <Box sx={{ textAlign: 'center', marginTop: '50px' }}>
                 <Typography variant="h4" color="error">
                     Access Denied
                 </Typography>
-                <Typography variant="body1" color="textSecondary">
-                    You do not have sufficient permissions to access this page. You will be redirected shortly.
-                </Typography>
-                {redirecting && (
-                    <Typography variant="body2" color="textSecondary">
-                        Redirecting in 3 seconds...
-                    </Typography>
+                {notLoggedIn ? (
+                    <>
+                        <Typography variant="body1" color="textSecondary">
+                            You are not logged in. You will be redirected to the login page shortly.
+                        </Typography>
+                        <Typography variant="body2" color="textSecondary">
+                            Redirecting in 3 seconds...
+                        </Typography>
+                    </>
+                ) : (
+                    <>
+                        <Typography variant="body1" color="textSecondary">
+                            You do not have sufficient permissions to access this page. You will be redirected shortly.
+                        </Typography>
+                        <Typography variant="body2" color="textSecondary">
+                            Redirecting in 3 seconds...
+                        </Typography>
+                    </>
                 )}
             </Box>
         );
