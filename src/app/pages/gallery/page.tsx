@@ -1,25 +1,48 @@
 'use client';
 import { AppBar, Box, Button, Container, Grid, Toolbar, Typography } from "@mui/material";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import SearchButton from "@/components/searchButton";
 
 export const Gallery = () => {
   const router = useRouter(); // Initialisiere den Router
+  const [username, setUsername] = useState<string | null>(null); // State für den Benutzernamen
+
+  // Laden des Benutzernamens aus dem localStorage, wenn der Benutzer eingeloggt ist
+  useEffect(() => {
+      // Überprüfen, ob es das erste Mal ist, dass die Seite geladen wird
+      if (typeof window !== 'undefined') {
+        const firstVisit = localStorage.getItem('firstVisit');
   
-    // Funktion zum Navigieren zur Login-Seite
-    const navigateToLogin = () => {
-      router.push('/pages/login'); // Navigiere zur Login-Seite
-    }; 
+        if (!firstVisit) {
+          // Wenn es der erste Besuch ist, Token löschen und Flag setzen
+          localStorage.removeItem('authToken');
+          localStorage.setItem('firstVisit', 'true');
+        }
+  
+        // Lade das JWT-Token aus dem localStorage, wenn vorhanden
+        const token = localStorage.getItem('authToken');
+        if (token) {
+          // Token dekodieren, um den Benutzernamen zu extrahieren
+          const decoded = JSON.parse(atob(token.split('.')[1])); // Token dekodieren (Base64)
+          setUsername(decoded.username); // Benutzernamen setzen
+        }
+      }
+    }, []);
 
-    // Funktion zum Navigieren zur Frontpage-Seite
-    const navigateToFrontpage = () => {
-      router.push('/'); // Navigiere zur Frontpage-Seite
-    }; 
+  // Funktion zum Navigieren zur Login-Seite
+  const navigateToLogin = () => {
+    router.push("/pages/login"); // Navigiere zur Login-Seite
+  };
 
-    const navigateToAdd = () => {
-      router.push('/pages/components/addButton'); // Navigiere zur Gallery-Seite
-    }; 
+  // Funktion zum Navigieren zur Frontpage-Seite
+  const navigateToFrontpage = () => {
+    router.push("/"); // Navigiere zur Frontpage-Seite
+  };
+
+  const navigateToAdd = () => {
+    router.push("/pages/components/addButton"); // Navigiere zur Gallery-Seite
+  };
 
   return (
     <Box
@@ -32,23 +55,29 @@ export const Gallery = () => {
       }}
     >
       <AppBar
-          position="static"
-          color="default"
-          sx={{ borderBottom: 1, borderColor: "divider" }}
-        >
-          <Toolbar>
-            <img
-              alt="Block"
-              src="https://c.animaapp.com/CBoGUkLi/img/block.svg"
-              style={{ marginTop: "-7.75px", marginBottom: "-7.75px" }}
-              onClick={navigateToFrontpage}
-            />
-            <Box sx={{ flexGrow: 1 }} />
+        position="static"
+        color="default"
+        sx={{ borderBottom: 1, borderColor: "divider" }}
+      >
+        <Toolbar>
+          <img
+            alt="Block"
+            src="https://c.animaapp.com/CBoGUkLi/img/block.svg"
+            style={{ marginTop: "-7.75px", marginBottom: "-7.75px" }}
+            onClick={navigateToFrontpage}
+          />
+          <Box sx={{ flexGrow: 1 }} />
+          {username ? (
+            <Button variant="contained" color="inherit" sx={{ marginRight: 2 }}>
+              Logged in as: {username}
+            </Button>
+          ) : (
             <Button variant="contained" color="inherit" sx={{ marginRight: 2 }} onClick={navigateToLogin}>
               Sign in
             </Button>
-          </Toolbar>
-        </AppBar>
+          )}
+        </Toolbar>
+      </AppBar>
 
       <Box
         sx={{
@@ -77,7 +106,7 @@ export const Gallery = () => {
 
       <SearchButton />
 
-      <Container >
+      <Container>
         {[
           {
             title: "Titel (Alpha)",
@@ -89,7 +118,7 @@ export const Gallery = () => {
           },
           {
             title: "Titel (Gamma)",
-            image: "https://i.ibb.co/9pz0HCb/Gamma.png", 
+            image: "https://i.ibb.co/9pz0HCb/Gamma.png",
           },
           {
             title: "Titel (Delta)",

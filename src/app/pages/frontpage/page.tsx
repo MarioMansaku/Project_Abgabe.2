@@ -10,22 +10,25 @@ export const Frontpage = () => {
   const [username, setUsername] = useState<string | null>(null); // State für den Benutzernamen
 
   useEffect(() => {
-    // Überprüfen, ob es das erste Mal ist, dass die Seite geladen wird
+    // Überprüfen, ob es das erste Mal nach einem Projektstart ist
     if (typeof window !== 'undefined') {
       const firstVisit = localStorage.getItem('firstVisit');
-
+      
       if (!firstVisit) {
-        // Wenn es der erste Besuch ist, Token löschen und Flag setzen
+        // Wenn es der erste Besuch nach dem Projektstart ist, Token löschen
         localStorage.removeItem('authToken');
-        localStorage.setItem('firstVisit', 'true');
-      }
+        setUsername(null);  // Benutzernamen zurücksetzen
 
-      // Lade das JWT-Token aus dem localStorage, wenn vorhanden
-      const token = localStorage.getItem('authToken');
-      if (token) {
-        // Token dekodieren, um den Benutzernamen zu extrahieren
-        const decoded = JSON.parse(atob(token.split('.')[1])); // Token dekodieren (Base64)
-        setUsername(decoded.username); // Benutzernamen setzen
+        // Flag für den ersten Besuch setzen
+        localStorage.setItem('firstVisit', 'true');
+      } else {
+        // Token laden, falls vorhanden und der Benutzer schon eingeloggt ist
+        const token = localStorage.getItem('authToken');
+        if (token) {
+          // Token dekodieren, um den Benutzernamen zu extrahieren
+          const decoded = JSON.parse(atob(token.split('.')[1])); // Token dekodieren (Base64)
+          setUsername(decoded.username); // Benutzernamen setzen
+        }
       }
     }
   }, []);
