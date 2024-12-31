@@ -7,8 +7,9 @@ import SearchButton from "@/components/searchButton";
 export const Gallery = () => {
   const router = useRouter(); // Initialisiere den Router
   const [username, setUsername] = useState<string | null>(null); // State für den Benutzernamen
+  const [isAdmin, setIsAdmin] = useState<boolean>(false); // State für Admin-Rechte
 
-  // Laden des Benutzernamens aus dem localStorage, wenn der Benutzer eingeloggt ist
+  // Laden des Benutzernamens und der Rolle aus dem localStorage, wenn der Benutzer eingeloggt ist
   useEffect(() => {
     // Überprüfen, ob es das erste Mal ist, dass die Seite geladen wird
     if (typeof window !== 'undefined') {
@@ -23,9 +24,10 @@ export const Gallery = () => {
       // Lade das JWT-Token aus dem localStorage, wenn vorhanden
       const token = localStorage.getItem('authToken');
       if (token) {
-        // Token dekodieren, um den Benutzernamen zu extrahieren
+        // Token dekodieren, um den Benutzernamen und die Rolle zu extrahieren
         const decoded = JSON.parse(atob(token.split('.')[1])); // Token dekodieren (Base64)
         setUsername(decoded.username); // Benutzernamen setzen
+        setIsAdmin(decoded.username === 'admin'); // Überprüfen, ob der Benutzer ein Admin ist
       }
     }
   }, []);
@@ -48,6 +50,7 @@ export const Gallery = () => {
   const handleLogout = () => {
     localStorage.removeItem('authToken'); // Token löschen
     setUsername(null); // Benutzernamen zurücksetzen
+    setIsAdmin(false); // Admin-Rechte zurücksetzen
     router.push("/pages/login"); // Zur Login-Seite navigieren
   };
 
@@ -116,9 +119,11 @@ export const Gallery = () => {
         <Typography variant="h1" color="#151547" sx={{ textAlign: "center" }}>
           Gallery
         </Typography>
-        <Button variant="contained" color="secondary" onClick={navigateToAdd}>
-          Add
-        </Button>
+        {isAdmin && (
+          <Button variant="contained" color="secondary" onClick={navigateToAdd}>
+            Add
+          </Button>
+        )}
       </Box>
 
       <SearchButton />

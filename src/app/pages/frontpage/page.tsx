@@ -8,6 +8,7 @@ import { Carousel } from '../components/carousel';
 export const Frontpage = () => {
   const router = useRouter(); // Initialisiere den Router
   const [username, setUsername] = useState<string | null>(null); // State für den Benutzernamen
+  const [isAdmin, setIsAdmin] = useState<boolean>(false); // State für Admin-Rechte
 
   useEffect(() => {
     // Überprüfen, ob es das erste Mal nach einem Projektstart ist
@@ -25,9 +26,10 @@ export const Frontpage = () => {
         // Token laden, falls vorhanden und der Benutzer schon eingeloggt ist
         const token = localStorage.getItem('authToken');
         if (token) {
-          // Token dekodieren, um den Benutzernamen zu extrahieren
+          // Token dekodieren, um den Benutzernamen und die Rolle zu extrahieren
           const decoded = JSON.parse(atob(token.split('.')[1])); // Token dekodieren (Base64)
           setUsername(decoded.username); // Benutzernamen setzen
+          setIsAdmin(decoded.username === 'admin'); // Überprüfen, ob der Benutzer ein Admin ist
         }
       }
     }
@@ -43,15 +45,17 @@ export const Frontpage = () => {
     router.push('/pages/gallery'); // Navigiere zur Gallery-Seite
   };
 
-  const navigateToAdd = () => {
-    router.push('/pages/components/addButton'); // Navigiere zur Gallery-Seite
-  };
-
   // Funktion zum Ausloggen (Token löschen und Benutzer zurücksetzen)
   const handleLogout = () => {
     localStorage.removeItem('authToken'); // Token löschen
     setUsername(null); // Benutzernamen zurücksetzen
+    setIsAdmin(false); // Admin-Rechte zurücksetzen
     router.push('/pages/login'); // Zur Login-Seite navigieren
+  };
+
+  // Funktion zum Navigieren zur Add-Seite
+  const navigateToAdd = () => {
+    router.push('/pages/components/addButton'); // Navigiere zur Add-Seite
   };
 
   return (
@@ -111,9 +115,11 @@ export const Frontpage = () => {
           SWE
         </Typography>
         <Box sx={{ display: 'flex', gap: 2 }}>
-          <Button variant="contained" color="secondary" onClick={navigateToAdd}>
-            Add
-          </Button>
+          {isAdmin && (
+            <Button variant="contained" color="secondary" onClick={navigateToAdd}>
+              Add
+            </Button>
+          )}
           <Button variant="contained" color="primary" onClick={navigateToGallery}>
             Gallery
           </Button>
