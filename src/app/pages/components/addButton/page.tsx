@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import { WriteServiceBuch } from '../../../../api/write-buch.service.ts';
 import { operations } from '../../../../api/api.ts';
 import { useRouter } from "next/navigation";
-import { Button } from "@mui/material";
+import { Button, Typography, Box } from "@mui/material";
 
 type PostPayload = operations["BuchWriteController_post"]["requestBody"]["content"]["application/json"];
 
@@ -13,6 +13,8 @@ export function AdminAddBook() {
     const [bookData, setBookData] = useState<Partial<Record<keyof PostPayload, any>>>({});
     const [status, setStatus] = useState<string>("");
     const [isAdmin, setIsAdmin] = useState<boolean>(false); // State für Admin-Status
+    const [accessDenied, setAccessDenied] = useState<boolean>(false); // State für Zugriff verweigert
+    const [redirecting, setRedirecting] = useState<boolean>(false); // State für Weiterleitung
 
     const router = useRouter(); // Initialisiere den Router
 
@@ -26,8 +28,13 @@ export function AdminAddBook() {
             // Token dekodieren, um den Benutzernamen zu überprüfen
             const decoded = JSON.parse(atob(token.split('.')[1]));
             if (decoded.username !== 'admin') {
-                // Wenn der Benutzer nicht 'admin' ist, zur Frontpage weiterleiten
-                router.push('/');
+                // Wenn der Benutzer nicht 'admin' ist, Zugriff verweigern
+                setAccessDenied(true);
+
+                // Verzögerung vor der Weiterleitung zur Frontpage
+                setTimeout(() => {
+                    router.push('/'); // Weiterleitung zur Frontpage
+                }, 3000); // 3000ms (3 Sekunden) Verzögerung
             } else {
                 setIsAdmin(true); // Benutzer ist 'admin'
             }
@@ -67,6 +74,25 @@ export function AdminAddBook() {
     const navigateToGallery = () => {
         router.push('/pages/gallery'); // Navigiere zur Gallery-Seite
     };
+
+    // Wenn der Benutzer nicht admin ist, eine Meldung anzeigen
+    if (accessDenied) {
+        return (
+            <Box sx={{ textAlign: 'center', marginTop: '50px' }}>
+                <Typography variant="h4" color="error">
+                    Access Denied
+                </Typography>
+                <Typography variant="body1" color="textSecondary">
+                    You do not have sufficient permissions to access this page. You will be redirected shortly.
+                </Typography>
+                {redirecting && (
+                    <Typography variant="body2" color="textSecondary">
+                        Redirecting in 3 seconds...
+                    </Typography>
+                )}
+            </Box>
+        );
+    }
 
     // Wenn der Benutzer kein Admin ist, wird diese Seite nicht gerendert
     if (!isAdmin) {
