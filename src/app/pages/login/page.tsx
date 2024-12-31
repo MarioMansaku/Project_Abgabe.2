@@ -21,7 +21,7 @@ export const Login = () => {
     e.preventDefault();
     setError('');
 
-    const response = await fetch('../api/status', {
+    const response = await fetch('api/status', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
