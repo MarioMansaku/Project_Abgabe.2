@@ -47,6 +47,13 @@ export const Frontpage = () => {
     router.push('/pages/components/addButton'); // Navigiere zur Gallery-Seite
   };
 
+  // Funktion zum Ausloggen (Token löschen und Benutzer zurücksetzen)
+  const handleLogout = () => {
+    localStorage.removeItem('authToken'); // Token löschen
+    setUsername(null); // Benutzernamen zurücksetzen
+    router.push('/pages/login'); // Zur Login-Seite navigieren
+  };
+
   return (
     <Box
       sx={{
@@ -63,9 +70,19 @@ export const Frontpage = () => {
           />
           <Box sx={{ flexGrow: 1 }} />
           {username ? (
-            <Button variant="contained" color="inherit" sx={{ marginRight: 2 }}>
-              Logged in as: {username}
-            </Button>
+            <>
+              <Button variant="contained" color="inherit" sx={{ marginRight: 2 }}>
+                Logged in as: {username}
+              </Button>
+              <Button
+                variant="contained"
+                color="secondary"
+                sx={{ marginRight: 2 }}
+                onClick={handleLogout} // Logout Button
+              >
+                Logout
+              </Button>
+            </>
           ) : (
             <Button variant="contained" color="inherit" sx={{ marginRight: 2 }} onClick={navigateToLogin}>
               Sign in
