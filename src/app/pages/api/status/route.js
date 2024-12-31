@@ -5,10 +5,8 @@ import jwt from 'jwt-simple';
 const SECRET_KEY = process.env.JWT_SECRET_KEY;
 
 const users = [
-  { id: 1, username: 'user1', password: '$2a$10$5O8uqU0oNSL6FHZhr3l.BO..LgfhzJw9P4GbZXwLj1dOa3VRmjRjW' }, // gehashtes Passwort: 'password123'
-  { id: 2, username: 'user2', password: '$2a$10$XzXx7g2V.xPZG3kWn6z1WONOdFqP7pOmcSCbKK5BOdl7eT.m8RQ2O' }, // gehashtes Passwort: 'password456'
-  { id: 3, username: 'test', password: 'test' },
-  { id: 4, username: 'admin', password: 'p' }
+  { id: 1, username: 'test', password: 'test' },
+  { id: 2, username: 'admin', password: 'p' }
 ];
 
 export async function POST(req) {
