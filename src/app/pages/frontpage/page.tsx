@@ -7,9 +7,13 @@ import { Carousel } from '../components/carousel';
 
 export const Frontpage = () => {
   const router = useRouter(); // Initialisiere den Router
-  const [username, setUsername] = useState(null); // State für den Benutzernamen
+  const [username, setUsername] = useState(); // State für den Benutzernamen
 
   useEffect(() => {
+    // Lösche das JWT-Token beim Start, um sicherzustellen, dass der Benutzer ausgeloggt ist
+    localStorage.removeItem('authToken'); // Entfernt das Token, wenn die Seite geladen wird
+
+    
     // Lade das JWT-Token aus dem localStorage
     const token = localStorage.getItem('authToken');
 
