@@ -7,20 +7,26 @@ import { Carousel } from '../components/carousel';
 
 export const Frontpage = () => {
   const router = useRouter(); // Initialisiere den Router
-  const [username, setUsername] = useState(); // State für den Benutzernamen
+  const [username, setUsername] = useState<string | null>(null); // State für den Benutzernamen
 
   useEffect(() => {
-    // Lösche das JWT-Token beim Start, um sicherzustellen, dass der Benutzer ausgeloggt ist
-    localStorage.removeItem('authToken'); // Entfernt das Token, wenn die Seite geladen wird
+    // Überprüfen, ob es das erste Mal ist, dass die Seite geladen wird
+    if (typeof window !== 'undefined') {
+      const firstVisit = localStorage.getItem('firstVisit');
 
-    
-    // Lade das JWT-Token aus dem localStorage
-    const token = localStorage.getItem('authToken');
+      if (!firstVisit) {
+        // Wenn es der erste Besuch ist, Token löschen und Flag setzen
+        localStorage.removeItem('authToken');
+        localStorage.setItem('firstVisit', 'true');
+      }
 
-    if (token) {
-      // Token dekodieren, um den Benutzernamen zu extrahieren
-      const decoded = JSON.parse(atob(token.split('.')[1])); // Token dekodieren (Base64)
-      setUsername(decoded.username); // Benutzernamen setzen
+      // Lade das JWT-Token aus dem localStorage, wenn vorhanden
+      const token = localStorage.getItem('authToken');
+      if (token) {
+        // Token dekodieren, um den Benutzernamen zu extrahieren
+        const decoded = JSON.parse(atob(token.split('.')[1])); // Token dekodieren (Base64)
+        setUsername(decoded.username); // Benutzernamen setzen
+      }
     }
   }, []);
 
