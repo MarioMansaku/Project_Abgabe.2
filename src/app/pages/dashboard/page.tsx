@@ -26,7 +26,7 @@ export const Dashboard = () => {
         const decoded = jwt.decode(token, SECRET_KEY); // Decode JWT to get user info
         setUser(decoded);
       } catch (error) {
-        router.push('/api/status');
+        router.push('login');
         console.error(error);
       }
     }
