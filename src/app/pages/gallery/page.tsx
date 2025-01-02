@@ -9,20 +9,20 @@ export const Gallery = () => {
   const [username, setUsername] = useState<string | null>(null); // State für den Benutzernamen
   const [isAdmin, setIsAdmin] = useState<boolean>(false); // State für Admin-Rechte
 
-  // Laden des Benutzernamens und der Rolle aus dem localStorage, wenn der Benutzer eingeloggt ist
+  // Laden des Benutzernamens und der Rolle aus dem sessionStorage, wenn der Benutzer eingeloggt ist
   useEffect(() => {
     // Überprüfen, ob es das erste Mal ist, dass die Seite geladen wird
     if (typeof window !== 'undefined') {
-      const firstVisit = localStorage.getItem('firstVisit');
+      const firstVisit = sessionStorage.getItem('firstVisit');
 
       if (!firstVisit) {
         // Wenn es der erste Besuch ist, Token löschen und Flag setzen
-        localStorage.removeItem('authToken');
-        localStorage.setItem('firstVisit', 'true');
+        sessionStorage.removeItem('authToken');
+        sessionStorage.setItem('firstVisit', 'true');
       }
 
-      // Lade das JWT-Token aus dem localStorage, wenn vorhanden
-      const token = localStorage.getItem('authToken');
+      // Lade das JWT-Token aus dem sessionStorage, wenn vorhanden
+      const token = sessionStorage.getItem('authToken');
       if (token) {
         // Token dekodieren, um den Benutzernamen und die Rolle zu extrahieren
         const decoded = JSON.parse(atob(token.split('.')[1])); // Token dekodieren (Base64)
@@ -48,7 +48,7 @@ export const Gallery = () => {
 
   // Funktion zum Ausloggen (Token löschen und Benutzer zurücksetzen)
   const handleLogout = () => {
-    localStorage.removeItem('authToken'); // Token löschen
+    sessionStorage.removeItem('authToken'); // Token löschen
     setUsername(null); // Benutzernamen zurücksetzen
     setIsAdmin(false); // Admin-Rechte zurücksetzen
     router.push("/pages/login"); // Zur Login-Seite navigieren

@@ -13,18 +13,18 @@ export const Frontpage = () => {
   useEffect(() => {
     // Überprüfen, ob es das erste Mal nach einem Projektstart ist
     if (typeof window !== 'undefined') {
-      const firstVisit = localStorage.getItem('firstVisit');
+      const firstVisit = sessionStorage.getItem('firstVisit');
       
       if (!firstVisit) {
         // Wenn es der erste Besuch nach dem Projektstart ist, Token löschen
-        localStorage.removeItem('authToken');
+        sessionStorage.removeItem('authToken');
         setUsername(null);  // Benutzernamen zurücksetzen
 
         // Flag für den ersten Besuch setzen
-        localStorage.setItem('firstVisit', 'true');
+        sessionStorage.setItem('firstVisit', 'true');
       } else {
         // Token laden, falls vorhanden und der Benutzer schon eingeloggt ist
-        const token = localStorage.getItem('authToken');
+        const token = sessionStorage.getItem('authToken');
         if (token) {
           // Token dekodieren, um den Benutzernamen und die Rolle zu extrahieren
           const decoded = JSON.parse(atob(token.split('.')[1])); // Token dekodieren (Base64)
@@ -47,7 +47,7 @@ export const Frontpage = () => {
 
   // Funktion zum Ausloggen (Token löschen und Benutzer zurücksetzen)
   const handleLogout = () => {
-    localStorage.removeItem('authToken'); // Token löschen
+    sessionStorage.removeItem('authToken'); // Token löschen
     setUsername(null); // Benutzernamen zurücksetzen
     setIsAdmin(false); // Admin-Rechte zurücksetzen
     router.push('/pages/login'); // Zur Login-Seite navigieren

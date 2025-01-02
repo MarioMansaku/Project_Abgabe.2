@@ -17,7 +17,7 @@ export const Dashboard = () => {
     if (!token) {
       router.push('/pages/login'); // Redirect to login if no token found
     } else {
-      const SECRET_KEY = process.env.NEXT_PUBLIC_JWT_SECRET_KEY; // Umgebungsvariable für client
+      const SECRET_KEY = process.env.JWT_SECRET_KEY; // Umgebungsvariable für client
 
       if (!SECRET_KEY) {
         router.push('/pages/login'); // Weiterleitung bei fehlendem SECRET_KEY
