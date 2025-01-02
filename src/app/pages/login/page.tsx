@@ -1,25 +1,34 @@
 'use client';
 import { AppBar, Box, Button, Container, TextField, Toolbar, Typography } from "@mui/material";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { useState } from 'react';
 
 export const Login = () => {
   const router = useRouter(); // Initialisiere den Router
-    
-    // Funktion zum Navigieren zur Frontpage-Seite
-    const navigateToFrontpage = () => {
-      router.push('/'); // Navigiere zur Frontpage-Seite
-    };
-
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  
+  const [isAlreadyLoggedIn, setIsAlreadyLoggedIn] = useState(false);
+
+  useEffect(() => {
+    // Prüfen, ob bereits ein JWT-Token im localStorage vorhanden ist
+    const token = localStorage.getItem('authToken');
+    if (token) {
+      setIsAlreadyLoggedIn(true); // Wenn Token vorhanden, setze den Status auf "schon eingeloggt"
+      router.push('/'); // Weiterleitung zur Frontpage oder Dashboard
+    }
+  }, [router]);
+
   // Funktion zum Abfragen der Login-Daten
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
+
+    // Überprüfen, ob der Benutzer bereits eingeloggt ist
+    if (isAlreadyLoggedIn) {
+      setError("You are already logged in.");
+      return;
+    }
 
     const response = await fetch('api/status', {
       method: 'POST',
@@ -34,7 +43,7 @@ export const Login = () => {
     if (response.ok) {
       // Store the JWT token in localStorage or cookies
       localStorage.setItem('authToken', data.token);
-      router.push('/pages/dashboard'); // Redirect to a protected page
+      router.push('/'); // Redirect to frontpage after successful login
     } else {
       setError(data.error || 'Login failed');
     }
@@ -59,7 +68,7 @@ export const Login = () => {
             alt="Block"
             src="https://c.animaapp.com/CBoGUkLi/img/block.svg"
             style={{ marginTop: "-7.75px", marginBottom: "-7.75px" }}
-            onClick={navigateToFrontpage}
+            onClick={() => router.push('/')} // Navigiere zur Frontpage-Seite
           />
           <Box sx={{ flexGrow: 1 }} />
         </Toolbar>
@@ -91,60 +100,60 @@ export const Login = () => {
         </Typography>
 
         <form onSubmit={handleSubmit}>
-        <Box sx={{ marginBottom: "20px" }}>
-          <Typography variant="body1" sx={{ marginBottom: "8px" }}>
-            Username
-          </Typography>
-          <TextField
-            fullWidth
-            variant="outlined"
-            type="username"
-            value={username}
+          <Box sx={{ marginBottom: "20px" }}>
+            <Typography variant="body1" sx={{ marginBottom: "8px" }}>
+              Username
+            </Typography>
+            <TextField
+              fullWidth
+              variant="outlined"
+              type="username"
+              value={username}
               onChange={(e) => setUsername(e.target.value)}
               sx={{
-              backgroundColor: "white",
-              borderRadius: "8px",
-            }}
-          />
-        </Box>
+                backgroundColor: "white",
+                borderRadius: "8px",
+              }}
+            />
+          </Box>
 
-        <Box sx={{ marginBottom: "20px" }}>
-          <Typography variant="body1" sx={{ marginBottom: "8px" }}>
-            Password
-          </Typography>
-          <TextField
-            fullWidth
-            variant="outlined"
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            sx={{
-              backgroundColor: "white",
-              borderRadius: "8px",
-            }}
-          />
-        </Box>
+          <Box sx={{ marginBottom: "20px" }}>
+            <Typography variant="body1" sx={{ marginBottom: "8px" }}>
+              Password
+            </Typography>
+            <TextField
+              fullWidth
+              variant="outlined"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              sx={{
+                backgroundColor: "white",
+                borderRadius: "8px",
+              }}
+            />
+          </Box>
 
-        {error && (
+          {error && (
             <Typography color="error" sx={{ textAlign: "center", marginBottom: "20px" }}>
               {error}
             </Typography>
           )}
 
-        <Button
-          variant="contained"
-          fullWidth
-          sx={{
-            backgroundColor: "#e3e3e3",
-            color: "#1e1e1e",
-            marginTop: "50px",
-            marginBottom: "20px",
-            borderRadius: "8px",
-            border: "1px solid #767676",
-          }}
-          type="submit"
-        >
-          Sign in
+          <Button
+            variant="contained"
+            fullWidth
+            sx={{
+              backgroundColor: "#e3e3e3",
+              color: "#1e1e1e",
+              marginTop: "50px",
+              marginBottom: "20px",
+              borderRadius: "8px",
+              border: "1px solid #767676",
+            }}
+            type="submit"
+          >
+            Sign in
           </Button>
         </form>
 

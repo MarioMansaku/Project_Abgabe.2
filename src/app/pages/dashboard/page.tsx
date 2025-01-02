@@ -1,4 +1,5 @@
 'use client';
+
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import jwt from 'jwt-simple';
@@ -16,30 +17,21 @@ export const Dashboard = () => {
     if (!token) {
       router.push('/pages/login'); // Redirect to login if no token found
     } else {
-      try {
-        const SECRET_KEY = process.env.JWT_SECRET_KEY;
+      const SECRET_KEY = process.env.NEXT_PUBLIC_JWT_SECRET_KEY; // Umgebungsvariable für client
 
-        if(!SECRET_KEY) {
-          throw new Error('JWT_SECRET_KEY is not defined in enviroment variables');
-        }
-        
-        const decoded = jwt.decode(token, SECRET_KEY); // Decode JWT to get user info
-        setUser(decoded);
-      } catch (error) {
-        router.push('login');
-        console.error(error);
+      if (!SECRET_KEY) {
+        router.push('/pages/login'); // Weiterleitung bei fehlendem SECRET_KEY
+        return;
       }
+
+      // JWT-Token dekodieren, um Benutzerdaten zu extrahieren
+      const decoded = jwt.decode(token, SECRET_KEY);
+      setUser(decoded);
     }
   }, [router]);
 
   if (!user) return <div>Loading...</div>;
 
-  return (
-    <div>
-      <h1>Welcome, {user.username}!</h1>
-      <p>This is a protected page.</p>
-    </div>
-  );
 };
 
 export default Dashboard;
