@@ -13,7 +13,7 @@ export const Dashboard = () => {
   const router = useRouter();
 
   useEffect(() => {
-    const token = localStorage.getItem('authToken');
+    const token = sessionStorage.getItem('authToken');
     if (!token) {
       router.push('/pages/login'); // Redirect to login if no token found
     } else {

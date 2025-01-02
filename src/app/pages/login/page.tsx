@@ -11,8 +11,8 @@ export const Login = () => {
   const [isAlreadyLoggedIn, setIsAlreadyLoggedIn] = useState(false);
 
   useEffect(() => {
-    // Prüfen, ob bereits ein JWT-Token im localStorage vorhanden ist
-    const token = localStorage.getItem('authToken');
+    // Prüfen, ob bereits ein JWT-Token im sessionStorage vorhanden ist
+    const token = sessionStorage.getItem('authToken'); // Verwende sessionStorage
     if (token) {
       setIsAlreadyLoggedIn(true); // Wenn Token vorhanden, setze den Status auf "schon eingeloggt"
       router.push('/'); // Weiterleitung zur Frontpage oder Dashboard
@@ -41,8 +41,8 @@ export const Login = () => {
     const data = await response.json();
 
     if (response.ok) {
-      // Store the JWT token in localStorage or cookies
-      localStorage.setItem('authToken', data.token);
+      // Store the JWT token in sessionStorage
+      sessionStorage.setItem('authToken', data.token); // Verwende sessionStorage
       router.push('/'); // Redirect to frontpage after successful login
     } else {
       setError(data.error || 'Login failed');
