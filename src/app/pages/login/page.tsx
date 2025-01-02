@@ -136,7 +136,7 @@ export const Login = () => {
 
           {error && (
             <Typography color="error" sx={{ textAlign: "center", marginBottom: "20px" }}>
-              {error}
+              {"Invalid username or password"}
             </Typography>
           )}
 
