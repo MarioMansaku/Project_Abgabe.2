@@ -10,4 +10,16 @@ const httpsOptions = {
   cert: fs.readFileSync('./src/config/tls/certificate.crt'),
 };
 
+
+module.exports = {
+  async rewrites() {
+    return [
+      {
+        source: '/api/:path*',
+        destination: 'http://localhost:3000/rest/:path*', // Proxy to backend
+      },
+    ];
+  },
+};
+
 export default nextConfig;

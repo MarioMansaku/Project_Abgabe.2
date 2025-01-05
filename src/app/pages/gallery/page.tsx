@@ -3,15 +3,20 @@ import { AppBar, Box, Button, Container, Grid, Toolbar, Typography } from "@mui/
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import SearchButton from "@/components/searchButton";
-import Image from "next/image";
+import BookItem from "@/components/BookItem";
+import { Book}  from "@/app/pages/types/types";
+import axios from "axios";
 
 export const Gallery = () => {
   const router = useRouter(); // Initialisiere den Router
   const [username, setUsername] = useState<string | null>(null); // State für den Benutzernamen
   const [isAdmin, setIsAdmin] = useState<boolean>(false); // State für Admin-Rechte
+  const [books, setBooks] = useState<Book[]>([]);
 
   // Laden des Benutzernamens und der Rolle aus dem sessionStorage, wenn der Benutzer eingeloggt ist
   useEffect(() => {
+    fetchBooks();
+
     // Überprüfen, ob es das erste Mal ist, dass die Seite geladen wird
     if (typeof window !== 'undefined') {
       const firstVisit = sessionStorage.getItem('firstVisit');
@@ -33,6 +38,37 @@ export const Gallery = () => {
     }
   }, []);
 
+
+  // TODO Refactor 
+  // FIX Is types and bookitem correctly placed in directory?
+  const fetchBooks = async () => {
+    try {
+      // HTTP GET-Anfrage an die API
+      const res = await axios.get(`https://localhost:3000/rest`, {
+          headers: {
+              Accept: "application/hal+json", // Setze den Accept-Header für die API
+          },
+      });
+      const data = await res.data;
+      console.debug('getBuch: Erfolgreich');
+      setBooks(data._embedded.buecher);
+  } catch (error: unknown) {
+      // Überprüfen, ob es sich um eine Antwort mit Fehlerstatus handelt
+      if (axios.isAxiosError(error)) {
+          const status = error.response?.status;
+          if (status === 404) {
+              const message = "Kein Buch entspricht den eingegebenen Suchkriterien.";
+              console.error(`API Error: ${message} (Status Code: ${status})`);
+              throw new Error(message);
+          } else if (status !== undefined && status >= 500) {
+              const message = "Es ist ein Fehler auf unserer Seite aufgetreten. Bitte versuchen Sie es später erneut.";
+              console.error(`API Error: ${message} (Status Code: ${status})`);
+              throw new Error(message);
+          }
+      }
+  }
+  
+  };
   // Funktion zum Navigieren zur Login-Seite
   const navigateToLogin = () => {
     router.push("/pages/login"); // Navigiere zur Login-Seite
@@ -167,6 +203,17 @@ export const Gallery = () => {
               </Grid>
             </Grid>
           ))}
+      </Container>
+{/* Dynamic Gallery from Books basis */}
+<Container>
+        <Typography variant="h4" sx={{ my: 4 }}>Dynamic Gallery</Typography>
+        <Grid container spacing={3}>
+          {books.map((book) => (
+            <Grid item xs={12} sm={6} md={4} key={book.isbn}>
+              <BookItem book={book} />
+            </Grid>
+          ))}
+        </Grid>
       </Container>
     </Box>
   );

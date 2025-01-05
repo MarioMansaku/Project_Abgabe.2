@@ -12,38 +12,30 @@ export function AdminAddBook() {
     const writeService = new WriteServiceBuch();
     const [bookData, setBookData] = useState<Partial<Record<keyof PostPayload, any>>>({});
     const [status, setStatus] = useState<string>("");
-    const [isAdmin, setIsAdmin] = useState<boolean>(false); // State für Admin-Status
     const [accessDenied, setAccessDenied] = useState<boolean>(false); // State für Zugriff verweigert
-    const [notLoggedIn, setNotLoggedIn] = useState<boolean>(false); // State für nicht eingeloggt
-    const [redirecting, setRedirecting] = useState<boolean>(false); // State für Weiterleitung
-
-    const router = useRouter(); // Initialisiere den Router
+    
+    const router = useRouter();
 
     // Überprüfen, ob der Benutzer eingeloggt ist und Admin ist
     useEffect(() => {
-        const token = localStorage.getItem('authToken');
+        const token = sessionStorage.getItem('authToken');
         if (!token) {
             // Wenn kein Token vorhanden ist, Zugang verweigern und weiterleiten
-            setNotLoggedIn(true);
             setAccessDenied(true);
 
-            // Verzögerung vor der Weiterleitung zur Login-Seite
             setTimeout(() => {
-                router.push('/pages/login'); // Weiterleitung zur Login-Seite
-            }, 3000); // 3000ms (3 Sekunden) Verzögerung
+                router.push('/pages/login');
+            }, 3000);
         } else {
             // Token dekodieren, um den Benutzernamen zu überprüfen
+
             const decoded = JSON.parse(atob(token.split('.')[1]));
-            if (decoded.username !== 'admin') {
-                // Wenn der Benutzer nicht 'admin' ist, Zugriff verweigern
+            if (decoded.username !== 'admin') {                
                 setAccessDenied(true);
 
-                // Verzögerung vor der Weiterleitung zur Frontpage
                 setTimeout(() => {
-                    router.push('/'); // Weiterleitung zur Frontpage
-                }, 3000); // 3000ms (3 Sekunden) Verzögerung
-            } else {
-                setIsAdmin(true); // Benutzer ist 'admin'
+                    router.push('/');
+                }, 3000);
             }
         }
     }, [router]);
@@ -77,7 +69,6 @@ export function AdminAddBook() {
         "titel",
     ];
 
-    // Funktion zum Navigieren zur Gallery-Seite
     const navigateToGallery = () => {
         router.push('/pages/gallery'); // Navigiere zur Gallery-Seite
     };
@@ -89,38 +80,20 @@ export function AdminAddBook() {
                 <Typography variant="h4" color="error">
                     Access Denied
                 </Typography>
-                {notLoggedIn ? (
-                    <>
-                        <Typography variant="body1" color="textSecondary">
-                            You are not logged in. You will be redirected to the login page shortly.
-                        </Typography>
-                        <Typography variant="body2" color="textSecondary">
-                            Redirecting in 3 seconds...
-                        </Typography>
-                    </>
-                ) : (
-                    <>
-                        <Typography variant="body1" color="textSecondary">
-                            You do not have sufficient permissions to access this page. You will be redirected shortly.
-                        </Typography>
-                        <Typography variant="body2" color="textSecondary">
-                            Redirecting in 3 seconds...
-                        </Typography>
-                    </>
-                )}
+                <Typography variant="body1" color="textSecondary">
+                    You do not have sufficient permissions to access this page. You will be redirected shortly.
+                </Typography>
+                <Typography variant="body2" color="textSecondary">
+                    Redirecting in 3 seconds...
+                </Typography>
             </Box>
         );
     }
-
-    // Wenn der Benutzer kein Admin ist, wird diese Seite nicht gerendert
-    if (!isAdmin) {
-        return null; // Hier könnte auch eine Umleitung auf eine andere Seite oder eine Ladeanzeige erfolgen
-    }
-
+    
     return (
         <div>
             <h2>Admin Input Table</h2>
-
+    
             {/* Table Displaying Input Fields and Values */}
             <table border={1} style={{ width: "100%", borderCollapse: "collapse", marginTop: "20px" }}>
                 <thead>
@@ -145,7 +118,7 @@ export function AdminAddBook() {
                     ))}
                 </tbody>
             </table>
-
+    
             <Button variant="contained" style={{ marginTop: 20, marginRight: 20 }} onClick={handleSubmit}>
                 Submit
             </Button>
@@ -154,7 +127,7 @@ export function AdminAddBook() {
             </Button>
             <p>{status}</p>
         </div>
-    );
-}
-
+    )};
+    
 export default AdminAddBook;
+    
