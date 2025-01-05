@@ -38,6 +38,9 @@ export const Gallery = () => {
     }
   }, []);
 
+
+  // TODO Refactor 
+  // FIX Is types and bookitem correctly placed in directory?
   const fetchBooks = async () => {
     try {
       // HTTP GET-Anfrage an die API
