@@ -3,7 +3,6 @@ import { AppBar, Box, Button, Container, Grid, Toolbar, Typography } from "@mui/
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import SearchButton from "@/components/searchButton";
-import Image from "next/image";
 
 export const Gallery = () => {
   const router = useRouter(); // Initialisiere den Router

@@ -15,7 +15,6 @@ export function AdminAddBook() {
     const [isAdmin, setIsAdmin] = useState<boolean>(false); // State für Admin-Status
     const [accessDenied, setAccessDenied] = useState<boolean>(false); // State für Zugriff verweigert
     const [notLoggedIn, setNotLoggedIn] = useState<boolean>(false); // State für nicht eingeloggt
-    const [redirecting, setRedirecting] = useState<boolean>(false); // State für Weiterleitung
 
     const router = useRouter(); // Initialisiere den Router
 
@@ -27,10 +26,9 @@ export function AdminAddBook() {
             setNotLoggedIn(true);
             setAccessDenied(true);
 
-            // Verzögerung vor der Weiterleitung zur Login-Seite
             setTimeout(() => {
-                router.push('/pages/login'); // Weiterleitung zur Login-Seite
-            }, 3000); // 3000ms (3 Sekunden) Verzögerung
+                router.push('/pages/login');
+            }, 3000);
         } else {
             // Token dekodieren, um den Benutzernamen zu überprüfen
             const decoded = JSON.parse(atob(token.split('.')[1]));
@@ -38,10 +36,9 @@ export function AdminAddBook() {
                 // Wenn der Benutzer nicht 'admin' ist, Zugriff verweigern
                 setAccessDenied(true);
 
-                // Verzögerung vor der Weiterleitung zur Frontpage
                 setTimeout(() => {
-                    router.push('/'); // Weiterleitung zur Frontpage
-                }, 3000); // 3000ms (3 Sekunden) Verzögerung
+                    router.push('/');
+                }, 3000);
             } else {
                 setIsAdmin(true); // Benutzer ist 'admin'
             }
