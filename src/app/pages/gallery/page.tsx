@@ -3,6 +3,7 @@ import { AppBar, Box, Button, Container, Grid, Toolbar, Typography } from "@mui/
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import SearchButton from "@/components/searchButton";
+import Image from "next/image";
 
 export const Gallery = () => {
   const router = useRouter(); // Initialisiere den Router
@@ -70,7 +71,7 @@ export const Gallery = () => {
         sx={{ borderBottom: 1, borderColor: "divider" }}
       >
         <Toolbar>
-          <img
+          <Image
             alt="Block"
             src="https://c.animaapp.com/CBoGUkLi/img/block.svg"
             style={{ marginTop: "-7.75px", marginBottom: "-7.75px" }}
