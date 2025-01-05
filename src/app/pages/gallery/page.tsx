@@ -3,12 +3,9 @@ import { AppBar, Box, Button, Container, Grid, Toolbar, Typography } from "@mui/
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import SearchButton from "@/components/searchButton";
-<<<<<<< HEAD
 import BookItem from "@/components/BookItem";
 import { Book}  from "@/app/pages/types/types";
 import axios from "axios";
-=======
->>>>>>> cb877d9c5da00cfc8bf689e3cececda7fa4d449c
 
 export const Gallery = () => {
   const router = useRouter(); // Initialisiere den Router
