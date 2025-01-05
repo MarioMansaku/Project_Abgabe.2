@@ -71,7 +71,7 @@ export const Gallery = () => {
         sx={{ borderBottom: 1, borderColor: "divider" }}
       >
         <Toolbar>
-          <Image
+          <img
             alt="Block"
             src="https://c.animaapp.com/CBoGUkLi/img/block.svg"
             style={{ marginTop: "-7.75px", marginBottom: "-7.75px" }}
