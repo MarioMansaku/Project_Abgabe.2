@@ -165,7 +165,7 @@ export const Gallery = () => {
 
       <SearchButton />
 
-      <Container>
+      {/* <Container>
         {[{ title: "Titel (Alpha)", image: "https://i.ibb.co/VHr3s01/Alpha.png" },
           { title: "Titel (Beta)", image: "https://i.ibb.co/y67qW95/Beta.png" },
           { title: "Titel (Gamma)", image: "https://i.ibb.co/9pz0HCb/Gamma.png" },
@@ -203,7 +203,7 @@ export const Gallery = () => {
               </Grid>
             </Grid>
           ))}
-      </Container>
+      </Container> */}
 {/* Dynamic Gallery from Books basis */}
 <Container>
         <Typography variant="h4" sx={{ my: 4 }}>Dynamic Gallery</Typography>
