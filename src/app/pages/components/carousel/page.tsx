@@ -10,6 +10,7 @@ export const Carousel = () => {
   const [books, setBooks] = useState<Book[]>([]); // Zustand für die Bücher
   const [modalOpen, setModalOpen] = useState(false); // Zustand für das Modal
   const [modalContent, setModalContent] = useState(''); // Zustand für die Modal-Inhalte
+  const [modalTitle, setModalTitle] = useState(''); // Zustand für den Modal-Titel
   const [loading, setLoading] = useState(false); // Zustand für den Ladezustand
   const [error, setError] = useState<string | null>(null); // Zustand für Fehler
 
@@ -54,8 +55,9 @@ export const Carousel = () => {
     try {
       const response = await axios.get(id); // id ist die URL für das Buch, die in "_links.self.href" enthalten ist
       const bookDetails = response.data;
+      setModalTitle(bookDetails.titel.titel); // Titel des Buches setzen
       setModalContent(
-        `Art: ${bookDetails.art}\nPreis: €${bookDetails.preis}\nRating: ${bookDetails.rating}/5\nRabatt: ${bookDetails.rabatt}%\nLieferbar: ${bookDetails.lieferbar ? 'Ja' : 'Nein'}\nDatum: ${bookDetails.datum}\nHomepage: ${bookDetails.homepage}\nSchlagwörter: ${bookDetails.schlagwoerter?.join(', ')}`
+        `Untertitel: ${bookDetails.titel.untertitel}\nArt: ${bookDetails.art}\nPreis: €${bookDetails.preis}\nRating: ${bookDetails.rating}/5\nRabatt: ${bookDetails.rabatt}%\nLieferbar: ${bookDetails.lieferbar ? 'Ja' : 'Nein'}\nDatum: ${bookDetails.datum}\nHomepage: ${bookDetails.homepage}\nSchlagwörter: ${bookDetails.schlagwoerter?.join(', ')}`
       );
     } catch (error) {
       setError('Fehler beim Abrufen der Buchdetails.');
@@ -74,6 +76,7 @@ export const Carousel = () => {
   const closeModal = () => {
     setModalOpen(false);
     setModalContent('');
+    setModalTitle(''); // Modal-Titel zurücksetzen
   };
 
   // Karussell-Einstellungen
@@ -115,8 +118,7 @@ export const Carousel = () => {
       {modalOpen && (
         <div className="modal-overlay" onClick={closeModal}> {/* Klick außerhalb des Modals schließt es */}
           <div className="modal" onClick={(e) => e.stopPropagation()}> {/* Verhindert das Schließen bei Klick innerhalb des Modals */}
-            <h2>Buch Details</h2>
-
+            <h2>{modalTitle}</h2> {/* Hier wird der Titel des Buches angezeigt */}
             {/* Wenn der Ladezustand aktiv ist */}
             {loading ? (
               <p>Loading...</p>
