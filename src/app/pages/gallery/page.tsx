@@ -83,6 +83,10 @@ export const Gallery = () => {
     router.push("/pages/components/addButton"); // Navigiere zur Gallery-Seite
   };
 
+  const navigateToUpdate = () => {
+    router.push("/pages/components/updateButton");
+  }
+
   // Funktion zum Ausloggen (Token löschen und Benutzer zurücksetzen)
   const handleLogout = () => {
     sessionStorage.removeItem('authToken'); // Token löschen
@@ -156,11 +160,16 @@ export const Gallery = () => {
         <Typography variant="h1" color="#151547" sx={{ textAlign: "center" }}>
           Gallery
         </Typography>
+        <Box sx={{ display: 'flex', gap: 2 }}>
         {isAdmin && (
-          <Button variant="contained" color="secondary" onClick={navigateToAdd}>
-            Add
-          </Button>
+          <><Button variant="contained" color="secondary" onClick={navigateToAdd}>
+              Add
+            </Button>
+            <Button variant="contained" color="warning" onClick={navigateToUpdate}>
+                Update
+              </Button></>
         )}
+        </Box>
       </Box>
 
       <SearchButton />
