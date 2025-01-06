@@ -1,6 +1,7 @@
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import React, { useState, useEffect } from "react";
+// @ts-expect-error "Fehler Slick"
 import Slider from "react-slick";
 import axios from 'axios'; // Importiere axios für die API-Anfragen
 import { Book } from '@/app/pages/types/types'; // Importiere das Book-Interface
