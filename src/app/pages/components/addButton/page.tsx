@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import { WriteServiceBuch } from '../../../../api/write-buch.service.ts';
 import { operations } from '../../../../api/api.ts';
 import { useRouter } from "next/navigation";
-import { Button, Typography, Box } from "@mui/material";
+import { AppBar, Toolbar, Button, Typography, Box, Container } from "@mui/material";
 
 type PostPayload = operations["BuchWriteController_post"]["requestBody"]["content"]["application/json"];
 
@@ -73,6 +73,10 @@ export function AdminAddBook() {
         router.push('/pages/gallery'); // Navigiere zur Gallery-Seite
     };
 
+    const navigateToFrontpage = () => {
+        router.push('/');
+    };
+
     // Wenn der Benutzer nicht eingeloggt ist oder nicht admin ist, eine Meldung anzeigen
     if (accessDenied) {
         return (
@@ -91,43 +95,63 @@ export function AdminAddBook() {
     }
     
     return (
-        <div>
-            <h2>Admin Input Table</h2>
-    
-            {/* Table Displaying Input Fields and Values */}
-            <table border={1} style={{ width: "100%", borderCollapse: "collapse", marginTop: "20px" }}>
-                <thead>
-                    <tr>
-                        <th>Field Name</th>
-                        <th>Value</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {fields.map((field) => (
-                        <tr key={field as string}>
-                            <td>{field}</td>
-                            <td>
-                                <input
-                                    type="text"
-                                    placeholder={`Enter ${field}`}
-                                    value={bookData[field] || ""}
-                                    onChange={(e) => handleInputChange(field, e.target.value)}
-                                />
-                            </td>
+        <Box
+            sx={{
+            height: 'relative',
+            overflow: 'hidden',
+        }}
+        >
+        <AppBar position="static" color="default" sx={{ borderBottom: 1, borderColor: 'divider' }}>
+            <Toolbar>
+            <img
+                alt="Block"
+                src="https://c.animaapp.com/CBoGUkLi/img/block.svg"
+                style={{ marginTop: '-7.75px', marginBottom: '-7.75px' }}
+                onClick={navigateToFrontpage}
+            />
+            </Toolbar>
+        </AppBar>
+        <Container>
+            <div>
+                <h2>Admin Input Table</h2>
+        
+                {/* Table Displaying Input Fields and Values */}
+                <table border={1} style={{ width: "100%", borderCollapse: "collapse", marginTop: "20px" }}>
+                    <thead>
+                        <tr>
+                            <th>Field Name</th>
+                            <th>Value</th>
                         </tr>
-                    ))}
-                </tbody>
-            </table>
-    
-            <Button variant="contained" style={{ marginTop: 20, marginRight: 20 }} onClick={handleSubmit}>
-                Submit
-            </Button>
-            <Button variant="contained" color="secondary" style={{ marginTop: 20, marginRight: 20 }} onClick={navigateToGallery}>
-                Gallery
-            </Button>
-            <p>{status}</p>
-        </div>
-    )};
+                    </thead>
+                    <tbody>
+                        {fields.map((field) => (
+                            <tr key={field as string}>
+                                <td>{field}</td>
+                                <td>
+                                    <input
+                                        type="text"
+                                        placeholder={`Enter ${field}`}
+                                        value={bookData[field] || ""}
+                                        onChange={(e) => handleInputChange(field, e.target.value)}
+                                    />
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+        
+                <Button variant="contained" style={{ marginTop: 20, marginRight: 20 }} onClick={handleSubmit}>
+                    Submit
+                </Button>
+                <Button variant="contained" color="secondary" style={{ marginTop: 20, marginRight: 20 }} onClick={navigateToGallery}>
+                    Gallery
+                </Button>
+                <p>{status}</p>
+            </div>
+            </Container>
+        </Box>
+    )
+};
     
 export default AdminAddBook;
     
