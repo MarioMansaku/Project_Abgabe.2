@@ -61,7 +61,7 @@ export const Frontpage = () => {
   return (
     <Box
       sx={{
-        height: 'relative',
+        height: '900px',
         overflow: 'hidden',
       }}
     >

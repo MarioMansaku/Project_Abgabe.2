@@ -85,7 +85,7 @@ export const Carousel = () => {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 3,
+    slidesToShow: 4,
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 2500,
@@ -110,7 +110,7 @@ export const Carousel = () => {
           <div key={book.isbn} onClick={() => openModal(book)}>
             <h3>{book.titel.titel}</h3>
             {/* Bild aus der bookImages Map entsprechend dem Titel */}
-            <img src={bookImages[book.titel.titel] || ""} alt={book.titel.titel} style={{ width: '100%' }} />
+            <img src={bookImages[book.titel.titel] || ""} alt={book.titel.titel} className="carousel-image" />
           </div>
         ))}
       </Slider>

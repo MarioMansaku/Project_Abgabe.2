@@ -31,3 +31,11 @@
     cursor: pointer;
   }
   
+
+.carousel-image {
+  width: 100%;
+  max-width: 250px;
+  height: auto;
+  object-fit: cover;
+  margin: 0 auto;
+}
