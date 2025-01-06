@@ -2,21 +2,20 @@ import axios from 'axios';
 import log from '../utils/logger.js';
 
 // Diese Funktion holt ein Buch basierend auf bestimmten Kriterien
-export const getBuch = async (criteria: string) => {
-    log.debug('getBuch: criteria=%s', criteria); // Debug-Log für die angegebenen Kriterien
+export const getBuch = async (criteria: string, value: string) => {
+    log.debug('getBuch: criteria=%s, value=%s', criteria, value);
 
     try {
-        // HTTP GET-Anfrage an die API
-        const res = await axios.get(`https://localhost:3000/rest?${criteria}`, {
+        const res = await axios.get(`https://localhost:3000/rest`, {
+            params: { [criteria]: value },
             headers: {
-                Accept: "application/hal+json", // Setze den Accept-Header für die API
+                Accept: "application/hal+json",
             },
         });
 
-        log.debug('getBuch: Erfolgreich');
-        return res.data; // Gibt die Antwortdaten der API zurück
+        log.debug('getBuch: Erfolgreich', res.data);
+        return res.data;
     } catch (error: unknown) {
-        // Überprüfen, ob es sich um eine Antwort mit Fehlerstatus handelt
         if (axios.isAxiosError(error)) {
             const status = error.response?.status;
             if (status === 404) {
@@ -28,6 +27,10 @@ export const getBuch = async (criteria: string) => {
                 log.error(`API Error: ${message} (Status Code: ${status})`);
                 throw new Error(message);
             }
+        } else {
+            log.error('Unbekannter Fehler:', error);
+            throw new Error("Ein unerwarteter Fehler ist aufgetreten.");
         }
     }
 };
+

@@ -18,7 +18,7 @@ export function SearchButton({ onSearchResults }: SearchButtonProps) {
     setLoading(true);
     setErrorMessage(null); // Fehler zurücksetzen
     try {
-      log.debug("Suche mit Suchkriterien:", criteria, "Wert:", value);
+      log.debug("Suche mit Suchkriterien:", criteria, "Wert:", value)
       onSearchResults(criteria, value);
     } catch (err: any) {
       console.error("Fehler bei der Suche:", err.message);
@@ -36,6 +36,7 @@ export function SearchButton({ onSearchResults }: SearchButtonProps) {
         <select value={criteria} onChange={(e) => setCriteria(e.target.value)}>
           <option value="isbn">ISBN</option>
           <option value="rating">Rating</option>
+          <option value="titel">Titel</option>
           <option value="art">Art</option>
         </select>
       </label>
