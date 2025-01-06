@@ -12,7 +12,7 @@ const BookItem: React.FC<BookItemProps> = ({ book }) => {
       <CardMedia
         component="img"
         height="140"
-        image="https://via.placeholder.com/150" // You can replace this with a real image URL
+        image="https://via.placeholder.com/150" 
         alt={book.titel.titel}
       />
       <CardContent>
