@@ -11,11 +11,11 @@ export const Gallery = () => {
   const router = useRouter();
   const [username, setUsername] = useState<string | null>(null);
   const [isAdmin, setIsAdmin] = useState<boolean>(false);
-  const [books, setBooks] = useState<Book[]>([]); // Alle Bücher aus der API
-  const [filteredBooks, setFilteredBooks] = useState<Book[]>([]); // Gefilterte Bücher
-  const [filterCriteria, setFilterCriteria] = useState({ criteria: "isbn", value: "" }); // Filterkriterien
+  const [books, setBooks] = useState<Book[]>([]);
+  const [filteredBooks, setFilteredBooks] = useState<Book[]>([]);
+  const [filterCriteria, setFilterCriteria] = useState({ criteria: "isbn", value: "" });
+  const [errorMessage, setErrorMessage] = useState<string | null>(null); // Fehlermeldung
 
-  // Laden des Benutzernamens und der Rolle aus dem sessionStorage
   useEffect(() => {
     fetchBooks();
 
@@ -35,47 +35,47 @@ export const Gallery = () => {
     }
   }, []);
 
-  // Fetch Bücher von der API
   const fetchBooks = async () => {
     try {
       const res = await axios.get(`https://localhost:3000/rest`, {
-        headers: {
-          Accept: "application/hal+json",
-        },
+        headers: { Accept: "application/hal+json" },
       });
       const data = await res.data;
       setBooks(data._embedded.buecher);
-      setFilteredBooks(data._embedded.buecher); // Initiale Liste der Bücher
+      setFilteredBooks(data._embedded.buecher);
     } catch (error) {
       console.error(error);
+      setErrorMessage("Fehler beim Laden der Bücher. Bitte versuchen Sie es später erneut.");
     }
   };
 
-  // Filtert die Bücher basierend auf den Suchkriterien
   const filterBooks = (criteria: string, value: string) => {
     if (!value) {
-      setFilteredBooks(books); // Wenn kein Wert eingegeben wurde, zeige alle Bücher
+      setFilteredBooks(books);
+      setErrorMessage(null); // Keine Fehlermeldung, wenn der Wert leer ist
     } else {
       const filtered = books.filter((book) =>
-        book[criteria]?.toString().toLowerCase().includes(value.toLowerCase()) // Fall-insensitive Filter
+        book[criteria]?.toString().toLowerCase().includes(value.toLowerCase())
       );
+      if (filtered.length === 0) {
+        setErrorMessage("Keine Bücher gefunden, die den Suchkriterien entsprechen.");
+      } else {
+        setErrorMessage(null); // Fehler zurücksetzen, wenn es Ergebnisse gibt
+      }
       setFilteredBooks(filtered);
     }
   };
 
-  // Callback-Funktion für die Suchergebnisse aus `SearchButton`
   const handleSearchResults = (criteria: string, value: string) => {
     setFilterCriteria({ criteria, value });
-    filterBooks(criteria, value); // Bücher filtern
+    filterBooks(criteria, value);
   };
 
-  // Funktionen zum Navigieren
   const navigateToLogin = () => router.push("/pages/login");
   const navigateToFrontpage = () => router.push("/");
   const navigateToAdd = () => router.push("/pages/components/addButton");
   const navigateToUpdate = () => router.push("/pages/components/updateButton");
 
-  // Funktion zum Ausloggen
   const handleLogout = () => {
     sessionStorage.removeItem('authToken');
     setUsername(null);
@@ -123,13 +123,14 @@ export const Gallery = () => {
           )}
         </Box>
       </Box>
-      
-      <Container>
-        <SearchButton onSearchResults={handleSearchResults}/>
-      </Container>
+
+      <SearchButton onSearchResults={handleSearchResults} />
 
       <Container>
         <Typography variant="h4" sx={{ my: 4 }}>Dynamic Gallery</Typography>
+        {/* Fehlermeldung */}
+        {errorMessage && <Typography color="error" variant="h6" sx={{ my: 2 }}>{errorMessage}</Typography>}
+        
         <Grid container spacing={3}>
           {filteredBooks.map((book) => (
             <Grid item xs={12} sm={6} md={4} key={book.isbn}>

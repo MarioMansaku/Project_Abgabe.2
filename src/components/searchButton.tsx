@@ -5,21 +5,24 @@ import { getBuch } from '../api/read-buch.service.ts';
 import log from '../utils/logger.js';
 
 interface SearchButtonProps {
-  onSearchResults: (criteria: string, value: string) => void; // Callback von der Gallery-Komponente
+  onSearchResults: (criteria: string, value: string) => void;
 }
 
 export function SearchButton({ onSearchResults }: SearchButtonProps) {
   const [criteria, setCriteria] = useState("isbn");
   const [value, setValue] = useState("");
   const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null); // Fehlermeldung
 
   const handleSearch = async () => {
     setLoading(true);
+    setErrorMessage(null); // Fehler zurücksetzen
     try {
       log.debug("Suche mit Suchkriterien:", criteria, "Wert:", value);
-      onSearchResults(criteria, value); // Übergibt die Kriterien an Gallery
+      onSearchResults(criteria, value);
     } catch (err: any) {
       console.error("Fehler bei der Suche:", err.message);
+      setErrorMessage("Es gab ein Problem mit der Suche. Bitte versuchen Sie es später erneut.");
     } finally {
       setLoading(false);
     }
@@ -48,6 +51,9 @@ export function SearchButton({ onSearchResults }: SearchButtonProps) {
       <button onClick={handleSearch} disabled={loading || !value.trim()}>
         {loading ? "Loading..." : "Search"}
       </button>
+
+      {/* Fehlermeldung */}
+      {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
     </div>
   );
 }
