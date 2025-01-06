@@ -171,45 +171,6 @@ export const Gallery = () => {
 
       <SearchButton />
 
-      {/* <Container>
-        {[{ title: "Titel (Alpha)", image: "https://i.ibb.co/VHr3s01/Alpha.png" },
-          { title: "Titel (Beta)", image: "https://i.ibb.co/y67qW95/Beta.png" },
-          { title: "Titel (Gamma)", image: "https://i.ibb.co/9pz0HCb/Gamma.png" },
-          { title: "Titel (Delta)", image: "https://i.ibb.co/hmynPQz/Delta.png" },
-          { title: "Titel (Epsilon)", image: "https://i.ibb.co/xMDBC09/Epsilon.png" },
-          { title: "Titel (Phi)", image: "https://i.ibb.co/W0hVrvf/Phi.png" }]
-          .map((item, index) => (
-            <Grid container spacing={3} key={index} sx={{ py: 4, alignItems: "center" }}>
-              <Grid item xs={12} md={6}>
-                <Box
-                  sx={{
-                    width: "100%",
-                    height: "850px",
-                    backgroundImage: `url(${item.image})`,
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                  }}
-                />
-              </Grid>
-              <Grid item xs={12} md={6}>
-                <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
-                  <Typography variant="h5" color="text.primary">
-                    {item.title}
-                  </Typography>
-                  <Typography variant="subtitle1" color="text.secondary">
-                    ISBN
-                  </Typography>
-                  <Typography variant="body1" color="text.primary">
-                    id;titel;untertitel;buch_id
-                  </Typography>
-                  <Typography variant="body1" color="text.primary">
-                    id;version;isbn;rating;art;preis;rabatt;lieferbar;datum;homepage;schlagwoerter;erzeugt;aktualisiert
-                  </Typography>
-                </Box>
-              </Grid>
-            </Grid>
-          ))}
-      </Container> */}
 {/* Dynamic Gallery from Books basis */}
 <Container>
         <Typography variant="h4" sx={{ my: 4 }}>Dynamic Gallery</Typography>
