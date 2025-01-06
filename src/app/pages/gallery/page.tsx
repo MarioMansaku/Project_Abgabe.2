@@ -124,7 +124,9 @@ export const Gallery = () => {
         </Box>
       </Box>
 
-      <SearchButton onSearchResults={handleSearchResults} />
+      <Container>
+        <SearchButton onSearchResults={handleSearchResults}/>
+      </Container>
 
       <Container>
         <Typography variant="h4" sx={{ my: 4 }}>Dynamic Gallery</Typography>
