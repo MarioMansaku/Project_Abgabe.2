@@ -1,4 +1,3 @@
-
 'use client';
 import { AppBar, Box, Button, Container, Grid, Toolbar, Typography } from "@mui/material";
 import React, { useState, useEffect } from "react";
@@ -15,7 +14,7 @@ export const Gallery = () => {
   const [books, setBooks] = useState<Book[]>([]);
   const [filteredBooks, setFilteredBooks] = useState<Book[]>([]);
   const [filterCriteria, setFilterCriteria] = useState({ criteria: "isbn", value: "" });
-  const [errorMessage, setErrorMessage] = useState<string | null>(null); // Fehlermeldung
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   useEffect(() => {
     fetchBooks();
@@ -53,15 +52,20 @@ export const Gallery = () => {
   const filterBooks = (criteria: string, value: string) => {
     if (!value) {
       setFilteredBooks(books);
-      setErrorMessage(null); // Keine Fehlermeldung, wenn der Wert leer ist
+      setErrorMessage(null);
     } else {
-      const filtered = books.filter((book) =>
-        book[criteria]?.toString().toLowerCase().includes(value.toLowerCase())
-      );
+      const filtered = books.filter((book) => {
+        if (criteria === "titel") {
+          return book.titel.titel.toLowerCase().includes(value.toLowerCase());
+        } else {
+          return book[criteria]?.toString().toLowerCase().includes(value.toLowerCase());
+        }
+      });
+
       if (filtered.length === 0) {
         setErrorMessage("Keine Bücher gefunden, die den Suchkriterien entsprechen.");
       } else {
-        setErrorMessage(null); // Fehler zurücksetzen, wenn es Ergebnisse gibt
+        setErrorMessage(null);
       }
       setFilteredBooks(filtered);
     }
@@ -131,7 +135,6 @@ export const Gallery = () => {
 
       <Container>
         <Typography variant="h4" sx={{ my: 4 }}>Dynamic Gallery</Typography>
-        {/* Fehlermeldung */}
         {errorMessage && <Typography color="error" variant="h6" sx={{ my: 2 }}>{errorMessage}</Typography>}
         
         <Grid container spacing={3}>
