@@ -70,6 +70,7 @@ export const Carousel = () => {
     setModalOpen(true);
   };
 
+  // Funktion zum Schließen des Modals
   const closeModal = () => {
     setModalOpen(false);
     setModalContent('');
@@ -112,9 +113,8 @@ export const Carousel = () => {
 
       {/* Modal anzeigen, wenn modalOpen true ist */}
       {modalOpen && (
-        <div className="modal-overlay">
-          <div className="modal">
-            <button onClick={closeModal} className="modal-close-button">X</button>
+        <div className="modal-overlay" onClick={closeModal}> {/* Klick außerhalb des Modals schließt es */}
+          <div className="modal" onClick={(e) => e.stopPropagation()}> {/* Verhindert das Schließen bei Klick innerhalb des Modals */}
             <h2>Buch Details</h2>
 
             {/* Wenn der Ladezustand aktiv ist */}
