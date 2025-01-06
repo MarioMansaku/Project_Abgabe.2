@@ -17,7 +17,7 @@ const UpdateButton: React.FC<{ id: number; initialData: any }> = ({ id, initialD
       await service.putBuch(buch, id);
       setSuccess(true);
     } catch (err: any) {
-      setError(err.message || "An error occurred during the update.");
+      setError(err.message || "Während der Aktualisierung ist ein Fehler aufgetreten.");
     } finally {
       setLoading(false);
     }
