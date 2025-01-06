@@ -142,19 +142,16 @@ export const Gallery = () => {
 
       <Box
         sx={{
-          display: "flex",
-          flexDirection: "column",
-          height: "255px",
-          alignItems: "center",
-          justifyContent: "center",
-          gap: 2,
-          p: 4,
-          width: "100%",
-          backgroundColor: "background.utilitiesScrim",
-          backgroundImage:
-            "url(https://c.animaapp.com/dwkKemiH/img/hero-image.png)",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
+          height: '255px',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          backgroundImage: 'url(https://c.animaapp.com/CBoGUkLi/img/hero-image.png)',
+          backgroundSize: 'cover',
+          backgroundPosition: '50% 50%',
+          padding: 4,
+          gap: 2
         }}
       >
         <Typography variant="h1" color="#151547" sx={{ textAlign: "center" }}>
