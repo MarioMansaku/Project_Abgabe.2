@@ -3,7 +3,8 @@ import React, { useState, useEffect } from "react";
 import { WriteServiceBuch } from '@/api/write-buch.service';
 import { AppBar, Toolbar, Button, Typography, Box, Container } from "@mui/material";
 import { useRouter } from 'next/navigation';
-import { getBuch } from '../api/read-buch.service';
+import { getBuch } from '@/api/read-buch.service';
+import { type } from '../../../../api/api';
 
 const UpdateButton: React.FC<{ id: string }> = ({ id }) => {
   const [buch, setBuch] = useState<any | null>(null); 
@@ -15,6 +16,25 @@ const UpdateButton: React.FC<{ id: string }> = ({ id }) => {
   const router = useRouter();
 
   useEffect(() => {
+    // Überprüfen, ob der Benutzer eingeloggt und Admin ist
+    const token = sessionStorage.getItem('authToken');
+    if (!token) {
+        // Wenn kein Token vorhanden ist, Zugang verweigern und weiterleiten
+        setAccessDenied(true);
+        setTimeout(() => {
+            router.push('/pages/login');
+        }, 3000);
+    } else {
+        // Token dekodieren, um den Benutzernamen zu überprüfen
+        const decoded = JSON.parse(atob(token.split('.')[1]));
+        if (decoded.username !== 'admin') {                
+            setAccessDenied(true);
+            setTimeout(() => {
+                router.push('/');
+            }, 3000);
+        }
+    }
+
     const fetchBook = async () => {
       try {
         setLoading(true);
@@ -62,7 +82,18 @@ const UpdateButton: React.FC<{ id: string }> = ({ id }) => {
     return <Typography>Loading...</Typography>;
   }
 
-  const fields: (keyof typeof buch)[] = Object.keys(buch) as (keyof typeof buch)[];
+  const fields: (keyof typeof buch)[] = [
+    "isbn",
+    "rating",
+    "art",
+    "preis",
+    "rabatt",
+    "lieferbar",
+    "datum",
+    "homepage",
+    "schlagwoerter",
+    "titel",
+];
 
   const navigateToGallery = () => {
     router.push('/pages/gallery');
@@ -122,7 +153,7 @@ const UpdateButton: React.FC<{ id: string }> = ({ id }) => {
                       value={buch[field] || ""}
                       onChange={(e) => handleInputChange(field, e.target.value)}
                       style={{
-                        width: "100%",
+                        width: "98%",
                         padding: "8px",
                         borderRadius: "4px",
                         border: "1px solid #ccc",
