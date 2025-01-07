@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import { WriteServiceBuch } from '../../../../api/write-buch.service.ts';
 import { operations } from '../../../../api/api.ts';
 import { useRouter } from "next/navigation";
-import { AppBar, Toolbar, Button, Typography, Box, Container } from "@mui/material";
+import { AppBar, Toolbar, Button, Typography, Box, Container, TextField } from "@mui/material";
 
 type PostPayload = operations["BuchWriteController_post"]["requestBody"]["content"]["application/json"];
 
@@ -25,7 +25,6 @@ export function AdminAddBook() {
                 router.push('/pages/login');
             }, 3000);
         } else {
-
             const decoded = JSON.parse(atob(token.split('.')[1]));
             if (decoded.username !== 'admin') {                
                 setAccessDenied(true);
@@ -37,10 +36,34 @@ export function AdminAddBook() {
         }
     }, [router]);
 
-    const handleInputChange = (key: keyof PostPayload, value: any) => {
+    const handleInputChange = (key: string, value: any) => {
+        const [mainKey, subKey] = key.split('.');
+
+        if (subKey) {
+            setBookData((prev) => ({
+                ...prev,
+                [mainKey as keyof PostPayload]: {
+                    ...(prev[mainKey as keyof PostPayload] || {}),
+                    [subKey]: value,
+                },
+            }));
+        } else {
+            setBookData((prev) => ({
+                ...prev,
+                [key as keyof PostPayload]: value,
+            }));
+        }
+    };
+
+    const handleAbbildungChange = (key: keyof PostPayload["abbildungen"][0], value: any) => {
         setBookData((prev) => ({
             ...prev,
-            [key]: value,
+            abbildungen: [
+                {
+                    ...(prev.abbildungen?.[0] || {}),
+                    [key]: value,
+                },
+            ],
         }));
     };
 
@@ -53,7 +76,7 @@ export function AdminAddBook() {
         }
     };
 
-    const fields: (keyof PostPayload)[] = [
+    const fields: (keyof PostPayload | string)[] = [
         "isbn",
         "rating",
         "art",
@@ -63,7 +86,6 @@ export function AdminAddBook() {
         "datum",
         "homepage",
         "schlagwoerter",
-        "titel",
     ];
 
     const navigateToGallery = () => {
@@ -91,61 +113,102 @@ export function AdminAddBook() {
     }
     
     return (
-        <Box
-            sx={{
-            height: 'relative',
-            overflow: 'hidden',
-        }}
-        >
-        <AppBar position="static" color="default" sx={{ borderBottom: 1, borderColor: 'divider' }}>
-            <Toolbar>
-            <img
-                alt="Block"
-                src="https://c.animaapp.com/CBoGUkLi/img/block.svg"
-                style={{ marginTop: '-7.75px', marginBottom: '-7.75px' }}
-                onClick={navigateToFrontpage}
-            />
-            </Toolbar>
-        </AppBar>
-        <Container>
-            <div>
-                <h2>Admin Input Table</h2>
-        
-                <table border={1} style={{ width: "100%", borderCollapse: "collapse", marginTop: "20px" }}>
-                    <thead>
-                        <tr>
-                            <th>Field Name</th>
-                            <th>Value</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {fields.map((field) => (
-                            <tr key={field as string}>
-                                <td>{field}</td>
-                                <td>
-                                    <input
-                                        type="text"
-                                        placeholder={`Enter ${field}`}
-                                        value={bookData[field] || ""}
-                                        onChange={(e) => handleInputChange(field, e.target.value)}
-                                    />
-                                </td>
+        <Box sx={{ height: 'relative', overflow: 'hidden' }}>
+            <AppBar position="static" color="default" sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                <Toolbar>
+                    <img
+                        alt="Block"
+                        src="https://c.animaapp.com/CBoGUkLi/img/block.svg"
+                        style={{ marginTop: '-7.75px', marginBottom: '-7.75px' }}
+                        onClick={navigateToFrontpage}
+                    />
+                </Toolbar>
+            </AppBar>
+            <Container>
+                <div>
+                    <h2>Admin Input Table</h2>
+                    <table border={1} style={{ width: "100%", borderCollapse: "collapse", marginTop: "20px" }}>
+                        <thead>
+                            <tr>
+                                <th>Field Name</th>
+                                <th>Value</th>
                             </tr>
-                        ))}
-                    </tbody>
-                </table>
-        
-                <Button variant="contained" style={{ marginTop: 20, marginRight: 20 }} onClick={handleSubmit}>
-                    Submit
-                </Button>
-                <Button variant="contained" color="secondary" style={{ marginTop: 20, marginRight: 20 }} onClick={navigateToGallery}>
-                    Gallery
-                </Button>
-                <p>{status}</p>
-            </div>
+                        </thead>
+                        <tbody>
+                            {fields.map((field) => (
+                                <tr key={field}>
+                                    <td>{field}</td>
+                                    <td>
+                                        <TextField
+                                            fullWidth
+                                            variant="outlined"
+                                            placeholder={`Enter ${field}`}
+                                            value={bookData[field as keyof PostPayload] || ""}
+                                            onChange={(e) => handleInputChange(field, e.target.value)}
+                                        />
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+
+                    {/* Titel Section */}
+                    <Box mt={4}>
+                        <Typography variant="h6" gutterBottom>
+                            Titel
+                        </Typography>
+                        <Box display="flex" flexDirection="column" gap={2}>
+                            <TextField
+                                label="Titel"
+                                fullWidth
+                                variant="outlined"
+                                value={bookData.titel?.titel || ""}
+                                onChange={(e) => handleInputChange("titel.titel", e.target.value)}
+                            />
+                            <TextField
+                                label="Untertitel"
+                                fullWidth
+                                variant="outlined"
+                                value={bookData.titel?.untertitel || ""}
+                                onChange={(e) => handleInputChange("titel.untertitel", e.target.value)}
+                            />
+                        </Box>
+                    </Box>
+
+                    {/* Abbildungen Section */}
+                    <Box mt={4}>
+                        <Typography variant="h6" gutterBottom>
+                            Abbildungen
+                        </Typography>
+                        <Box display="flex" flexDirection="column" gap={2}>
+                            <TextField
+                                label="Beschriftung"
+                                fullWidth
+                                variant="outlined"
+                                value={bookData.abbildungen?.[0]?.beschriftung || ""}
+                                onChange={(e) => handleAbbildungChange("beschriftung", e.target.value)}
+                            />
+                            <TextField
+                                label="Content Type"
+                                fullWidth
+                                variant="outlined"
+                                value={bookData.abbildungen?.[0]?.contentType || ""}
+                                onChange={(e) => handleAbbildungChange("contentType", e.target.value)}
+                            />
+                        </Box>
+                    </Box>
+
+                    <Button variant="contained" style={{ marginTop: 20, marginRight: 20 }} onClick={handleSubmit}>
+                        Submit
+                    </Button>
+                    <Button variant="contained" color="secondary" style={{ marginTop: 20, marginRight: 20 }} onClick={navigateToGallery}>
+                        Gallery
+                    </Button>
+                    <p>{status}</p>
+                </div>
             </Container>
         </Box>
-    )
+    );
 };
-    
+
 export default AdminAddBook;
