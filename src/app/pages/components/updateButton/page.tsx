@@ -4,7 +4,6 @@ import { WriteServiceBuch } from '@/api/write-buch.service';
 import { AppBar, Toolbar, Button, Typography, Box, Container } from "@mui/material";
 import { useRouter } from 'next/navigation';
 import { getBuch } from '@/api/read-buch.service';
-import { type } from '../../../../api/api';
 
 const UpdateButton: React.FC<{ id: string }> = ({ id }) => {
   const [buch, setBuch] = useState<any | null>(null); 
@@ -81,6 +80,7 @@ const UpdateButton: React.FC<{ id: string }> = ({ id }) => {
 
   const fields: (keyof typeof buch)[] = [
     "isbn",
+    "id",
     "rating",
     "art",
     "preis",
@@ -90,7 +90,21 @@ const UpdateButton: React.FC<{ id: string }> = ({ id }) => {
     "homepage",
     "schlagwoerter",
     "titel",
-];
+  ];
+
+  const exampleValues: Record<string, string> = {
+    isbn: "Enter ISBN, z.B. 978-3-16-148410-0",
+    id: "Enter ID, z.B. 70",
+    rating: "Enter rating, 1-5",
+    art: "Enter Art (epub, paperback, hardcover)",
+    preis: "Enter Preis in Euro, z.B. 19.99",
+    rabatt: "Enter Rabatt in %, z.B. 10",
+    lieferbar: "Enter lieferbar (Ja, Nein)",
+    datum: "Enter Datum, z.B. 2023-01-01",
+    homepage: "Enter homepage, z.B. https://example.com",
+    schlagwoerter: "Enter Schlagwörter (Java, Python, TypeScript, NULL)",
+    titel: "Enter Titel, z.B. Beispielbuch",
+  };
 
   const navigateToGallery = () => {
     router.push('/pages/gallery');
@@ -146,7 +160,7 @@ const UpdateButton: React.FC<{ id: string }> = ({ id }) => {
                   <td style={{ padding: "10px", border: "1px solid #ddd" }}>
                     <input
                       type="text"
-                      placeholder={`Enter ${field}`}
+                      placeholder={exampleValues[field] || `Enter ${field}`}
                       value={buch[field] || ""}
                       onChange={(e) => handleInputChange(field, e.target.value)}
                       style={{
