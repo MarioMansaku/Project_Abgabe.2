@@ -6,6 +6,7 @@ import SearchButton from "@/components/searchButton";
 import BookItem from "@/components/BookItem";
 import { Book } from "@/app/pages/types/types";
 import axios from "axios";
+import '../components/carousel/Carousel.css'; // Stelle sicher, dass du das CSS importierst
 
 export const Gallery = () => {
   const router = useRouter();
@@ -15,6 +16,8 @@ export const Gallery = () => {
   const [filteredBooks, setFilteredBooks] = useState<Book[]>([]);
   const [filterCriteria, setFilterCriteria] = useState({ criteria: "isbn", value: "" });
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [selectedBook, setSelectedBook] = useState<Book | null>(null);
 
   useEffect(() => {
     fetchBooks();
@@ -88,6 +91,16 @@ export const Gallery = () => {
     router.push("/pages/login");
   };
 
+  const openModal = (book: Book) => {
+    setSelectedBook(book);
+    setModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setModalOpen(false);
+    setSelectedBook(null);
+  };
+
   return (
     <Box sx={{ display: "flex", overflow: "hidden", flexDirection: "column", height: "relative", backgroundColor: "background.default" }}>
       <AppBar position="static" color="default" sx={{ borderBottom: 1, borderColor: "divider" }}>
@@ -130,21 +143,39 @@ export const Gallery = () => {
       </Box>
 
       <Container>
-        <SearchButton onSearchResults={handleSearchResults}/>
+        <SearchButton onSearchResults={handleSearchResults} />
       </Container>
 
       <Container>
         <Typography variant="h4" sx={{ my: 4 }}>Dynamic Gallery</Typography>
         {errorMessage && <Typography color="error" variant="h6" sx={{ my: 2 }}>{errorMessage}</Typography>}
-        
+
         <Grid container spacing={3}>
           {filteredBooks.map((book) => (
             <Grid item xs={12} sm={6} md={4} key={book.isbn}>
-              <BookItem book={book} />
+              <BookItem book={book} onClick={() => openModal(book)} />
             </Grid>
           ))}
         </Grid>
       </Container>
+
+      {modalOpen && selectedBook && (
+        <div className="modal-overlay" onClick={handleCloseModal}>
+          <div className="modal" onClick={(e) => e.stopPropagation()}>
+            <Typography variant="h6">{selectedBook.titel.titel}</Typography>
+            <Typography variant="body1">Untertitel: {selectedBook.titel.untertitel}</Typography>
+            <Typography variant="body1">Art: {selectedBook.art}</Typography>
+            <Typography variant="body1">Preis: €{selectedBook.preis}</Typography>
+            <Typography variant="body1">Rating: {selectedBook.rating}/5</Typography>
+            <Typography variant="body1">Rabatt: {selectedBook.rabatt}%</Typography>
+            <Typography variant="body1">Lieferbar: {selectedBook.lieferbar ? 'Ja' : 'Nein'}</Typography>
+            <Typography variant="body1">Datum: {selectedBook.datum}</Typography>
+            <Typography variant="body1">Homepage: {selectedBook.homepage}</Typography>
+            <Typography variant="body1">Schlagwörter: {selectedBook.schlagwoerter?.join(', ')}</Typography>
+            <Button onClick={handleCloseModal} color="primary">Schließen</Button>
+          </div>
+        </div>
+      )}
     </Box>
   );
 };
