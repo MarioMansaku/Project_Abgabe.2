@@ -102,10 +102,6 @@ export const Gallery = () => {
     setSelectedBook(null);
   };
 
-  const deleteButton = () => {
-
-  }
-
   return (
     <Box sx={{ display: "flex", overflow: "hidden", flexDirection: "column", height: "relative", backgroundColor: "background.default" }}>
       <AppBar position="static" color="default" sx={{ borderBottom: 1, borderColor: "divider" }}>
@@ -169,6 +165,7 @@ export const Gallery = () => {
           <div className="modal" onClick={(e) => e.stopPropagation()}>
             <Typography variant="h6">{selectedBook.titel.titel}</Typography>
             <Typography variant="body1">Untertitel: {selectedBook.titel.untertitel}</Typography>
+            <Typography variant="body1">ID: {selectedBook.id}</Typography>
             <Typography variant="body1">Art: {selectedBook.art}</Typography>
             <Typography variant="body1">Preis: €{selectedBook.preis}</Typography>
             <Typography variant="body1">Rating: {selectedBook.rating}/5</Typography>
@@ -178,7 +175,15 @@ export const Gallery = () => {
             <Typography variant="body1">Homepage: {selectedBook.homepage}</Typography>
             <Typography variant="body1">Schlagwörter: {selectedBook.schlagwoerter?.join(', ')}</Typography>
             <Button onClick={handleCloseModal} color="primary">Schließen</Button>
-            {isAdmin && (<Button variant="contained" color="error" sx={{marginLeft: 5}} onClick={deleteButton}>Delete</Button>)}
+            {isAdmin && selectedBook && selectedBook.id && (
+            <AdminDeleteButton 
+              id={selectedBook.id} 
+              onDeleteSuccess={() => {
+              setModalOpen(false);
+              setSelectedBook(null);
+              }} 
+              />
+            )}
           </div>
         </div>
       )}
