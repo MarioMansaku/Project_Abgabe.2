@@ -12,11 +12,11 @@ export function SearchButton({ onSearchResults }: SearchButtonProps) {
   const [criteria, setCriteria] = useState("isbn");
   const [value, setValue] = useState("");
   const [loading, setLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState<string | null>(null); // Fehlermeldung
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const handleSearch = async () => {
     setLoading(true);
-    setErrorMessage(null); // Fehler zurücksetzen
+    setErrorMessage(null);
     try {
       log.debug("Suche mit Suchkriterien:", criteria, "Wert:", value)
       onSearchResults(criteria, value);
@@ -53,7 +53,6 @@ export function SearchButton({ onSearchResults }: SearchButtonProps) {
         {loading ? "Loading..." : "Search"}
       </button>
 
-      {/* Fehlermeldung */}
       {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
     </div>
   );

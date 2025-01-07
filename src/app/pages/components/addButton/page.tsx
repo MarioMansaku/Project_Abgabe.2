@@ -12,22 +12,19 @@ export function AdminAddBook() {
     const writeService = new WriteServiceBuch();
     const [bookData, setBookData] = useState<Partial<Record<keyof PostPayload, any>>>({});
     const [status, setStatus] = useState<string>("");
-    const [accessDenied, setAccessDenied] = useState<boolean>(false); // State für Zugriff verweigert
+    const [accessDenied, setAccessDenied] = useState<boolean>(false);
     
     const router = useRouter();
 
-    // Überprüfen, ob der Benutzer eingeloggt ist und Admin ist
     useEffect(() => {
         const token = sessionStorage.getItem('authToken');
         if (!token) {
-            // Wenn kein Token vorhanden ist, Zugang verweigern und weiterleiten
             setAccessDenied(true);
 
             setTimeout(() => {
                 router.push('/pages/login');
             }, 3000);
         } else {
-            // Token dekodieren, um den Benutzernamen zu überprüfen
 
             const decoded = JSON.parse(atob(token.split('.')[1]));
             if (decoded.username !== 'admin') {                
@@ -70,14 +67,13 @@ export function AdminAddBook() {
     ];
 
     const navigateToGallery = () => {
-        router.push('/pages/gallery'); // Navigiere zur Gallery-Seite
+        router.push('/pages/gallery');
     };
 
     const navigateToFrontpage = () => {
         router.push('/');
     };
 
-    // Wenn der Benutzer nicht eingeloggt ist oder nicht admin ist, eine Meldung anzeigen
     if (accessDenied) {
         return (
             <Box sx={{ textAlign: 'center', marginTop: '50px' }}>
@@ -115,7 +111,6 @@ export function AdminAddBook() {
             <div>
                 <h2>Admin Input Table</h2>
         
-                {/* Table Displaying Input Fields and Values */}
                 <table border={1} style={{ width: "100%", borderCollapse: "collapse", marginTop: "20px" }}>
                     <thead>
                         <tr>
@@ -154,4 +149,3 @@ export function AdminAddBook() {
 };
     
 export default AdminAddBook;
-    

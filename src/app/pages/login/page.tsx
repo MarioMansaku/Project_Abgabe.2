@@ -4,27 +4,24 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 export const Login = () => {
-  const router = useRouter(); // Initialisiere den Router
+  const router = useRouter();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [isAlreadyLoggedIn, setIsAlreadyLoggedIn] = useState(false);
 
   useEffect(() => {
-    // Prüfen, ob bereits ein JWT-Token im sessionStorage vorhanden ist
-    const token = sessionStorage.getItem('authToken'); // Verwende sessionStorage
+    const token = sessionStorage.getItem('authToken');
     if (token) {
-      setIsAlreadyLoggedIn(true); // Wenn Token vorhanden, setze den Status auf "schon eingeloggt"
-      router.push('/'); // Weiterleitung zur Frontpage oder Dashboard
+      setIsAlreadyLoggedIn(true);
+      router.push('/');
     }
   }, [router]);
 
-  // Funktion zum Abfragen der Login-Daten
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
 
-    // Überprüfen, ob der Benutzer bereits eingeloggt ist
     if (isAlreadyLoggedIn) {
       setError("You are already logged in.");
       return;
@@ -41,9 +38,8 @@ export const Login = () => {
     const data = await response.json();
 
     if (response.ok) {
-      // Store the JWT token in sessionStorage
-      sessionStorage.setItem('authToken', data.token); // Verwende sessionStorage
-      router.push('/'); // Redirect to frontpage after successful login
+      sessionStorage.setItem('authToken', data.token);
+      router.push('/');
     } else {
       setError(data.error || 'Login failed');
     }
@@ -68,7 +64,7 @@ export const Login = () => {
             alt="Block"
             src="https://c.animaapp.com/CBoGUkLi/img/block.svg"
             style={{ marginTop: "-7.75px", marginBottom: "-7.75px" }}
-            onClick={() => router.push('/')} // Navigiere zur Frontpage-Seite
+            onClick={() => router.push('/')}
           />
           <Box sx={{ flexGrow: 1 }} />
         </Toolbar>

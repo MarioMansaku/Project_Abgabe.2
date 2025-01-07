@@ -16,16 +16,13 @@ const UpdateButton: React.FC<{ id: string }> = ({ id }) => {
   const router = useRouter();
 
   useEffect(() => {
-    // Überprüfen, ob der Benutzer eingeloggt und Admin ist
     const token = sessionStorage.getItem('authToken');
     if (!token) {
-        // Wenn kein Token vorhanden ist, Zugang verweigern und weiterleiten
         setAccessDenied(true);
         setTimeout(() => {
             router.push('/pages/login');
         }, 3000);
     } else {
-        // Token dekodieren, um den Benutzernamen zu überprüfen
         const decoded = JSON.parse(atob(token.split('.')[1]));
         if (decoded.username !== 'admin') {                
             setAccessDenied(true);

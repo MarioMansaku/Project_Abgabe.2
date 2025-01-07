@@ -6,56 +6,47 @@ import { useRouter } from 'next/navigation';
 import { Carousel } from '../components/carousel';
 
 export const Frontpage = () => {
-  const router = useRouter(); // Initialisiere den Router
-  const [username, setUsername] = useState<string | null>(null); // State für den Benutzernamen
-  const [isAdmin, setIsAdmin] = useState<boolean>(false); // State für Admin-Rechte
+  const router = useRouter();
+  const [username, setUsername] = useState<string | null>(null);
+  const [isAdmin, setIsAdmin] = useState<boolean>(false);
 
   useEffect(() => {
-    // Überprüfen, ob es das erste Mal nach einem Projektstart ist
     if (typeof window !== 'undefined') {
       const firstVisit = sessionStorage.getItem('firstVisit');
       
       if (!firstVisit) {
-        // Wenn es der erste Besuch nach dem Projektstart ist, Token löschen
         sessionStorage.removeItem('authToken');
-        setUsername(null);  // Benutzernamen zurücksetzen
+        setUsername(null);
 
-        // Flag für den ersten Besuch setzen
         sessionStorage.setItem('firstVisit', 'true');
       } else {
-        // Token laden, falls vorhanden und der Benutzer schon eingeloggt ist
         const token = sessionStorage.getItem('authToken');
         if (token) {
-          // Token dekodieren, um den Benutzernamen und die Rolle zu extrahieren
-          const decoded = JSON.parse(atob(token.split('.')[1])); // Token dekodieren (Base64)
-          setUsername(decoded.username); // Benutzernamen setzen
-          setIsAdmin(decoded.username === 'admin'); // Überprüfen, ob der Benutzer ein Admin ist
+          const decoded = JSON.parse(atob(token.split('.')[1]));
+          setUsername(decoded.username);
+          setIsAdmin(decoded.username === 'admin');
         }
       }
     }
   }, []);
 
-  // Funktion zum Navigieren zur Login-Seite
   const navigateToLogin = () => {
-    router.push('/pages/login'); // Navigiere zur Login-Seite
+    router.push('/pages/login');
   };
 
-  // Funktion zum Navigieren zur Gallery-Seite
   const navigateToGallery = () => {
-    router.push('/pages/gallery'); // Navigiere zur Gallery-Seite
+    router.push('/pages/gallery');
   };
 
-  // Funktion zum Ausloggen (Token löschen und Benutzer zurücksetzen)
   const handleLogout = () => {
-    sessionStorage.removeItem('authToken'); // Token löschen
-    setUsername(null); // Benutzernamen zurücksetzen
-    setIsAdmin(false); // Admin-Rechte zurücksetzen
-    router.push('/pages/login'); // Zur Login-Seite navigieren
+    sessionStorage.removeItem('authToken');
+    setUsername(null);
+    setIsAdmin(false);
+    router.push('/pages/login');
   };
 
-  // Funktion zum Navigieren zur Add-Seite
   const navigateToAdd = () => {
-    router.push('/pages/components/addButton'); // Navigiere zur Add-Seite
+    router.push('/pages/components/addButton');
   };
 
   return (
@@ -82,7 +73,7 @@ export const Frontpage = () => {
                 variant="contained"
                 color="secondary"
                 sx={{ marginRight: 2 }}
-                onClick={handleLogout} // Logout Button
+                onClick={handleLogout}
               >
                 Logout
               </Button>

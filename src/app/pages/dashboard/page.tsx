@@ -15,16 +15,15 @@ export const Dashboard = () => {
   useEffect(() => {
     const token = sessionStorage.getItem('authToken');
     if (!token) {
-      router.push('/pages/login'); // Redirect to login if no token found
+      router.push('/pages/login');
     } else {
-      const SECRET_KEY = process.env.JWT_SECRET_KEY; // Umgebungsvariable für client
+      const SECRET_KEY = process.env.JWT_SECRET_KEY;
 
       if (!SECRET_KEY) {
-        router.push('/pages/login'); // Weiterleitung bei fehlendem SECRET_KEY
+        router.push('/pages/login');
         return;
       }
 
-      // JWT-Token dekodieren, um Benutzerdaten zu extrahieren
       const decoded = jwt.decode(token, SECRET_KEY);
       setUser(decoded);
     }
