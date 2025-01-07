@@ -11,23 +11,6 @@ export const Frontpage = () => {
   const [isAdmin, setIsAdmin] = useState<boolean>(false);
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const firstVisit = sessionStorage.getItem('firstVisit');
-      
-      if (!firstVisit) {
-        sessionStorage.removeItem('authToken');
-        setUsername(null);
-
-        sessionStorage.setItem('firstVisit', 'true');
-      } else {
-        const token = sessionStorage.getItem('authToken');
-        if (token) {
-          const decoded = JSON.parse(atob(token.split('.')[1]));
-          setUsername(decoded.username);
-          setIsAdmin(decoded.username === 'admin');
-        }
-      }
-    }
   }, []);
 
   const navigateToLogin = () => {

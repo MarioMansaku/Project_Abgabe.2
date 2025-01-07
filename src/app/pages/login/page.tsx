@@ -27,21 +27,33 @@ export const Login = () => {
       return;
     }
 
-    const response = await fetch('api/status', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ username, password }),
-    });
+    try {
+      const response = await fetch('https://localhost:3000/auth/token', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, password }),
+      });
 
-    const data = await response.json();
+      const data = await response.json();
 
-    if (response.ok) {
-      sessionStorage.setItem('authToken', data.token);
-      router.push('/');
-    } else {
-      setError(data.error || 'Login failed');
+      if (response.ok) {
+        // Extract the access token and other details
+        const { access_token, refresh_token, expires_in } = data;
+
+        // Store tokens and expiration in sessionStorage
+        sessionStorage.setItem('authToken', access_token);
+        sessionStorage.setItem('refreshToken', refresh_token);
+        sessionStorage.setItem('expiresIn', expires_in);
+
+        // Redirect to the home page or dashboard
+        router.push('/');
+      } else {
+        setError(data.error || 'Login failed');
+      }
+    } catch (err) {
+      setError('An error occurred. Please try again.');
     }
   };
 
