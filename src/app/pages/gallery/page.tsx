@@ -6,7 +6,8 @@ import SearchButton from "@/components/searchButton";
 import BookItem from "@/components/BookItem";
 import { Book } from "@/app/pages/types/types";
 import axios from "axios";
-import '../components/carousel/Carousel.css'; // Stelle sicher, dass du das CSS importierst
+import '../components/carousel/Carousel.css';
+import { AdminDeleteButton } from "@/components/deleteButton";
 
 export const Gallery = () => {
   const router = useRouter();
@@ -101,6 +102,10 @@ export const Gallery = () => {
     setSelectedBook(null);
   };
 
+  const deleteButton = () => {
+
+  }
+
   return (
     <Box sx={{ display: "flex", overflow: "hidden", flexDirection: "column", height: "relative", backgroundColor: "background.default" }}>
       <AppBar position="static" color="default" sx={{ borderBottom: 1, borderColor: "divider" }}>
@@ -173,6 +178,7 @@ export const Gallery = () => {
             <Typography variant="body1">Homepage: {selectedBook.homepage}</Typography>
             <Typography variant="body1">Schlagwörter: {selectedBook.schlagwoerter?.join(', ')}</Typography>
             <Button onClick={handleCloseModal} color="primary">Schließen</Button>
+            {isAdmin && (<Button variant="contained" color="error" sx={{marginLeft: 5}} onClick={deleteButton}>Delete</Button>)}
           </div>
         </div>
       )}
