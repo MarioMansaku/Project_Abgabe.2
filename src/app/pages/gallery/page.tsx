@@ -58,19 +58,19 @@ export const Gallery = () => {
 
   const handleDeleteClick = (book: Book) => {
     setBookToDelete(book);
-    setConfirmDeleteOpen(true); // Zeigt das Bestätigungs-Popup
+    setConfirmDeleteOpen(true);
   };
 
   const handleDeleteConfirm = async () => {
     if (bookToDelete) {
-      await deleteBook(String(bookToDelete.id)); // Lösche das Buch
-      setConfirmDeleteOpen(false); // Schließe das Bestätigungs-Popup
+      await deleteBook(String(bookToDelete.id));
+      setConfirmDeleteOpen(false);
     }
   };
 
   const handleDeleteCancel = () => {
-    setConfirmDeleteOpen(false); // Schließe das Bestätigungs-Popup ohne zu löschen
-    setBookToDelete(null); // Rücksetzen des ausgewählten Buchs
+    setConfirmDeleteOpen(false);
+    setBookToDelete(null);
   };
 
   const ConfirmDeleteDialog = ({ open, onClose, onConfirm }) => {
@@ -99,7 +99,7 @@ export const Gallery = () => {
           Authorization: `Bearer ${token}`,
         },
       });
-      fetchBooks(); // Aktualisiere die Buchliste nach erfolgreichem Löschen
+      fetchBooks();
     } catch (error) {
       console.error("Fehler beim Löschen des Buchs:", error);
       setErrorMessage("Fehler beim Löschen des Buchs. Bitte versuchen Sie es erneut.");
@@ -155,7 +155,6 @@ export const Gallery = () => {
     setSelectedBook(null);
   };
 
-  //TODO change background image from anima hero default pic to maybe https://images.unsplash.com/photo-1507842217343-583bb7270b66 will have to change font coloring then ?
   return (
     <Box sx={{ display: "flex", overflow: "hidden", flexDirection: "column", height: "relative", backgroundColor: "background.default" }}>
       <AppBar position="static" color="default" sx={{ borderBottom: 1, borderColor: "divider" }}>
@@ -180,8 +179,12 @@ export const Gallery = () => {
       </AppBar>
 
       
-      <Box sx={{ height: '255px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', backgroundImage: 'url(https://c.animaapp.com/CBoGUkLi/img/hero-image.png)', backgroundSize: 'cover', backgroundPosition: '50% 50%', padding: 4, gap: 2 }}>
-        <Typography variant="h1" color="#151547" sx={{ textAlign: "center" }}>
+      <Box sx={{ height: '255px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', backgroundImage: 'url(https://images.unsplash.com/photo-1507842217343-583bb7270b66)', backgroundSize: 'cover', backgroundPosition: '50% 50%', padding: 4, gap: 2 }}>
+        <Typography variant="h1" color="#151547" sx={{  textAlign: "center",
+                                                        color: 'white', 
+                                                        WebkitTextStroke: '1px black',
+                                                        textStroke: '1px black',
+                                                      }}>
           Gallery
         </Typography>
         <Box sx={{ display: 'flex', gap: 2 }}>
@@ -236,7 +239,7 @@ export const Gallery = () => {
                 <Button
                   variant="contained"
                   color="error"
-                  onClick={() => handleDeleteClick(selectedBook)} // Zeigt das Bestätigungs-Popup an
+                  onClick={() => handleDeleteClick(selectedBook)}
                 >
                   Delete
                 </Button>
@@ -245,7 +248,6 @@ export const Gallery = () => {
     </div>
   </div>
 )}
-      {/* Bestätigungsdialog */}
       <ConfirmDeleteDialog
         open={confirmDeleteOpen}
         onClose={handleDeleteCancel}

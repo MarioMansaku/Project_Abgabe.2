@@ -97,16 +97,22 @@ export const Frontpage = () => {
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
-          backgroundImage: 'url(https://c.animaapp.com/CBoGUkLi/img/hero-image.png)',
+          backgroundImage: 'url(https://images.unsplash.com/photo-1507842217343-583bb7270b66)',
           backgroundSize: 'cover',
           backgroundPosition: '50% 50%',
           padding: 4,
         }}
       >
-        <Typography variant="h1" color="textPrimary" sx={{ marginBottom: 1 }}>
+        <Typography variant="h1" color="textPrimary" sx={{  marginBottom: 1, 
+                                                            color: 'white', 
+                                                            WebkitTextStroke: '1px black',
+                                                            textStroke: '1px black', }}>
           Bücher
         </Typography>
-        <Typography variant="h2" color="textPrimary" sx={{ marginBottom: 2 }}>
+        <Typography variant="h2" color="textPrimary" sx={{  marginBottom: 2, 
+                                                            color: 'white', 
+                                                            WebkitTextStroke: '1px black',
+                                                            textStroke: '1px black', }}>
           SWE
         </Typography>
         <Box sx={{ display: 'flex', gap: 2 }}>
