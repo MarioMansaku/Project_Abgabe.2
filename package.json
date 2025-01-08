@@ -6,7 +6,8 @@
     "dev": "set PORT=4000 && node server.js",
     "build": "next build",
     "start": "set PORT=4000 && next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "prettier": "prettier --write ."
   },
   "dependencies": {
     "@emotion/cache": "11.13.5",
@@ -38,6 +39,7 @@
     "eslint-config-next": "15.0.3",
     "globals": "15.13.0",
     "postcss": "^8.4.27",
+    "prettier-plugin-organize-imports": "4.1.0",
     "typescript": "^5"
   }
 }

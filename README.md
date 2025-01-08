@@ -12,9 +12,10 @@ npm install slick-carousel --legacy-peer-deps #Installation der Karussell-Kompon
 npm install next-auth jwt-simple bcryptjs --legacy-peer-deps #Installation der fürs Login notwenigen Packete
 npm install prettier  # Prettier installieren
 
-npm install --save-dev eslint-config-prettier
+npm install --save-dev eslint-config-prettier eslint-plugin-prettier prettier-plugin-organize-imports
 
-npm install --save-dev eslint @typescript-eslint/eslint-plugin eslint-plugin-unicorn eslint-plugin-sonarjs eslint-plugin-prettier eslint-plugin-promise eslint-plugin-security eslint-plugin-security-node eslint-plugin-prefer-arrow eslint-plugin-regexp @stylistic/eslint-plugin 
+
+npm install --save-dev eslint @typescript-eslint/eslint-plugin eslint-plugin-unicorn eslint-plugin-sonarjs eslint-plugin-promise eslint-plugin-security eslint-plugin-security-node eslint-plugin-prefer-arrow eslint-plugin-regexp @stylistic/eslint-plugin 
 # Installation von allen notwendigen Plugins
 
 # GitHub 
