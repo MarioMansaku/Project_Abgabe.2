@@ -2,10 +2,10 @@
   "extends": [
     "next/core-web-vitals",
     "next/typescript",
-    "plugin:prettier/recommended" // Prettier-Konfiguration hinzufügen
+    "plugin:prettier/recommended"
   ],
-  "plugins": ["prettier"], // Prettier als Plugin hinzufügen
+  "plugins": ["prettier"],
   "rules": {
-    "prettier/prettier": ["error"] // Prettier-Fehler als ESLint-Fehler anzeigen
+    "prettier/prettier": ["error"]
   }
 }
