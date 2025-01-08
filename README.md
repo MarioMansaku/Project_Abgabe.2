@@ -10,6 +10,7 @@ npm install @mui/material # Installation von "@mui/icons-material für page.tsx
 npm install react-slick --legacy-peer-deps #Installation von react slick für das Karussell
 npm install slick-carousel --legacy-peer-deps #Installation der Karussell-Komponenten
 npm install next-auth jwt-simple bcryptjs --legacy-peer-deps #Installation der fürs Login notwenigen Packete
+npm install prettier  # Prettier installieren
 
 # GitHub 
 
@@ -31,4 +32,21 @@ To further ease integration the OpenAPI documentation is included in this projec
 
 ```bash
 openapi-typescript C:\Users\...\...\...\openapi\swagger.json --output src/api.ts
+```
+
+# Prettier 
+
+```bash
+npm install prettier  # Prettier installieren
+
+node --eval "fs.writeFileSync('.prettierrc','{}\n')" # prettierrc erzeugen
+
+node --eval "fs.writeFileSync('.prettierignore','# Ignore artifacts:\nbuild\ncoverage\n')"  
+# prettierignore erzeugen
+```
+
+# ESLint
+
+```bash
+
 ```
