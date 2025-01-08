@@ -96,7 +96,7 @@ const UpdateButton: React.FC<{ id: string }> = ({ id }) => {
   ];
 
   const exampleValues: Record<string, string> = {
-    isbn: "Enter ISBN, z.B. 978-3-16-148410-0",
+    isbn: "Enter ISBN, z.B. 978-3-166-14841-0",
     id: "Enter ID, z.B. 70",
     rating: "Enter rating, 1-5",
     art: "Enter Art (epub, paperback, hardcover)",
