@@ -46,6 +46,7 @@ node --eval "fs.writeFileSync('.prettierignore','# Ignore artifacts:\nbuild\ncov
 ```
 
 ## Terminal Split Pane
+
 Vier SplitPanes im Terminal bitte für eure Nutzung die Pfade entsprechend anpassen
 How-To:
 In Windows Terminal Ctrl + , öffnet die Settings, dann unten links 'json Datei bearbeiten und 'profiles' folgende Profile einfügen
