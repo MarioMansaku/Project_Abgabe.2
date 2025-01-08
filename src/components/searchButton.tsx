@@ -4,8 +4,10 @@ import React, { useState } from "react";
 import { getBuch } from '../api/read-buch.service.ts';
 import log from '../utils/logger.js';
 
+// Definiert die Eigenschaften, die die SearchButton-Komponente erwartet
 interface SearchButtonProps {
-  onSearchResults: (criteria: string, value: string) => void;
+  // onSearchResults ist eine Callback-Funktion, um Suchergebnisse an die Elternkomponente weiterzugeben
+  onSearchResults: (criteria: string, value: string, results?: any) => void;
 }
 
 export function SearchButton({ onSearchResults }: SearchButtonProps) {
@@ -14,15 +16,22 @@ export function SearchButton({ onSearchResults }: SearchButtonProps) {
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
+  // Funktion, die beim Klick auf den Such-Button aufgerufen wird
   const handleSearch = async () => {
-    setLoading(true);
+    // Setzt den Ladezustand auf true
+    setLoading(true); 
+    // Zurücksetzen einer evtl. vorherigen Fehlermeldung
     setErrorMessage(null);
     try {
       log.debug("Suche mit Suchkriterien:", criteria, "Wert:", value)
-      onSearchResults(criteria, value);
+
+      // Ruft die getBuch-Funktion auf, um Daten anhand von Kriterien und Wert zu erhalten
+      const results = await getBuch(criteria, value);
+      // Übergibt die Ergebnisse (results) an die Elternkomponente
+      onSearchResults(criteria, value, results);
     } catch (err: any) {
       console.error("Fehler bei der Suche:", err.message);
-      setErrorMessage("Es gab ein Problem mit der Suche. Bitte versuchen Sie es später erneut.");
+      setErrorMessage(err.message);
     } finally {
       setLoading(false);
     }
@@ -30,7 +39,7 @@ export function SearchButton({ onSearchResults }: SearchButtonProps) {
 
   return (
     <div>
-      <h1>Suche mit Suchkriterien</h1>
+      <h1>Suchkriterien auswählen</h1>
       <label>
         Suche nach:
         <select value={criteria} onChange={(e) => setCriteria(e.target.value)}>
