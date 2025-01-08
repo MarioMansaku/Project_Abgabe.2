@@ -156,6 +156,7 @@ export const Gallery = () => {
     setSelectedBook(null);
   };
 
+  //TODO change background image from anima hero default pic to maybe https://images.unsplash.com/photo-1507842217343-583bb7270b66
   return (
     <Box sx={{ display: "flex", overflow: "hidden", flexDirection: "column", height: "relative", backgroundColor: "background.default" }}>
       <AppBar position="static" color="default" sx={{ borderBottom: 1, borderColor: "divider" }}>
@@ -179,6 +180,7 @@ export const Gallery = () => {
         </Toolbar>
       </AppBar>
 
+      
       <Box sx={{ height: '255px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', backgroundImage: 'url(https://c.animaapp.com/CBoGUkLi/img/hero-image.png)', backgroundSize: 'cover', backgroundPosition: '50% 50%', padding: 4, gap: 2 }}>
         <Typography variant="h1" color="#151547" sx={{ textAlign: "center" }}>
           Gallery
