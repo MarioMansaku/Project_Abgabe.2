@@ -1,5 +1,5 @@
 'use client';
-import { AppBar, Box, Button, Container, Grid, Toolbar, Typography } from "@mui/material";
+import { AppBar, Box, Button, Container, Grid, Toolbar, Typography, Dialog, DialogActions, DialogContent, DialogTitle } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import SearchButton from "@/components/searchButton";
@@ -19,6 +19,8 @@ export const Gallery = () => {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedBook, setSelectedBook] = useState<Book | null>(null);
+  const [confirmDeleteOpen, setConfirmDeleteOpen] = useState(false);
+  const [bookToDelete, setBookToDelete] = useState<Book | null>(null);
 
   useEffect(() => {
     fetchBooks();
@@ -53,6 +55,36 @@ export const Gallery = () => {
       console.error(error);
       setErrorMessage("Fehler beim Laden der Bücher. Bitte versuchen Sie es später erneut.");
     }
+  };
+
+  const handleDeleteClick = (book: Book) => {
+    setBookToDelete(book);
+    setConfirmDeleteOpen(true); // Zeigt das Bestätigungs-Popup
+  };
+
+  const handleDeleteConfirm = async () => {
+    if (bookToDelete) {
+      await deleteBook(bookToDelete.id); // Lösche das Buch
+      setConfirmDeleteOpen(false); // Schließe das Bestätigungs-Popup
+    }
+  };
+
+  const handleDeleteCancel = () => {
+    setConfirmDeleteOpen(false); // Schließe das Bestätigungs-Popup ohne zu löschen
+    setBookToDelete(null); // Rücksetzen des ausgewählten Buchs
+  };
+
+  const ConfirmDeleteDialog = ({ open, onClose, onConfirm }) => {
+    return (
+      <Dialog open={open} onClose={onClose}>
+        <DialogTitle>Bestätigung</DialogTitle>
+        <DialogContent>Sind Sie sicher, dass Sie dieses Buch löschen möchten?</DialogContent>
+        <DialogActions>
+          <Button onClick={onClose} color="primary">Abbrechen</Button>
+          <Button onClick={onConfirm} color="secondary">Löschen</Button>
+        </DialogActions>
+      </Dialog>
+    );
   };
 
   const deleteBook = async (id: string) => {
@@ -198,24 +230,26 @@ export const Gallery = () => {
       <Typography variant="body1">Schlagwörter: {selectedBook.schlagwoerter?.join(', ')}</Typography>
       
       <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2 }}>
-        <Button onClick={handleCloseModal} color="primary">Schließen</Button>
-        {isAdmin && selectedBook && selectedBook.id && (
-          <Button
-            variant="contained"
-            color="error"
-            onClick={async () => {
-              await deleteBook(selectedBook.id); // Aufruf der Delete-Funktion
-              setModalOpen(false); // Schließt das Modal
-              setSelectedBook(null); // Setzt das ausgewählte Buch zurück
-            }}
-          >
-            Delete
-          </Button>
+              <Button onClick={handleCloseModal} color="primary">Schließen</Button>
+              {isAdmin && selectedBook && selectedBook.id && (
+                <Button
+                  variant="contained"
+                  color="error"
+                  onClick={() => handleDeleteClick(selectedBook)} // Zeigt das Bestätigungs-Popup an
+                >
+                  Delete
+                </Button>
         )}
       </Box>
     </div>
   </div>
 )}
+      {/* Bestätigungsdialog */}
+      <ConfirmDeleteDialog
+        open={confirmDeleteOpen}
+        onClose={handleDeleteCancel}
+        onConfirm={handleDeleteConfirm}
+      />
     </Box>
   );
 };
