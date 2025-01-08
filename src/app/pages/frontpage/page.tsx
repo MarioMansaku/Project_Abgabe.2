@@ -4,6 +4,7 @@ import { AppBar, Box, Button, Grid, Paper, Toolbar, Typography } from '@mui/mate
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Carousel } from '../components/carousel';
+import { getUserInfoFromToken } from '@/app/utils/decodeToken';
 
 export const Frontpage = () => {
   const router = useRouter();
@@ -11,6 +12,18 @@ export const Frontpage = () => {
   const [isAdmin, setIsAdmin] = useState<boolean>(false);
 
   useEffect(() => {
+    // Überprüfe den authToken und den Benutzernamen
+    const authToken = sessionStorage.getItem('authToken');
+    const storedUsername = sessionStorage.getItem('username'); // Optional: Benutzername speichern
+    const adminStatus = sessionStorage.getItem('isAdmin') === 'true'; // Optional: Admin-Status speichern
+
+    if (authToken) {
+      setUsername(storedUsername || 'Unknown User');
+      setIsAdmin(adminStatus);
+    } else {
+      setUsername(null);
+      setIsAdmin(false);
+    }
   }, []);
 
   const navigateToLogin = () => {
@@ -22,7 +35,10 @@ export const Frontpage = () => {
   };
 
   const handleLogout = () => {
+    // Lösche alle Auth-bezogenen Daten
     sessionStorage.removeItem('authToken');
+    sessionStorage.removeItem('username');
+    sessionStorage.removeItem('isAdmin');
     setUsername(null);
     setIsAdmin(false);
     router.push('/pages/login');
