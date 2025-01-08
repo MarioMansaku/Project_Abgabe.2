@@ -29,9 +29,9 @@ export function SearchButton({ onSearchResults }: SearchButtonProps) {
       const results = await getBuch(criteria, value);
       // Übergibt die Ergebnisse (results) an die Elternkomponente
       onSearchResults(criteria, value, results);
-    } catch (err: any) {
-      console.error("Fehler bei der Suche:", err.message);
-      setErrorMessage(err.message);
+    } catch (error) {
+      console.error("Fehler bei der Suche:", error);
+      setErrorMessage("Fehler bei der Suche!");
     } finally {
       setLoading(false);
     }
