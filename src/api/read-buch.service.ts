@@ -12,7 +12,6 @@ export const getBuch = async (criteria: string, value: string) => {
                 Accept: "application/hal+json",
             },
         });
-
         log.debug('getBuch: Erfolgreich', res.data);
         return res.data;
     } catch (error: unknown) {
@@ -27,10 +26,7 @@ export const getBuch = async (criteria: string, value: string) => {
                 log.error(`API Error: ${message} (Status Code: ${status})`);
                 throw new Error(message);
             }
-        } else {
-            log.error('Unbekannter Fehler:', error);
-            throw new Error("Ein unerwarteter Fehler ist aufgetreten.");
-        }
+        };
     }
 };
 
