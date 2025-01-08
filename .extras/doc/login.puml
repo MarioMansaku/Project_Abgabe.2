@@ -1,4 +1,4 @@
-@startuml login state
+@startuml Login
 [*] --> InitialCheck : App gestartet
 
 state InitialCheck {

@@ -1,4 +1,4 @@
-@startuml AdminDeleteButton
+@startuml BuchEntfernen
 [*] --> Idle
 
 state Idle {
