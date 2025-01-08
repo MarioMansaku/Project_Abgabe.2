@@ -156,7 +156,7 @@ export const Gallery = () => {
     setSelectedBook(null);
   };
 
-  //TODO change background image from anima hero default pic to maybe https://images.unsplash.com/photo-1507842217343-583bb7270b66
+  //TODO change background image from anima hero default pic to maybe https://images.unsplash.com/photo-1507842217343-583bb7270b66 will have to change font coloring then ?
   return (
     <Box sx={{ display: "flex", overflow: "hidden", flexDirection: "column", height: "relative", backgroundColor: "background.default" }}>
       <AppBar position="static" color="default" sx={{ borderBottom: 1, borderColor: "divider" }}>
