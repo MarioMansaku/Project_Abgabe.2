@@ -5,14 +5,14 @@ import { AppBar, Toolbar, Button, Typography, Box, Container } from "@mui/materi
 import { useRouter } from 'next/navigation';
 import { getBuch } from '@/api/read-buch.service';
 
-const UpdateButton: React.FC<{ id: string }> = ({ id }) => {
+const UpdateButton: React.FC<{ id: number }> = ({ id }) => {
   const [buch, setBuch] = useState<any | null>(null); 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
   const [status, setStatus] = useState<string>("");
   const [accessDenied, setAccessDenied] = useState<boolean>(false);
-  const [isAdmin, setIsAdmin] = useState<boolean>(false);
+  const [, setIsAdmin] = useState<boolean>(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -37,9 +37,11 @@ const UpdateButton: React.FC<{ id: string }> = ({ id }) => {
     const fetchBook = async () => {
       try {
         setLoading(true);
-        const bookData = await getBuch('isbn', id); 
+        
+        const bookData = await getBuch('isbn', String(id)); 
         setBuch(bookData);
       } catch (error) {
+        console.error('Fehler beim Abrufen der Bücher:', error);
         setError('Buch konnte nicht geladen werden.');
       } finally {
         setLoading(false);

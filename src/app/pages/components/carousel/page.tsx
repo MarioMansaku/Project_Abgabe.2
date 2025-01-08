@@ -57,6 +57,7 @@ export const Carousel = () => {
         `Untertitel: ${bookDetails.titel.untertitel}\nID: ${bookDetails.id}\nArt: ${bookDetails.art}\nPreis: €${bookDetails.preis}\nRating: ${bookDetails.rating}/5\nRabatt: ${bookDetails.rabatt}%\nLieferbar: ${bookDetails.lieferbar ? 'Ja' : 'Nein'}\nDatum: ${bookDetails.datum}\nHomepage: ${bookDetails.homepage}\nSchlagwörter: ${bookDetails.schlagwoerter?.join(', ')}`
       );
     } catch (error) {
+      console.error('Fehler beim Abrufen der Bücher:', error);
       setError('Fehler beim Abrufen der Buchdetails.');
     } finally {
       setLoading(false);

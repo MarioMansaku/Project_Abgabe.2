@@ -52,7 +52,8 @@ export const Login = () => {
       } else {
         setError(data.error || 'Login failed');
       }
-    } catch (err) {
+    } catch (error) {
+      console.error('Fehler beim Abrufen der Bücher:', error);
       setError('An error occurred. Please try again.');
     }
   };

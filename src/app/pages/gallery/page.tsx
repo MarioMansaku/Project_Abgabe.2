@@ -7,7 +7,6 @@ import BookItem from "@/components/BookItem";
 import { Book } from "@/app/pages/types/types";
 import axios from "axios";
 import '../components/carousel/Carousel.css';
-import { AdminDeleteButton } from "@/components/deleteButton";
 
 export const Gallery = () => {
   const router = useRouter();
@@ -15,7 +14,7 @@ export const Gallery = () => {
   const [isAdmin, setIsAdmin] = useState<boolean>(false);
   const [books, setBooks] = useState<Book[]>([]);
   const [filteredBooks, setFilteredBooks] = useState<Book[]>([]);
-  const [filterCriteria, setFilterCriteria] = useState({ criteria: "isbn", value: "" });
+  const [, setFilterCriteria] = useState({ criteria: "isbn", value: "" });
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedBook, setSelectedBook] = useState<Book | null>(null);
@@ -64,7 +63,7 @@ export const Gallery = () => {
 
   const handleDeleteConfirm = async () => {
     if (bookToDelete) {
-      await deleteBook(bookToDelete.id); // Lösche das Buch
+      await deleteBook(String(bookToDelete.id)); // Lösche das Buch
       setConfirmDeleteOpen(false); // Schließe das Bestätigungs-Popup
     }
   };

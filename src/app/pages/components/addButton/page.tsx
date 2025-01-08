@@ -13,7 +13,7 @@ export function AdminAddBook() {
     const [bookData, setBookData] = useState<Partial<Record<keyof PostPayload, any>>>({});
     const [status, setStatus] = useState<string>("");
     const [accessDenied, setAccessDenied] = useState<boolean>(false);
-    const [isAdmin, setIsAdmin] = useState<boolean>(false);
+    const [, setIsAdmin] = useState<boolean>(false);
 
     const router = useRouter();
 
