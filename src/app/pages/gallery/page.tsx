@@ -23,19 +23,16 @@ export const Gallery = () => {
   useEffect(() => {
     fetchBooks();
 
-    if (typeof window !== 'undefined') {
-      const firstVisit = sessionStorage.getItem('firstVisit');
-      if (!firstVisit) {
-        sessionStorage.removeItem('authToken');
-        sessionStorage.setItem('firstVisit', 'true');
-      }
+    const authToken = sessionStorage.getItem('authToken');
+    const storedUsername = sessionStorage.getItem('username'); // Optional: Benutzername speichern
+    const adminStatus = sessionStorage.getItem('isAdmin') === 'true'; // Optional: Admin-Status speichern
 
-      const token = sessionStorage.getItem('authToken');
-      if (token) {
-        const decoded = JSON.parse(atob(token.split('.')[1]));
-        setUsername(decoded.username);
-        setIsAdmin(decoded.username === 'admin');
-      }
+    if (authToken) {
+      setUsername(storedUsername || 'Unknown User');
+      setIsAdmin(adminStatus);
+    } else {
+      setUsername(null);
+      setIsAdmin(false);
     }
   }, []);
 

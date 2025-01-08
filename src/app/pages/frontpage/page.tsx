@@ -24,6 +24,7 @@ export const Frontpage = () => {
       setUsername(null);
       setIsAdmin(false);
     }
+
   }, []);
 
   const navigateToLogin = () => {
