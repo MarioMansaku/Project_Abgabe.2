@@ -1,0 +1,22 @@
+@startuml AdminDeleteButton
+[*] --> Idle
+
+state Idle {
+    onClick: handleDelete()
+}
+
+Idle --> Loading: ID verfügbar
+
+state Loading {
+    try: writeService.deleteBuch(id)
+    catch: log.error
+    finally: setIsLoading(false)
+}
+
+Loading --> Success: Löschen erfolgreich
+Success --> Idle: onDeleteSuccess()
+
+Loading --> Error: Fehler aufgetreten
+Error --> Idle
+
+@enduml
