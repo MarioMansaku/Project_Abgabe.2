@@ -1,0 +1,29 @@
+@startuml BuchHinzufuegen
+[*] --> Unauthenticated : Start
+
+state Unauthenticated {
+    [*] --> AccessDenied : Kein Token
+    AccessDenied --> RedirectLogin : Weiterleitung zu /pages/login
+}
+
+state Authenticated {
+    [*] --> CheckRole : Token validieren
+    CheckRole --> Admin : Rolle ist Admin
+    CheckRole --> AccessDenied : Keine Admin-Rechte
+
+    state Admin {
+        [*] --> InputForm : Admin sieht Eingabeformular
+        InputForm --> Submitting : Klick auf "Submit"
+        Submitting --> Success : Buch erfolgreich hinzugefügt
+        Submitting --> Error : Fehler beim Hinzufügen
+        Success --> InputForm : Neues Buch hinzufügen
+        Error --> InputForm : Fehler beheben
+    }
+}
+
+AccessDenied --> [*] : Weiterleitung abgeschlossen
+RedirectLogin --> [*] : Benutzer auf Login-Seite
+
+Authenticated --> [*] : Benutzer meldet sich ab
+Unauthenticated --> Authenticated : Authentifizierung erfolgreich
+@enduml
