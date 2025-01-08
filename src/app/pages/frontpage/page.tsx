@@ -4,6 +4,7 @@ import { AppBar, Box, Button, Grid, Paper, Toolbar, Typography } from '@mui/mate
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Carousel } from '../components/carousel';
+import { getUserInfoFromToken } from '@/app/utils/decodeToken';
 
 export const Frontpage = () => {
   const router = useRouter();

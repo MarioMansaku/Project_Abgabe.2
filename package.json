@@ -19,6 +19,7 @@
     "bcryptjs": "2.4.3",
     "class-transformer": "0.5.1",
     "class-validator": "0.14.1",
+    "jwt-decode": "4.0.0",
     "jwt-simple": "0.5.6",
     "loglevel": "1.9.2",
     "next": "15.0.3",
