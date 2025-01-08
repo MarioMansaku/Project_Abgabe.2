@@ -1,1 +1,1 @@
-export { AdminAddBook } from "./page"
+export { AdminAddBook } from './page';

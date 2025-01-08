@@ -10,12 +10,12 @@ export interface Book {
     homepage: string;
     schlagwoerter: string[] | null;
     titel: {
-      titel: string;
-      untertitel: string;
+        titel: string;
+        untertitel: string;
     };
     _links: {
-      self: {
-        href: string;
-      };
+        self: {
+            href: string;
+        };
     };
-  }
+}

@@ -1,1 +1,1 @@
-export { UpdateButton } from "./page"
+export { UpdateButton } from './page';

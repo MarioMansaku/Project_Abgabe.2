@@ -1,36 +1,35 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
 import jwt from 'jwt-simple';
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 interface User {
-  username: string;
+    username: string;
 }
 
 export const Dashboard = () => {
-  const [user, setUser] = useState<User | null>(null);
-  const router = useRouter();
+    const [user, setUser] = useState<User | null>(null);
+    const router = useRouter();
 
-  useEffect(() => {
-    const token = sessionStorage.getItem('authToken');
-    if (!token) {
-      router.push('/pages/login');
-    } else {
-      const SECRET_KEY = process.env.JWT_SECRET_KEY;
+    useEffect(() => {
+        const token = sessionStorage.getItem('authToken');
+        if (!token) {
+            router.push('/pages/login');
+        } else {
+            const SECRET_KEY = process.env.JWT_SECRET_KEY;
 
-      if (!SECRET_KEY) {
-        router.push('/pages/login');
-        return;
-      }
+            if (!SECRET_KEY) {
+                router.push('/pages/login');
+                return;
+            }
 
-      const decoded = jwt.decode(token, SECRET_KEY);
-      setUser(decoded);
-    }
-  }, [router]);
+            const decoded = jwt.decode(token, SECRET_KEY);
+            setUser(decoded);
+        }
+    }, [router]);
 
-  if (!user) return <div>Loading...</div>;
-
+    if (!user) return <div>Loading...</div>;
 };
 
 export default Dashboard;
