@@ -1,0 +1,30 @@
+@startuml login state
+[*] --> InitialCheck : App gestartet
+
+state InitialCheck {
+  [*] --> CheckSessionStorage
+  CheckSessionStorage --> AlreadyLoggedIn : Token gefunden
+  CheckSessionStorage --> LoginPrompt : Kein Token gefunden
+}
+
+AlreadyLoggedIn --> [*] : Weiterleitung zu "/"
+LoginPrompt --> EnterCredentials : Benutzer gibt Daten ein
+
+state EnterCredentials {
+  [*] --> AwaitInput
+  AwaitInput --> ValidateInput : Benutzer klickt "Sign in"
+  ValidateInput --> LoginSuccess : Authentifizierung erfolgreich
+  ValidateInput --> LoginError : Authentifizierung fehlgeschlagen
+}
+
+LoginError --> AwaitInput : Fehler korrigieren
+LoginSuccess --> [*] : Token gespeichert, Weiterleitung zu "/"
+
+state LoginSuccess {
+  [*] --> StoreTokens
+  StoreTokens --> Redirect : Weiterleitung zur Startseite
+}
+
+[*] --> RegisterRedirect : Benutzer klickt "Register"
+RegisterRedirect --> [*] : Weiterleitung zu "/register"
+@enduml
