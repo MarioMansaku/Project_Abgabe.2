@@ -14,10 +14,6 @@ npm install prettier  # Prettier installieren
 
 npm install --save-dev eslint-config-prettier eslint-plugin-prettier prettier-plugin-organize-imports
 
-
-npm install --save-dev eslint @typescript-eslint/eslint-plugin eslint-plugin-unicorn eslint-plugin-sonarjs eslint-plugin-promise eslint-plugin-security eslint-plugin-security-node eslint-plugin-prefer-arrow eslint-plugin-regexp @stylistic/eslint-plugin 
-# Installation von allen notwendigen Plugins
-
 # GitHub 
 
 git add . # Alle Änderungen Stagen 
