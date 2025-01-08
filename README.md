@@ -34,7 +34,7 @@ To further ease integration the OpenAPI documentation is included in this projec
 openapi-typescript C:\Users\...\...\...\openapi\swagger.json --output src/api.ts
 ```
 
-# Prettier 
+# Prettier
 
 ```bash
 npm install prettier  # Prettier installieren
@@ -43,10 +43,4 @@ node --eval "fs.writeFileSync('.prettierrc','{}\n')" # prettierrc erzeugen
 
 node --eval "fs.writeFileSync('.prettierignore','# Ignore artifacts:\nbuild\ncoverage\n')"  
 # prettierignore erzeugen
-```
-
-# ESLint
-
-```bash
-
 ```
