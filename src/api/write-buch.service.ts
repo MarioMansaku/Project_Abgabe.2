@@ -9,7 +9,7 @@ type PutResponse = operations["BuchWriteController_put"]["responses"]["204"]["co
 type DeleteResponse204 = operations["BuchWriteController_delete"]["responses"]["204"]["headers"];
 
 const BASE_URL = 'https://localhost:3000/rest';
-
+const token = sessionStorage.getItem('authToken');
 export class WriteServiceBuch {
     // Sende eine HTTP POST-Anfrage an die API mit den Buchdaten
     async postBuch(buch: PostPayload): Promise<PostResponse | void> {
@@ -32,7 +32,6 @@ export class WriteServiceBuch {
     // Senden einer HTTP PUT-Anfrage zur Aktualisierung des Buches
     async putBuch(buch: PutPayload, id: number): Promise<PutResponse | void> {
         const url = `${BASE_URL}/${id}`;
-        const token = this.getAuthToken();
         const response: AxiosResponse<PutResponse> = await axios.put(url, buch, {
             headers: {
                 "Content-Type": "application/json",
@@ -50,7 +49,6 @@ export class WriteServiceBuch {
     // Senden einer HTTP DELETE-Anfrage zum Löschen des Buches
     async deleteBuch(id: number): Promise<DeleteResponse204 | void> {
         const url = `${BASE_URL}/${id}`;
-        const token = this.getAuthToken();
         const response: AxiosResponse<DeleteResponse204> = await axios.delete(url, {
             headers: {
                 "Authorization": `Bearer ${token}`,
