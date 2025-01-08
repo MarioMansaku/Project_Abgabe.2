@@ -53,6 +53,26 @@ export const Gallery = () => {
     }
   };
 
+  const deleteBook = async (id: string) => {
+    const token = sessionStorage.getItem('authToken');
+    if (!token) {
+      setErrorMessage("Authentifizierung erforderlich, um ein Buch zu löschen.");
+      return;
+    }
+
+    try {
+      await axios.delete(`https://localhost:3000/rest/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      fetchBooks(); // Aktualisiere die Buchliste nach erfolgreichem Löschen
+    } catch (error) {
+      console.error("Fehler beim Löschen des Buchs:", error);
+      setErrorMessage("Fehler beim Löschen des Buchs. Bitte versuchen Sie es erneut.");
+    }
+  };
+
   const filterBooks = (criteria: string, value: string) => {
     if (!value) {
       setFilteredBooks(books);
@@ -148,45 +168,52 @@ export const Gallery = () => {
       </Container>
 
       <Container>
-        <Typography variant="h4" sx={{ my: 4 }}>Dynamic Gallery</Typography>
-        {errorMessage && <Typography color="error" variant="h6" sx={{ my: 2 }}>{errorMessage}</Typography>}
+  <Typography variant="h4" sx={{ my: 4 }}>Dynamic Gallery</Typography>
+  {errorMessage && <Typography color="error" variant="h6" sx={{ my: 2 }}>{errorMessage}</Typography>}
 
-        <Grid container spacing={3}>
-          {filteredBooks.map((book) => (
-            <Grid item xs={12} sm={6} md={4} key={book.isbn}>
-              <BookItem book={book} onClick={() => openModal(book)} />
-            </Grid>
-          ))}
-        </Grid>
-      </Container>
+  <Grid container spacing={3}>
+    {filteredBooks.map((book) => (
+      <Grid item xs={12} sm={6} md={4} key={book.isbn}>
+        <BookItem book={book} onClick={() => openModal(book)} />
+      </Grid>
+    ))}
+  </Grid>
+</Container>
 
-      {modalOpen && selectedBook && (
-        <div className="modal-overlay" onClick={handleCloseModal}>
-          <div className="modal" onClick={(e) => e.stopPropagation()}>
-            <Typography variant="h6">{selectedBook.titel.titel}</Typography>
-            <Typography variant="body1">Untertitel: {selectedBook.titel.untertitel}</Typography>
-            <Typography variant="body1">ID: {selectedBook.id}</Typography>
-            <Typography variant="body1">Art: {selectedBook.art}</Typography>
-            <Typography variant="body1">Preis: €{selectedBook.preis}</Typography>
-            <Typography variant="body1">Rating: {selectedBook.rating}/5</Typography>
-            <Typography variant="body1">Rabatt: {selectedBook.rabatt}%</Typography>
-            <Typography variant="body1">Lieferbar: {selectedBook.lieferbar ? 'Ja' : 'Nein'}</Typography>
-            <Typography variant="body1">Datum: {selectedBook.datum}</Typography>
-            <Typography variant="body1">Homepage: {selectedBook.homepage}</Typography>
-            <Typography variant="body1">Schlagwörter: {selectedBook.schlagwoerter?.join(', ')}</Typography>
-            <Button onClick={handleCloseModal} color="primary">Schließen</Button>
-            {isAdmin && selectedBook && selectedBook.id && (
-            <AdminDeleteButton 
-              id={selectedBook.id} 
-              onDeleteSuccess={() => {
-              setModalOpen(false);
-              setSelectedBook(null);
-              }} 
-              />
-            )}
-          </div>
-        </div>
-      )}
+{modalOpen && selectedBook && (
+  <div className="modal-overlay" onClick={handleCloseModal}>
+    <div className="modal" onClick={(e) => e.stopPropagation()}>
+      <Typography variant="h6">{selectedBook.titel.titel}</Typography>
+      <Typography variant="body1">Untertitel: {selectedBook.titel.untertitel}</Typography>
+      <Typography variant="body1">ID: {selectedBook.id}</Typography>
+      <Typography variant="body1">Art: {selectedBook.art}</Typography>
+      <Typography variant="body1">Preis: €{selectedBook.preis}</Typography>
+      <Typography variant="body1">Rating: {selectedBook.rating}/5</Typography>
+      <Typography variant="body1">Rabatt: {selectedBook.rabatt}%</Typography>
+      <Typography variant="body1">Lieferbar: {selectedBook.lieferbar ? 'Ja' : 'Nein'}</Typography>
+      <Typography variant="body1">Datum: {selectedBook.datum}</Typography>
+      <Typography variant="body1">Homepage: {selectedBook.homepage}</Typography>
+      <Typography variant="body1">Schlagwörter: {selectedBook.schlagwoerter?.join(', ')}</Typography>
+      
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2 }}>
+        <Button onClick={handleCloseModal} color="primary">Schließen</Button>
+        {isAdmin && selectedBook && selectedBook.id && (
+          <Button
+            variant="contained"
+            color="error"
+            onClick={async () => {
+              await deleteBook(selectedBook.id); // Aufruf der Delete-Funktion
+              setModalOpen(false); // Schließt das Modal
+              setSelectedBook(null); // Setzt das ausgewählte Buch zurück
+            }}
+          >
+            Delete
+          </Button>
+        )}
+      </Box>
+    </div>
+  </div>
+)}
     </Box>
   );
 };
