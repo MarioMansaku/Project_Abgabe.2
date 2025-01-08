@@ -1,4 +1,4 @@
-# Kommandos 
+# Kommandos
 
 ```bash
 npm run dev # Server hochfahren 
@@ -20,7 +20,7 @@ git commit -m "message" # Einen Commit mit einer Nachricht erstellen
 git push -u origin main # Alle Änderungen ins Haupt-Repository pushen 
 ```
 
-# OpenApi Code Generation
+## OpenApi Code Generation
 
 Use the provided OpenAPI documentation from {{Host}}:Port/swagger-json (e.g. https://localhost:3000/swagger-json):
 ```bash
@@ -34,7 +34,7 @@ To further ease integration the OpenAPI documentation is included in this projec
 openapi-typescript C:\Users\...\...\...\openapi\swagger.json --output src/api.ts
 ```
 
-# Prettier
+## Prettier
 
 ```bash
 npm install prettier  # Prettier installieren
