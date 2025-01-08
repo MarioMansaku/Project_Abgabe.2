@@ -13,25 +13,26 @@ export function AdminAddBook() {
     const [bookData, setBookData] = useState<Partial<Record<keyof PostPayload, any>>>({});
     const [status, setStatus] = useState<string>("");
     const [accessDenied, setAccessDenied] = useState<boolean>(false);
-    
+    const [isAdmin, setIsAdmin] = useState<boolean>(false);
+
     const router = useRouter();
 
     useEffect(() => {
-        const token = `eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJMTjJBRnQ4TzEyeVVPS1hmSElQUmlVeEloREZMLTFkQmJnc2psZjNiancwIn0.eyJleHAiOjE3MzYyODkzMzYsImlhdCI6MTczNjI4NzUzNiwianRpIjoiOTFkZDlhMTctM2ZkMS00ZWEyLTk0MjQtOGZkNTc1ZmQzMzRlIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4ODgwL3JlYWxtcy9uZXN0IiwiYXVkIjoiYWNjb3VudCIsInN1YiI6IjgyYWJkNTNkLTAyMzktNDY2Yi05ZTZkLWE2YTg3MjIzNmNjMiIsInR5cCI6IkJlYXJlciIsImF6cCI6Im5lc3QtY2xpZW50Iiwic2lkIjoiZGRlMDUyMWMtMjAxNC00ODgxLTkzN2UtYjgyMzllYzQxMDdmIiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyJodHRwczovL2xvY2FsaG9zdDozMDAwIiwiaHR0cHM6Ly9vYXV0aC5wc3Rtbi5pbyIsImh0dHBzOi8vYnVjaDozMDAwIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIiwiZGVmYXVsdC1yb2xlcy1uZXN0Il19LCJyZXNvdXJjZV9hY2Nlc3MiOnsibmVzdC1jbGllbnQiOnsicm9sZXMiOlsiYWRtaW4iXX0sImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoiZW1haWwgcHJvZmlsZSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwibmFtZSI6Ik5lc3QgQWRtaW4iLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJhZG1pbiIsImdpdmVuX25hbWUiOiJOZXN0IiwiZmFtaWx5X25hbWUiOiJBZG1pbiIsImVtYWlsIjoiYWRtaW5AYWNtZS5jb20ifQ.HMhV_8uUOR7iJySxQQHVToJctR9tjdSl_ENUDPlGrXNJFFtHaQopnxVESvk23cSwdzqakzrLLdO8X9M36mj3mOmv_tjyIXl-B6IOL9oZzV1JppUPaqo8pIZbKqtmopyF8UtSUX2yojh9UIYPUbsqIlZ2ivoMGEajzyOslUyEYMFVQ2oJyfVmlo-22zw_UoYeplsF22B49I9I0bKAjNetaw7o-OJ6j5ZWFJBnGcu2qtHl0WiUsVwcUOap4xAtWci-YNFtJkptB442sz2boShhe3pI6qzgK7nVG51GazqNTpKOcqdXi6FT-1ovVUOopOS2HkLhxG8cjaOsDjg9eVo_vw`;
+        const token = sessionStorage.getItem('authToken');
         if (!token) {
-            // setAccessDenied(true);
-
+            setAccessDenied(true);
             setTimeout(() => {
                 router.push('/pages/login');
             }, 3000);
         } else {
             const decoded = JSON.parse(atob(token.split('.')[1]));
-            if (decoded.username !== 'admin') {                
-                // setAccessDenied(true);
-
-                // setTimeout(() => {
-                //     router.push('/');
-                // }, 3000);
+            if (decoded.resource_access && decoded.resource_access['nest-client'] && decoded.resource_access['nest-client'].roles.includes('admin')) {
+                setIsAdmin(true);
+            } else {
+                setAccessDenied(true);
+                setTimeout(() => {
+                    router.push('/');
+                }, 3000);
             }
         }
     }, [router]);

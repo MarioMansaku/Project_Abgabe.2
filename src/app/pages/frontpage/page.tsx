@@ -12,25 +12,21 @@ export const Frontpage = () => {
   const [isAdmin, setIsAdmin] = useState<boolean>(false);
 
   useEffect(() => {
-    // Überprüfe den authToken und den Benutzernamen
+    
     if (typeof window !== 'undefined') {
       const token = sessionStorage.getItem('authToken');
       if (token) {
-        // JWT Dekodierung
         const decoded = JSON.parse(atob(token.split('.')[1]));
   
-        // Den bevorzugten Benutzernamen (preferred_username) extrahieren
-        const username = decoded.preferred_username || 'Unknown User'; // Falls kein Username vorhanden ist, Standardwert setzen
+        const username = decoded.preferred_username || 'Unknown User';
   
-        // Die Rolle aus resource_access extrahieren
         const roles = decoded.resource_access && decoded.resource_access['nest-client'] 
                       ? decoded.resource_access['nest-client'].roles 
                       : [];
-        const role = roles.includes('admin') ? 'admin' : 'user'; // Wenn 'admin' Rolle vorhanden, dann 'admin', sonst 'user'
+        const role = roles.includes('admin') ? 'admin' : 'user';
   
-        // Den Benutzernamen und die Rolle setzen
         setUsername(username);
-        setIsAdmin(role === 'admin'); // Wenn der Benutzer die Rolle 'admin' hat, dann setze isAdmin auf true
+        setIsAdmin(role === 'admin');
       }
     }
 

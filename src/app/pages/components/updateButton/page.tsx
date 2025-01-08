@@ -12,6 +12,7 @@ const UpdateButton: React.FC<{ id: string }> = ({ id }) => {
   const [success, setSuccess] = useState(false);
   const [status, setStatus] = useState<string>("");
   const [accessDenied, setAccessDenied] = useState<boolean>(false);
+  const [isAdmin, setIsAdmin] = useState<boolean>(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -23,7 +24,9 @@ const UpdateButton: React.FC<{ id: string }> = ({ id }) => {
         }, 3000);
     } else {
         const decoded = JSON.parse(atob(token.split('.')[1]));
-        if (decoded.username !== 'admin') {                
+        if (decoded.resource_access && decoded.resource_access['nest-client'] && decoded.resource_access['nest-client'].roles.includes('admin')) {
+            setIsAdmin(true);
+        } else {
             setAccessDenied(true);
             setTimeout(() => {
                 router.push('/');
@@ -44,7 +47,7 @@ const UpdateButton: React.FC<{ id: string }> = ({ id }) => {
     };
 
     fetchBook();
-  }, [id]);
+  }, [id, router]);
 
   const handleInputChange = (field: string, value: any) => {
     setBuch((prevBuch) => ({
