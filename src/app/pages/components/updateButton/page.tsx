@@ -119,7 +119,7 @@ const UpdateButton: React.FC<{ id: string }> = ({ id }) => {
         art: 'Enter Art (epub, paperback, hardcover)',
         preis: 'Enter Preis in Euro, z.B. 19.99',
         rabatt: 'Enter Rabatt in %, z.B. 10',
-        lieferbar: 'Enter lieferbar (Ja, Nein)',
+        lieferbar: 'Enter lieferbar (true, false)',
         datum: 'Enter Datum, z.B. 2023-01-01',
         homepage: 'Enter homepage, z.B. https://example.com',
         schlagwoerter: 'Enter Schlagwörter (Java, Python, TypeScript, NULL)',
