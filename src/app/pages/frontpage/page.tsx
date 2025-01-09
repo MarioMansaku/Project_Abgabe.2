@@ -48,7 +48,6 @@ export const Frontpage = () => {
     };
 
     const handleLogout = () => {
-        // Lösche alle Auth-bezogenen Daten
         sessionStorage.removeItem('authToken');
         sessionStorage.removeItem('username');
         sessionStorage.removeItem('isAdmin');

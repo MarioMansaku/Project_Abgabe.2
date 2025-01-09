@@ -4,9 +4,7 @@ import { useState } from 'react';
 import { getBuch } from '../api/read-buch.service.ts';
 import log from '../utils/logger.js';
 
-// Definiert die Eigenschaften, die die SearchButton-Komponente erwartet
 interface SearchButtonProps {
-    // onSearchResults ist eine Callback-Funktion, um Suchergebnisse an die Elternkomponente weiterzugeben
     onSearchResults: (criteria: string, value: string, results?: any) => void;
 }
 
@@ -16,18 +14,13 @@ export function SearchButton({ onSearchResults }: SearchButtonProps) {
     const [loading, setLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-    // Funktion, die beim Klick auf den Such-Button aufgerufen wird
     const handleSearch = async () => {
-        // Setzt den Ladezustand auf true
         setLoading(true);
-        // Zurücksetzen einer evtl. vorherigen Fehlermeldung
         setErrorMessage(null);
         try {
             log.debug('Suche mit Suchkriterien:', criteria, 'Wert:', value);
 
-            // Ruft die getBuch-Funktion auf, um Daten anhand von Kriterien und Wert zu erhalten
             const results = await getBuch(criteria, value);
-            // Übergibt die Ergebnisse (results) an die Elternkomponente
             onSearchResults(criteria, value, results);
         } catch (error) {
             console.error('Fehler bei der Suche:', error);

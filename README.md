@@ -90,3 +90,5 @@ In Windows Terminal Ctrl + , öffnet die Settings, dann unten links 'json Datei 
     "tabTitle": "FrontEndDemo"
 }
 ```
+
+Das Profil 'FrontEnd Demo' sollte dann bei Terminal Neustart verfügbar sein.

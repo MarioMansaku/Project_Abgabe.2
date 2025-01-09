@@ -5,8 +5,8 @@ import { useState } from 'react';
 import log from '../utils/logger.js';
 
 interface AdminDeleteButtonProps {
-    id: number; // Prop für die ID
-    onDeleteSuccess: () => void; // Callback, der nach dem erfolgreichen Löschen aufgerufen wird
+    id: number;
+    onDeleteSuccess: () => void;
 }
 
 export function AdminDeleteButton({
@@ -24,9 +24,9 @@ export function AdminDeleteButton({
         setIsLoading(true);
 
         try {
-            await writeService.deleteBuch(id); // Lösche das Buch anhand der ISBN
+            await writeService.deleteBuch(id);
             log.debug(`Buch mit der ID ${id} wurde erfolgreich gelöscht.`);
-            onDeleteSuccess(); // Callback nach erfolgreichem Löschen
+            onDeleteSuccess();
         } catch (error) {
             log.error(
                 `Fehler beim Löschen des Buches mit der ID ${id}: ${error}`,

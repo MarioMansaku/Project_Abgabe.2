@@ -97,7 +97,6 @@ export function AdminAddBook() {
 
     const fields: (keyof PostPayload | string)[] = [
         'isbn',
-        'id',
         'rating',
         'art',
         'preis',
@@ -106,21 +105,18 @@ export function AdminAddBook() {
         'datum',
         'homepage',
         'schlagwoerter',
-        'titel',
     ];
 
     const exampleValues: Record<string, string> = {
         isbn: 'Enter ISBN, z.B. 978-3-166-14841-0',
-        id: 'Enter ID, z.B. 70',
         rating: 'Enter rating, 1-5',
         art: 'Enter Art (epub, paperback, hardcover)',
         preis: 'Enter Preis in Euro, z.B. 19.99',
         rabatt: 'Enter Rabatt in %, z.B. 10',
-        lieferbar: 'Enter lieferbar (Ja, Nein)',
+        lieferbar: 'Enter lieferbar (true, false)',
         datum: 'Enter Datum, z.B. 2023-01-01',
         homepage: 'Enter homepage, z.B. https://example.com',
         schlagwoerter: 'Enter Schlagwörter (Java, Python, TypeScript, NULL)',
-        titel: 'Enter Titel, z.B. Beispielbuch',
     };
 
     const navigateToGallery = () => {
@@ -214,7 +210,6 @@ export function AdminAddBook() {
                         </tbody>
                     </table>
 
-                    {/* Titel Section */}
                     <Box mt={4}>
                         <Typography variant="h6" gutterBottom>
                             Titel
@@ -247,7 +242,6 @@ export function AdminAddBook() {
                         </Box>
                     </Box>
 
-                    {/* Abbildungen Section */}
                     <Box mt={4}>
                         <Typography variant="h6" gutterBottom>
                             Abbildungen

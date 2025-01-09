@@ -1,4 +1,5 @@
 'use client';
+
 import {
     AppBar,
     Box,
@@ -47,15 +48,12 @@ export const Login = () => {
             const data = await response.json();
 
             if (response.ok) {
-                // Extract the access token and other details
                 const { access_token, refresh_token, expires_in } = data;
 
-                // Store tokens and expiration in sessionStorage
                 sessionStorage.setItem('authToken', access_token);
                 sessionStorage.setItem('refreshToken', refresh_token);
                 sessionStorage.setItem('expiresIn', expires_in);
 
-                // Redirect to the home page or dashboard
                 router.push('/');
             } else {
                 setError(data.error || 'Login failed');
@@ -185,20 +183,6 @@ export const Login = () => {
                         Sign in
                     </Button>
                 </form>
-
-                <Button
-                    variant="contained"
-                    fullWidth
-                    sx={{
-                        backgroundColor: '#2c2c2c',
-                        color: 'white',
-                        borderRadius: '8px',
-                        border: '1px solid #2c2c2c',
-                    }}
-                    onClick={() => router.push('/register')}
-                >
-                    Register
-                </Button>
             </Box>
         </Container>
     );
