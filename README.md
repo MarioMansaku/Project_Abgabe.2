@@ -12,6 +12,8 @@ npm install slick-carousel --legacy-peer-deps #Installation der Karussell-Kompon
 npm install next-auth jwt-simple bcryptjs --legacy-peer-deps #Installation der fürs Login notwenigen Packete
 npm install prettier  # Prettier installieren
 
+npm install --save-dev eslint-config-prettier eslint-plugin-prettier prettier-plugin-organize-imports
+
 # GitHub 
 
 git add . # Alle Änderungen Stagen 

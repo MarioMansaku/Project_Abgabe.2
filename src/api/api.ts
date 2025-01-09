@@ -1,25 +1,25 @@
 export interface paths {
-    "/rest/{id}": {
+    '/rest/{id}': {
         parameters: {
             query?: never;
             header?: {
-                "If-None-Match"?: string;
+                'If-None-Match'?: string;
             };
             path?: {
                 id: string;
             };
             cookie?: never;
         };
-        
+
         get: {
-            operationID: "BuchGetController_getById";
-            summary: "Suche mit der Buch-ID";
+            operationID: 'BuchGetController_getById';
+            summary: 'Suche mit der Buch-ID';
             parameters: {
                 header: {
-                    "If-None-Match"?: string;
+                    'If-None-Match'?: string;
                 };
                 path: {
-                    id: string; 
+                    id: string;
                 };
             };
             requestBody?: never;
@@ -29,45 +29,45 @@ export interface paths {
                         ETag: string;
                     };
                     content: {
-                        "application/hal+json": {
+                        'application/hal+json': {
                             id: number;
                             titel: string;
                             [key: string]: unknown;
                         };
                     };
                 };
-                
+
                 304: {
                     header: {
-                        [name: string]: unknown; // No Body, only Headers 
+                        [name: string]: unknown; // No Body, only Headers
                     };
                 };
-                
+
                 404: {
-                    description: "Die Buch-ID ist ungültig oder das Buch existiert nicht";
+                    description: 'Die Buch-ID ist ungültig oder das Buch existiert nicht';
                     content: {
-                        "application/hal+json": {
+                        'application/hal+json': {
                             error: string;
                         };
                     };
                 };
 
                 406: {
-                    description: "Nicht akzeptabler Inhaltstyp";
+                    description: 'Nicht akzeptabler Inhaltstyp';
                 };
             };
         };
         /** Ein vorhandenes Buch aktualisieren */
-        put: operations["BuchWriteController_put"];
+        put: operations['BuchWriteController_put'];
         post?: never;
         /** Buch mit der ID löschen */
-        delete: operations["BuchWriteController_delete"];
+        delete: operations['BuchWriteController_delete'];
         options?: never;
         head?: never;
         patch?: never;
         trace?: never;
     };
-    "/rest": {
+    '/rest': {
         parameters: {
             query?: never;
             header?: never;
@@ -75,17 +75,17 @@ export interface paths {
             cookie?: never;
         };
         /** Suche mit Suchkriterien */
-        get: operations["BuchGetController_get"];
+        get: operations['BuchGetController_get'];
         put?: never;
         /** Ein neues Buch anlegen */
-        post: operations["BuchWriteController_post"];
+        post: operations['BuchWriteController_post'];
         delete?: never;
         options?: never;
         head?: never;
         patch?: never;
         trace?: never;
     };
-    "/auth/token": {
+    '/auth/token': {
         parameters: {
             query?: never;
             header?: never;
@@ -95,14 +95,14 @@ export interface paths {
         get?: never;
         put?: never;
         /** Access Token zu Benutzername und Passwort */
-        post: operations["TokenController_token"];
+        post: operations['TokenController_token'];
         delete?: never;
         options?: never;
         head?: never;
         patch?: never;
         trace?: never;
     };
-    "/auth/refresh": {
+    '/auth/refresh': {
         parameters: {
             query?: never;
             header?: never;
@@ -112,14 +112,14 @@ export interface paths {
         get?: never;
         put?: never;
         /** Refresh für vorhandenen Token */
-        post: operations["TokenController_refresh"];
+        post: operations['TokenController_refresh'];
         delete?: never;
         options?: never;
         head?: never;
         patch?: never;
         trace?: never;
     };
-    "/dev/db_populate": {
+    '/dev/db_populate': {
         parameters: {
             query?: never;
             header?: never;
@@ -129,7 +129,7 @@ export interface paths {
         get?: never;
         put?: never;
         /** DB neu laden */
-        post: operations["DevController_dbPopulate"];
+        post: operations['DevController_dbPopulate'];
         delete?: never;
         options?: never;
         head?: never;
@@ -176,8 +176,8 @@ export interface components {
              *       "PYTHON"
              *     ] */
             schlagwoerter: Record<string, never>;
-            titel: components["schemas"]["TitelDTO"];
-            abbildungen: components["schemas"]["AbbildungDTO"][];
+            titel: components['schemas']['TitelDTO'];
+            abbildungen: components['schemas']['AbbildungDTO'][];
         };
         BuchDtoOhneRef: {
             /** @example 978-0-007-00644-1 */
@@ -238,7 +238,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": {
+                    'application/json': {
                         /** @example ok */
                         status?: string;
                         /** @example {
@@ -282,7 +282,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": {
+                    'application/json': {
                         /** @example error */
                         status?: string;
                         /** @example {
@@ -346,7 +346,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": {
+                    'application/json': {
                         /** @example ok */
                         status?: string;
                         /** @example {
@@ -390,7 +390,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": {
+                    'application/json': {
                         /** @example error */
                         status?: string;
                         /** @example {
@@ -461,7 +461,7 @@ export interface operations {
             query?: never;
             header?: {
                 /** @description Header für bedingte GET-Requests, z.B. "0" */
-                "If-None-Match"?: string;
+                'If-None-Match'?: string;
             };
             path: {
                 /** @description Z.B. 1 */
@@ -499,7 +499,7 @@ export interface operations {
             query?: never;
             header?: {
                 /** @description Header für optimistische Synchronisation */
-                "If-Match"?: string;
+                'If-Match'?: string;
             };
             path: {
                 id: number;
@@ -508,7 +508,7 @@ export interface operations {
         };
         requestBody: {
             content: {
-                "application/json": components["schemas"]["BuchDtoOhneRef"];
+                'application/json': components['schemas']['BuchDtoOhneRef'];
             };
         };
         responses: {
@@ -615,7 +615,7 @@ export interface operations {
         };
         requestBody: {
             content: {
-                "application/json": components["schemas"]["BuchDTO"];
+                'application/json': components['schemas']['BuchDTO'];
             };
         };
         responses: {
@@ -651,8 +651,8 @@ export interface operations {
         };
         requestBody: {
             content: {
-                "application/x-www-form-urlencoded": components["schemas"]["TokenData"];
-                "application/json": components["schemas"]["TokenData"];
+                'application/x-www-form-urlencoded': components['schemas']['TokenData'];
+                'application/json': components['schemas']['TokenData'];
             };
         };
         responses: {
@@ -681,8 +681,8 @@ export interface operations {
         };
         requestBody: {
             content: {
-                "application/x-www-form-urlencoded": components["schemas"]["Refresh"];
-                "application/json": components["schemas"]["Refresh"];
+                'application/x-www-form-urlencoded': components['schemas']['Refresh'];
+                'application/json': components['schemas']['Refresh'];
             };
         };
         responses: {

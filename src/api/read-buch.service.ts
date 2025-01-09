@@ -9,7 +9,7 @@ export const getBuch = async (criteria: string, value: string) => {
         const res = await axios.get(`https://localhost:3000/rest`, {
             params: { [criteria]: value },
             headers: {
-                Accept: "application/hal+json",
+                Accept: 'application/hal+json',
             },
         });
         log.debug('getBuch: Erfolgreich', res.data);
@@ -18,15 +18,16 @@ export const getBuch = async (criteria: string, value: string) => {
         if (axios.isAxiosError(error)) {
             const status = error.response?.status;
             if (status === 404) {
-                const message = "Kein Buch entspricht den eingegebenen Suchkriterien.";
+                const message =
+                    'Kein Buch entspricht den eingegebenen Suchkriterien.';
                 log.error(`API Error: ${message} (Status Code: ${status})`);
                 throw new Error(message);
             } else if (status !== undefined && status >= 500) {
-                const message = "Es ist ein Fehler auf unserer Seite aufgetreten. Bitte versuchen Sie es später erneut.";
+                const message =
+                    'Es ist ein Fehler auf unserer Seite aufgetreten. Bitte versuchen Sie es später erneut.';
                 log.error(`API Error: ${message} (Status Code: ${status})`);
                 throw new Error(message);
             }
-        };
+        }
     }
 };
-

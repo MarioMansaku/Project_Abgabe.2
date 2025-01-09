@@ -1,17 +1,28 @@
-'use client'
+'use client';
 
-import React, { useState, useEffect } from "react";
-import { WriteServiceBuch } from '../../../../api/write-buch.service.ts';
+import {
+    AppBar,
+    Box,
+    Button,
+    Container,
+    TextField,
+    Toolbar,
+    Typography,
+} from '@mui/material';
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 import { operations } from '../../../../api/api.ts';
-import { useRouter } from "next/navigation";
-import { AppBar, Toolbar, Button, Typography, Box, Container, TextField } from "@mui/material";
+import { WriteServiceBuch } from '../../../../api/write-buch.service.ts';
 
-type PostPayload = operations["BuchWriteController_post"]["requestBody"]["content"]["application/json"];
+type PostPayload =
+    operations['BuchWriteController_post']['requestBody']['content']['application/json'];
 
 export function AdminAddBook() {
     const writeService = new WriteServiceBuch();
-    const [bookData, setBookData] = useState<Partial<Record<keyof PostPayload, any>>>({});
-    const [status, setStatus] = useState<string>("");
+    const [bookData, setBookData] = useState<
+        Partial<Record<keyof PostPayload, any>>
+    >({});
+    const [status, setStatus] = useState<string>('');
     const [accessDenied, setAccessDenied] = useState<boolean>(false);
     const [, setIsAdmin] = useState<boolean>(false);
 
@@ -26,7 +37,11 @@ export function AdminAddBook() {
             }, 3000);
         } else {
             const decoded = JSON.parse(atob(token.split('.')[1]));
-            if (decoded.resource_access && decoded.resource_access['nest-client'] && decoded.resource_access['nest-client'].roles.includes('admin')) {
+            if (
+                decoded.resource_access &&
+                decoded.resource_access['nest-client'] &&
+                decoded.resource_access['nest-client'].roles.includes('admin')
+            ) {
                 setIsAdmin(true);
             } else {
                 setAccessDenied(true);
@@ -56,7 +71,10 @@ export function AdminAddBook() {
         }
     };
 
-    const handleAbbildungChange = (key: keyof PostPayload["abbildungen"][0], value: any) => {
+    const handleAbbildungChange = (
+        key: keyof PostPayload['abbildungen'][0],
+        value: any,
+    ) => {
         setBookData((prev) => ({
             ...prev,
             abbildungen: [
@@ -71,39 +89,39 @@ export function AdminAddBook() {
     const handleSubmit = async () => {
         try {
             await writeService.postBuch(bookData as PostPayload);
-            setStatus("Book added successfully!");
+            setStatus('Book added successfully!');
         } catch (error: any) {
             setStatus(`Error: ${error.message}`);
         }
     };
 
     const fields: (keyof PostPayload | string)[] = [
-        "isbn",
-        "id",
-        "rating",
-        "art",
-        "preis",
-        "rabatt",
-        "lieferbar",
-        "datum",
-        "homepage",
-        "schlagwoerter",
-        "titel",
+        'isbn',
+        'id',
+        'rating',
+        'art',
+        'preis',
+        'rabatt',
+        'lieferbar',
+        'datum',
+        'homepage',
+        'schlagwoerter',
+        'titel',
     ];
 
     const exampleValues: Record<string, string> = {
-        isbn: "Enter ISBN, z.B. 978-3-166-14841-0",
-        id: "Enter ID, z.B. 70",
-        rating: "Enter rating, 1-5",
-        art: "Enter Art (epub, paperback, hardcover)",
-        preis: "Enter Preis in Euro, z.B. 19.99",
-        rabatt: "Enter Rabatt in %, z.B. 10",
-        lieferbar: "Enter lieferbar (Ja, Nein)",
-        datum: "Enter Datum, z.B. 2023-01-01",
-        homepage: "Enter homepage, z.B. https://example.com",
-        schlagwoerter: "Enter Schlagwörter (Java, Python, TypeScript, NULL)",
-        titel: "Enter Titel, z.B. Beispielbuch",
-      };
+        isbn: 'Enter ISBN, z.B. 978-3-166-14841-0',
+        id: 'Enter ID, z.B. 70',
+        rating: 'Enter rating, 1-5',
+        art: 'Enter Art (epub, paperback, hardcover)',
+        preis: 'Enter Preis in Euro, z.B. 19.99',
+        rabatt: 'Enter Rabatt in %, z.B. 10',
+        lieferbar: 'Enter lieferbar (Ja, Nein)',
+        datum: 'Enter Datum, z.B. 2023-01-01',
+        homepage: 'Enter homepage, z.B. https://example.com',
+        schlagwoerter: 'Enter Schlagwörter (Java, Python, TypeScript, NULL)',
+        titel: 'Enter Titel, z.B. Beispielbuch',
+    };
 
     const navigateToGallery = () => {
         router.push('/pages/gallery');
@@ -120,7 +138,8 @@ export function AdminAddBook() {
                     Access Denied
                 </Typography>
                 <Typography variant="body1" color="textSecondary">
-                    You do not have sufficient permissions to access this page. You will be redirected shortly.
+                    You do not have sufficient permissions to access this page.
+                    You will be redirected shortly.
                 </Typography>
                 <Typography variant="body2" color="textSecondary">
                     Redirecting in 3 seconds...
@@ -128,15 +147,22 @@ export function AdminAddBook() {
             </Box>
         );
     }
-    
+
     return (
         <Box sx={{ height: 'relative', overflow: 'hidden' }}>
-            <AppBar position="static" color="default" sx={{ borderBottom: 1, borderColor: 'divider' }}>
+            <AppBar
+                position="static"
+                color="default"
+                sx={{ borderBottom: 1, borderColor: 'divider' }}
+            >
                 <Toolbar>
                     <img
                         alt="Block"
                         src="https://c.animaapp.com/CBoGUkLi/img/block.svg"
-                        style={{ marginTop: '-7.75px', marginBottom: '-7.75px' }}
+                        style={{
+                            marginTop: '-7.75px',
+                            marginBottom: '-7.75px',
+                        }}
                         onClick={navigateToFrontpage}
                     />
                 </Toolbar>
@@ -144,7 +170,14 @@ export function AdminAddBook() {
             <Container>
                 <div>
                     <h2>Admin Input Table</h2>
-                    <table border={1} style={{ width: "100%", borderCollapse: "collapse", marginTop: "20px" }}>
+                    <table
+                        border={1}
+                        style={{
+                            width: '100%',
+                            borderCollapse: 'collapse',
+                            marginTop: '20px',
+                        }}
+                    >
                         <thead>
                             <tr>
                                 <th>Field Name</th>
@@ -159,9 +192,21 @@ export function AdminAddBook() {
                                         <TextField
                                             fullWidth
                                             variant="outlined"
-                                            placeholder={exampleValues[field] || `Enter ${field}`}
-                                            value={bookData[field as keyof PostPayload] || ""}
-                                            onChange={(e) => handleInputChange(field, e.target.value)}
+                                            placeholder={
+                                                exampleValues[field] ||
+                                                `Enter ${field}`
+                                            }
+                                            value={
+                                                bookData[
+                                                    field as keyof PostPayload
+                                                ] || ''
+                                            }
+                                            onChange={(e) =>
+                                                handleInputChange(
+                                                    field,
+                                                    e.target.value,
+                                                )
+                                            }
                                         />
                                     </td>
                                 </tr>
@@ -169,7 +214,6 @@ export function AdminAddBook() {
                         </tbody>
                     </table>
 
-                    {/* Titel Section */}
                     <Box mt={4}>
                         <Typography variant="h6" gutterBottom>
                             Titel
@@ -179,20 +223,29 @@ export function AdminAddBook() {
                                 label="Titel"
                                 fullWidth
                                 variant="outlined"
-                                value={bookData.titel?.titel || ""}
-                                onChange={(e) => handleInputChange("titel.titel", e.target.value)}
+                                value={bookData.titel?.titel || ''}
+                                onChange={(e) =>
+                                    handleInputChange(
+                                        'titel.titel',
+                                        e.target.value,
+                                    )
+                                }
                             />
                             <TextField
                                 label="Untertitel"
                                 fullWidth
                                 variant="outlined"
-                                value={bookData.titel?.untertitel || ""}
-                                onChange={(e) => handleInputChange("titel.untertitel", e.target.value)}
+                                value={bookData.titel?.untertitel || ''}
+                                onChange={(e) =>
+                                    handleInputChange(
+                                        'titel.untertitel',
+                                        e.target.value,
+                                    )
+                                }
                             />
                         </Box>
                     </Box>
 
-                    {/* Abbildungen Section */}
                     <Box mt={4}>
                         <Typography variant="h6" gutterBottom>
                             Abbildungen
@@ -202,23 +255,47 @@ export function AdminAddBook() {
                                 label="Beschriftung"
                                 fullWidth
                                 variant="outlined"
-                                value={bookData.abbildungen?.[0]?.beschriftung || ""}
-                                onChange={(e) => handleAbbildungChange("beschriftung", e.target.value)}
+                                value={
+                                    bookData.abbildungen?.[0]?.beschriftung ||
+                                    ''
+                                }
+                                onChange={(e) =>
+                                    handleAbbildungChange(
+                                        'beschriftung',
+                                        e.target.value,
+                                    )
+                                }
                             />
                             <TextField
                                 label="Content Type"
                                 fullWidth
                                 variant="outlined"
-                                value={bookData.abbildungen?.[0]?.contentType || ""}
-                                onChange={(e) => handleAbbildungChange("contentType", e.target.value)}
+                                value={
+                                    bookData.abbildungen?.[0]?.contentType || ''
+                                }
+                                onChange={(e) =>
+                                    handleAbbildungChange(
+                                        'contentType',
+                                        e.target.value,
+                                    )
+                                }
                             />
                         </Box>
                     </Box>
 
-                    <Button variant="contained" style={{ marginTop: 20, marginRight: 20 }} onClick={handleSubmit}>
+                    <Button
+                        variant="contained"
+                        style={{ marginTop: 20, marginRight: 20 }}
+                        onClick={handleSubmit}
+                    >
                         Submit
                     </Button>
-                    <Button variant="contained" color="secondary" style={{ marginTop: 20, marginRight: 20 }} onClick={navigateToGallery}>
+                    <Button
+                        variant="contained"
+                        color="secondary"
+                        style={{ marginTop: 20, marginRight: 20 }}
+                        onClick={navigateToGallery}
+                    >
                         Gallery
                     </Button>
                     <p>{status}</p>
@@ -226,6 +303,6 @@ export function AdminAddBook() {
             </Container>
         </Box>
     );
-};
+}
 
 export default AdminAddBook;
