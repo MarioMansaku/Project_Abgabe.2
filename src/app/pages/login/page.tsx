@@ -47,15 +47,12 @@ export const Login = () => {
             const data = await response.json();
 
             if (response.ok) {
-                // Extract the access token and other details
                 const { access_token, refresh_token, expires_in } = data;
 
-                // Store tokens and expiration in sessionStorage
                 sessionStorage.setItem('authToken', access_token);
                 sessionStorage.setItem('refreshToken', refresh_token);
                 sessionStorage.setItem('expiresIn', expires_in);
 
-                // Redirect to the home page or dashboard
                 router.push('/');
             } else {
                 setError(data.error || 'Login failed');

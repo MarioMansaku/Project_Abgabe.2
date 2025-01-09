@@ -214,7 +214,6 @@ export function AdminAddBook() {
                         </tbody>
                     </table>
 
-                    {/* Titel Section */}
                     <Box mt={4}>
                         <Typography variant="h6" gutterBottom>
                             Titel
@@ -247,7 +246,6 @@ export function AdminAddBook() {
                         </Box>
                     </Box>
 
-                    {/* Abbildungen Section */}
                     <Box mt={4}>
                         <Typography variant="h6" gutterBottom>
                             Abbildungen

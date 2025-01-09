@@ -1,5 +1,4 @@
 // /app/api/status/route.js
-//TODO do we still need this ?
 import jwt from 'jwt-simple';
 
 const SECRET_KEY = process.env.JWT_SECRET_KEY;

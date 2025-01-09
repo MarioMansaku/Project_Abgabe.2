@@ -19,7 +19,6 @@ const BookItem: React.FC<BookItemProps> = ({ book, onClick }) => {
     return (
         <Card sx={{ maxWidth: 345, marginBottom: 2 }} onClick={onClick}>
             {' '}
-            {/* onClick an Card gebunden */}
             <CardMedia
                 component="img"
                 height="140"

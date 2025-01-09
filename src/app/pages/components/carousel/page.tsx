@@ -1,9 +1,9 @@
+import { Book } from '@/app/pages/types/types';
+import axios from 'axios';
 import { useEffect, useState } from 'react';
 import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
 // @ts-expect-error "Fehler Slick"
-import { Book } from '@/app/pages/types/types';
-import axios from 'axios';
 import Slider from 'react-slick';
 import './Carousel.css';
 
@@ -114,7 +114,6 @@ export const Carousel = () => {
                 <div className="modal-overlay" onClick={closeModal}>
                     <div className="modal" onClick={(e) => e.stopPropagation()}>
                         {' '}
-                        {/* Verhindert das Schließen bei Klick innerhalb des Modals */}
                         <h2>{modalTitle}</h2>
                         {loading ? (
                             <p>Loading...</p>
