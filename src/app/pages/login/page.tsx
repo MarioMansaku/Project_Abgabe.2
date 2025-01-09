@@ -184,19 +184,6 @@ export const Login = () => {
                     </Button>
                 </form>
 
-                <Button
-                    variant="contained"
-                    fullWidth
-                    sx={{
-                        backgroundColor: '#2c2c2c',
-                        color: 'white',
-                        borderRadius: '8px',
-                        border: '1px solid #2c2c2c',
-                    }}
-                    onClick={() => router.push('/register')}
-                >
-                    Register
-                </Button>
             </Box>
         </Container>
     );
