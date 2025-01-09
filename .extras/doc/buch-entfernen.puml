@@ -1,22 +1,28 @@
-@startuml BuchEntfernen
-[*] --> Idle
+@startuml BookDeletion
+[*] --> BookSelection : Benutzer wählt Buch aus
+BookSelection --> ConfirmationDialog : "Löschen" angeklickt
 
-state Idle {
-    onClick: handleDelete()
+state ConfirmationDialog {
+    [*] --> Open
+    Open --> Cancel : "Abbrechen" angeklickt
+    Open --> Confirm : "Löschen bestätigen" angeklickt
+    Cancel --> [*]
 }
 
-Idle --> Loading: ID verfügbar
+ConfirmationDialog --> DeletingBook : Bestätigt
+DeletingBook --> Success : Löschen erfolgreich
+DeletingBook --> Error : Fehler beim Löschen
 
-state Loading {
-    try: writeService.deleteBuch(id)
-    catch: log.error
-    finally: setIsLoading(false)
+state Success {
+    [*] --> UpdateGallery
+    UpdateGallery --> [*] : Galerie aktualisiert
 }
 
-Loading --> Success: Löschen erfolgreich
-Success --> Idle: onDeleteSuccess()
+state Error {
+    [*] --> ShowErrorMessage
+    ShowErrorMessage --> [*]
+}
 
-Loading --> Error: Fehler aufgetreten
-Error --> Idle
-
+Success --> [*]
+Error --> [*]
 @enduml
