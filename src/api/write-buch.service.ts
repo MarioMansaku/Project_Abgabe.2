@@ -17,32 +17,27 @@ const BASE_URL = 'https://localhost:3000/rest';
 const token = sessionStorage.getItem('authToken');
 
 const buchJson = {
-    "isbn": "978-0-007-00644-1",
-    "rating": 5,
-    "art": "EPUB",
-    "preis": 1,
-    "rabatt": 0.1,
-    "lieferbar": true,
-    "datum": "2021-01-31",
-    "homepage": "https://test.de/",
-    "schlagwoerter": [
-      "JAVASCRIPT",
-      "TYPESCRIPT",
-      "JAVA",
-      "PYTHON"
-    ],
-    "titel": {
-      "titel": "Der Titel",
-      "untertitel": "Der Untertitel"
+    isbn: '978-0-007-00644-1',
+    rating: 5,
+    art: 'EPUB',
+    preis: 1,
+    rabatt: 0.1,
+    lieferbar: true,
+    datum: '2021-01-31',
+    homepage: 'https://test.de/',
+    schlagwoerter: ['JAVASCRIPT', 'TYPESCRIPT', 'JAVA', 'PYTHON'],
+    titel: {
+        titel: 'Der Titel',
+        untertitel: 'Der Untertitel',
     },
-    "abbildungen": [
-      {
-        "beschriftung": "Die Beschriftung",
-        "contentType": "image/png"
-      }
-    ]
-  }
-  
+    abbildungen: [
+        {
+            beschriftung: 'Die Beschriftung',
+            contentType: 'image/png',
+        },
+    ],
+};
+
 export class WriteServiceBuch {
     // Sende eine HTTP POST-Anfrage an die API mit den Buchdaten
     async postBuch(buch: PostPayload): Promise<PostResponse | void> {
@@ -57,7 +52,7 @@ export class WriteServiceBuch {
             },
         );
 
-        console.log(JSON.stringify(buch, null, 2)); 
+        console.log(JSON.stringify(buch, null, 2));
 
         // Überprüfen, ob der Statuscode nicht 201 ist.
         if (response.status !== 201) {

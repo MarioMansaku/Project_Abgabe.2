@@ -5,13 +5,13 @@ import {
     Box,
     Button,
     Container,
+    FormControl,
+    InputLabel,
+    MenuItem,
+    Select,
     TextField,
     Toolbar,
     Typography,
-    Select,
-    MenuItem,
-    InputLabel,
-    FormControl,
 } from '@mui/material';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
@@ -118,7 +118,7 @@ export function AdminAddBook() {
         schlagwoerter: 'Enter Schlagwörter (e.g., JAVASCRIPT, TYPESCRIPT)',
     };
 
- const handleAbbildungChange = (
+    const handleAbbildungChange = (
         key: keyof PostPayload['abbildungen'][0],
         value: any,
     ) => {
@@ -200,40 +200,88 @@ export function AdminAddBook() {
                                     <td>{field}</td>
                                     <td>
                                         {field === 'lieferbar' ? (
-                                            <FormControl fullWidth variant="outlined">
-                                                <InputLabel>Lieferbar</InputLabel>
+                                            <FormControl
+                                                fullWidth
+                                                variant="outlined"
+                                            >
+                                                <InputLabel>
+                                                    Lieferbar
+                                                </InputLabel>
                                                 <Select
                                                     label="Lieferbar"
-                                                    value={bookData.lieferbar?.toString() || ''}
-                                                    onChange={(e) => handleInputChange(field, e.target.value)}
+                                                    value={
+                                                        bookData.lieferbar?.toString() ||
+                                                        ''
+                                                    }
+                                                    onChange={(e) =>
+                                                        handleInputChange(
+                                                            field,
+                                                            e.target.value,
+                                                        )
+                                                    }
                                                 >
-                                                    <MenuItem value="true">Yes</MenuItem>
-                                                    <MenuItem value="false">No</MenuItem>
+                                                    <MenuItem value="true">
+                                                        Yes
+                                                    </MenuItem>
+                                                    <MenuItem value="false">
+                                                        No
+                                                    </MenuItem>
                                                 </Select>
                                             </FormControl>
                                         ) : field === 'datum' ? (
                                             <TextField
                                                 fullWidth
                                                 variant="outlined"
-                                                placeholder={exampleValues[field] || `Enter ${field}`}
+                                                placeholder={
+                                                    exampleValues[field] ||
+                                                    `Enter ${field}`
+                                                }
                                                 value={bookData.datum || ''}
-                                                onChange={(e) => handleInputChange(field, e.target.value)}
+                                                onChange={(e) =>
+                                                    handleInputChange(
+                                                        field,
+                                                        e.target.value,
+                                                    )
+                                                }
                                             />
-                                        ) : field === 'rating' || field === 'preis' || field === 'rabatt' ? (
+                                        ) : field === 'rating' ||
+                                          field === 'preis' ||
+                                          field === 'rabatt' ? (
                                             <TextField
                                                 fullWidth
                                                 variant="outlined"
                                                 type="number"
-                                                value={bookData[field as keyof PostPayload] || ''}
-                                                onChange={(e) => handleInputChange(field, e.target.value)}
+                                                value={
+                                                    bookData[
+                                                        field as keyof PostPayload
+                                                    ] || ''
+                                                }
+                                                onChange={(e) =>
+                                                    handleInputChange(
+                                                        field,
+                                                        e.target.value,
+                                                    )
+                                                }
                                             />
                                         ) : (
                                             <TextField
                                                 fullWidth
                                                 variant="outlined"
-                                                placeholder={exampleValues[field] || `Enter ${field}`}
-                                                value={bookData[field as keyof PostPayload] || ''}
-                                                onChange={(e) => handleInputChange(field, e.target.value)}
+                                                placeholder={
+                                                    exampleValues[field] ||
+                                                    `Enter ${field}`
+                                                }
+                                                value={
+                                                    bookData[
+                                                        field as keyof PostPayload
+                                                    ] || ''
+                                                }
+                                                onChange={(e) =>
+                                                    handleInputChange(
+                                                        field,
+                                                        e.target.value,
+                                                    )
+                                                }
                                             />
                                         )}
                                     </td>
@@ -252,14 +300,24 @@ export function AdminAddBook() {
                                 fullWidth
                                 variant="outlined"
                                 value={bookData.titel?.titel || ''}
-                                onChange={(e) => handleInputChange('titel.titel', e.target.value)}
+                                onChange={(e) =>
+                                    handleInputChange(
+                                        'titel.titel',
+                                        e.target.value,
+                                    )
+                                }
                             />
                             <TextField
                                 label="Untertitel"
                                 fullWidth
                                 variant="outlined"
                                 value={bookData.titel?.untertitel || ''}
-                                onChange={(e) => handleInputChange('titel.untertitel', e.target.value)}
+                                onChange={(e) =>
+                                    handleInputChange(
+                                        'titel.untertitel',
+                                        e.target.value,
+                                    )
+                                }
                             />
                         </Box>
                     </Box>
@@ -273,15 +331,30 @@ export function AdminAddBook() {
                                 label="Beschriftung"
                                 fullWidth
                                 variant="outlined"
-                                value={bookData.abbildungen?.[0]?.beschriftung || ''}
-                                onChange={(e) => handleAbbildungChange('beschriftung', e.target.value)}
+                                value={
+                                    bookData.abbildungen?.[0]?.beschriftung ||
+                                    ''
+                                }
+                                onChange={(e) =>
+                                    handleAbbildungChange(
+                                        'beschriftung',
+                                        e.target.value,
+                                    )
+                                }
                             />
                             <TextField
                                 label="Content Type"
                                 fullWidth
                                 variant="outlined"
-                                value={bookData.abbildungen?.[0]?.contentType || ''}
-                                onChange={(e) => handleAbbildungChange('contentType', e.target.value)}
+                                value={
+                                    bookData.abbildungen?.[0]?.contentType || ''
+                                }
+                                onChange={(e) =>
+                                    handleAbbildungChange(
+                                        'contentType',
+                                        e.target.value,
+                                    )
+                                }
                             />
                         </Box>
                     </Box>
