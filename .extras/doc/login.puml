@@ -7,7 +7,7 @@ state InitialCheck {
   CheckSessionStorage --> LoginPrompt : Kein Token gefunden
 }
 
-AlreadyLoggedIn --> [*] : Weiterleitung zu "/"
+AlreadyLoggedIn --> [*] : Weiterleitung zur Homepage 
 LoginPrompt --> EnterCredentials : Benutzer gibt Daten ein
 
 state EnterCredentials {
@@ -18,7 +18,7 @@ state EnterCredentials {
 }
 
 LoginError --> AwaitInput : Fehler korrigieren
-LoginSuccess --> [*] : Token gespeichert, Weiterleitung zu "/"
+LoginSuccess --> [*] : Token gespeichert, Weiterleitung zur Homepage
 
 state LoginSuccess {
   [*] --> StoreTokens
@@ -26,5 +26,5 @@ state LoginSuccess {
 }
 
 [*] --> RegisterRedirect : Benutzer klickt "Register"
-RegisterRedirect --> [*] : Weiterleitung zu "/register"
+RegisterRedirect --> [*] : Weiterleitung zur register page
 @enduml

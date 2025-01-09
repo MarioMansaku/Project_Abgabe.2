@@ -3,7 +3,7 @@
 
 state Unauthenticated {
     [*] --> AccessDenied : Kein Token
-    AccessDenied --> RedirectLogin : Weiterleitung zu /pages/login
+    AccessDenied --> RedirectLogin : Weiterleitung zu login page
 }
 
 state Authenticated {
