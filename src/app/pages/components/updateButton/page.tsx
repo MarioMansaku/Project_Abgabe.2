@@ -13,7 +13,7 @@ import {
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 
-const UpdateButton: React.FC<{ id: number }> = ({ id }) => {
+const UpdateButton: React.FC<{ id: string }> = ({ id }) => {
     const [buch, setBuch] = useState<any | null>(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
@@ -50,7 +50,7 @@ const UpdateButton: React.FC<{ id: number }> = ({ id }) => {
             try {
                 setLoading(true);
 
-                const bookData = await getBuch('isbn', String(id));
+                const bookData = await getBuch('id', id);
                 setBuch(bookData);
             } catch (error) {
                 console.error('Fehler beim Abrufen der Bücher:', error);
